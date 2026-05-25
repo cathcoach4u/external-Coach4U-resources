@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Weekly Check-in | Your Relationship Coach</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#003366">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Your Relationship Coach">
+  <link rel="apple-touch-icon" href="assets/coach4u-icon.jpeg">
+  <style>
+    body { opacity: 0; transition: opacity 0.2s ease; background: #f4f6f9; }
+    .container { padding: 0 0 40px; }
+    .ws-header { padding: 20px 16px 0; }
+    .ws-title { font-size: 1.2rem; font-weight: 800; color: var(--primary); margin: 0 0 4px; }
+    .ws-sub { font-size: 0.85rem; color: #666; margin: 0 0 8px; line-height: 1.5; }
+    .week-badge {
+      display: inline-block; font-size: 0.72rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.5px;
+      color: var(--accent); background: rgba(13,148,136,0.1);
+      padding: 3px 10px; border-radius: 20px; margin: 0 16px 16px;
+    }
+    .form-card {
+      background: white; border-radius: 10px;
+      border: 1px solid var(--border);
+      margin: 0 16px 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      overflow: hidden;
+    }
+    .form-card-head {
+      padding: 11px 14px 9px; border-bottom: 1px solid #f0f0f0;
+      font-size: 0.82rem; font-weight: 800; color: var(--primary);
+    }
+    .form-card-body { padding: 14px 14px 16px; }
+    .score-wrap { text-align: center; padding: 4px 0 8px; }
+    .score-display { font-size: 3rem; font-weight: 800; line-height: 1; margin-bottom: 10px; display: block; }
+    .score-slider {
+      -webkit-appearance: none; appearance: none;
+      width: 100%; height: 6px; border-radius: 99px;
+      background: #e5e7eb; outline: none;
+    }
+    .score-slider::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none;
+      width: 24px; height: 24px; border-radius: 50%;
+      background: var(--accent); cursor: pointer;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    }
+    .score-labels { display: flex; justify-content: space-between; font-size: 0.68rem; color: #aaa; margin-top: 6px; }
+    .field-group { margin-bottom: 0; }
+    .field-group textarea {
+      width: 100%; padding: 9px 12px;
+      border: 1px solid #ddd; border-radius: 8px;
+      font-size: 0.88rem; font-family: var(--font-body);
+      color: var(--text); background: white; resize: vertical;
+      min-height: 72px;
+      transition: border-color 0.2s;
+    }
+    .field-group textarea:focus { outline: none; border-color: var(--accent); }
+    .save-btn {
+      display: block; width: calc(100% - 32px); margin: 0 16px;
+      padding: 13px; background: var(--accent); color: white;
+      border: none; border-radius: 10px; font-size: 0.9rem; font-weight: 700;
+      cursor: pointer; transition: background 0.15s;
+    }
+    .save-btn:hover { background: var(--accent-dark); }
+    .saved-view { display: none; }
+    .saved-card {
+      background: #f0fdf4; border: 1.5px solid #86efac;
+      border-radius: 10px; margin: 0 16px 12px;
+      padding: 20px 16px; text-align: center;
+    }
+    .saved-score { font-size: 3rem; font-weight: 800; line-height: 1; margin-bottom: 8px; }
+    .saved-title { font-size: 1rem; font-weight: 700; color: #166534; margin-bottom: 4px; }
+    .saved-week { font-size: 0.78rem; color: #4ade80; font-weight: 600; margin-bottom: 16px; }
+    .saved-row { text-align: left; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #d1fae5; }
+    .saved-row:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .saved-q { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; color: #059669; margin-bottom: 3px; }
+    .saved-a { font-size: 0.85rem; color: #1f2937; line-height: 1.5; }
+    .home-btn {
+      display: block; width: 100%; margin-top: 16px;
+      padding: 11px; background: var(--accent); color: white;
+      border: none; border-radius: 10px; font-size: 0.88rem; font-weight: 700;
+      cursor: pointer; text-decoration: none; text-align: center;
+    }
+    .home-btn:hover { background: var(--accent-dark); color: white; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-left">
+        <a href="couple.html" class="header-back">&#x2190; Home</a>
+        <span class="header-title">Weekly Check-in</span>
+      </div>
+      <button id="signOutBtn" class="sign-out-btn">Sign Out</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <div id="formView">
+      <div class="ws-header">
+        <h1 class="ws-title">&#x1F4AC; Weekly Check-in</h1>
+        <p class="ws-sub">Stay connected, surface what matters, and set your intention for the week.</p>
+      </div>
+      <div id="weekBadge" class="week-badge"></div>
+
+      <div class="form-card">
+        <div class="form-card-head">&#x1F49A; How connected do you feel this week?</div>
+        <div class="form-card-body">
+          <div class="score-wrap">
+            <span class="score-display" id="scoreDisplay">7</span>
+            <input type="range" class="score-slider" id="scoreSlider" min="1" max="10" value="7">
+            <div class="score-labels"><span>1 &mdash; Distant</span><span>10 &mdash; Deeply connected</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <div class="form-card-head">&#x2728; What&rsquo;s been a highlight?</div>
+        <div class="form-card-body">
+          <div class="field-group">
+            <textarea id="highlight" placeholder="A moment, win, or thing you appreciated this week&hellip;"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <div class="form-card-head">&#x26A0;&#xFE0F; What needs our attention?</div>
+        <div class="form-card-body">
+          <div class="field-group">
+            <textarea id="attention" placeholder="Something that felt hard, unresolved, or needs a conversation&hellip;"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <div class="form-card-head">&#x1F331; Our intention for this week</div>
+        <div class="form-card-body">
+          <div class="field-group">
+            <textarea id="intention" placeholder="One thing we want to focus on or do for each other&hellip;"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <button class="save-btn" id="saveBtn">Save Check-in</button>
+    </div>
+
+    <div id="savedView" class="saved-view">
+      <div class="ws-header">
+        <h1 class="ws-title">&#x1F4AC; Weekly Check-in</h1>
+      </div>
+      <div class="saved-card">
+        <div class="saved-score" id="savedScore"></div>
+        <div class="saved-title">Check-in saved &#x2713;</div>
+        <div class="saved-week" id="savedWeek"></div>
+        <div id="savedSummary"></div>
+        <a class="home-btn" href="couple.html">&#x2190; Back to Home</a>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+    const supabase = createClient('https://eekefsuaefgpqmjdyniy.supabase.co', 'sb_publishable_pcXHwQVMpvEojb4K3afEMw_RMvgZM-Y');
+
+    function readLS(key, fallback) {
+      try { const r = localStorage.getItem(key); if (r != null) return JSON.parse(r); } catch(_) {}
+      return fallback;
+    }
+    function esc(s) {
+      return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+    function thisWeekIso() {
+      const d = new Date();
+      d.setDate(d.getDate() - d.getDay());
+      return d.toISOString().slice(0,10);
+    }
+    function fmtWeek(iso) {
+      const d = new Date(iso + 'T00:00:00');
+      return 'Week of ' + d.toLocaleDateString('en-AU', {day:'numeric', month:'long', year:'numeric'});
+    }
+    function scoreColor(s) {
+      return s >= 7 ? '#10b981' : s >= 4 ? '#f59e0b' : '#ef4444';
+    }
+
+    function showSaved(entry, weekIso) {
+      document.getElementById('formView').style.display = 'none';
+      document.getElementById('savedView').style.display = '';
+      const score = Number(entry.score);
+      const scoreEl = document.getElementById('savedScore');
+      scoreEl.textContent = score;
+      scoreEl.style.color = scoreColor(score);
+      document.getElementById('savedWeek').textContent = fmtWeek(weekIso);
+      const rows = [
+        entry.highlight && { q: 'Highlight', a: entry.highlight },
+        entry.attention && { q: 'Needs attention', a: entry.attention },
+        entry.intention && { q: 'Our intention', a: entry.intention },
+      ].filter(Boolean);
+      document.getElementById('savedSummary').innerHTML = rows.map(r =>
+        `<div class="saved-row"><div class="saved-q">${esc(r.q)}</div><div class="saved-a">${esc(r.a)}</div></div>`
+      ).join('');
+    }
+
+    async function init() {
+      const { data: { user }, error } = await supabase.auth.getUser();
+      if (!user || error) { window.location.href = 'login.html'; return; }
+      const { data: profile } = await supabase.from('users').select('membership_status').eq('id', user.id).single();
+      if (!profile || profile.membership_status !== 'active') { window.location.href = 'inactive.html'; return; }
+
+      const weekIso = thisWeekIso();
+      document.getElementById('weekBadge').textContent = fmtWeek(weekIso);
+
+      const pulse = readLS('rc_couple_pulse', {});
+      const existing = pulse[weekIso];
+      if (existing) {
+        document.getElementById('scoreSlider').value = existing.score;
+        document.getElementById('scoreDisplay').textContent = existing.score;
+        document.getElementById('scoreDisplay').style.color = scoreColor(Number(existing.score));
+        if (existing.highlight) document.getElementById('highlight').value = existing.highlight;
+        if (existing.attention) document.getElementById('attention').value = existing.attention;
+        if (existing.intention) document.getElementById('intention').value = existing.intention;
+      } else {
+        document.getElementById('scoreDisplay').style.color = scoreColor(7);
+      }
+
+      const slider = document.getElementById('scoreSlider');
+      const display = document.getElementById('scoreDisplay');
+      slider.addEventListener('input', () => {
+        const v = Number(slider.value);
+        display.textContent = v;
+        display.style.color = scoreColor(v);
+      });
+
+      document.getElementById('saveBtn').addEventListener('click', () => {
+        const entry = {
+          score:     Number(document.getElementById('scoreSlider').value),
+          highlight: document.getElementById('highlight').value.trim(),
+          attention: document.getElementById('attention').value.trim(),
+          intention: document.getElementById('intention').value.trim(),
+          saved_at:  new Date().toISOString(),
+        };
+        const pulse = readLS('rc_couple_pulse', {});
+        pulse[weekIso] = entry;
+        localStorage.setItem('rc_couple_pulse', JSON.stringify(pulse));
+        showSaved(entry, weekIso);
+      });
+
+      document.body.style.opacity = '1';
+      document.getElementById('signOutBtn').addEventListener('click', async () => {
+        await supabase.auth.signOut();
+        window.location.href = 'login.html';
+      });
+    }
+    init();
+  </script>
+</body>
+</html>

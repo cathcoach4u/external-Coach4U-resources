@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Learn | Your Relationship Coach</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#003366">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Your Relationship Coach">
+  <link rel="apple-touch-icon" href="assets/coach4u-icon.jpeg">
+  <style>
+    body { opacity: 0; transition: opacity 0.2s ease; background: #f4f6f9; }
+    .container { padding: 0 0 88px; }
+    .ws-header { padding: 20px 16px 0; }
+    .ws-title { font-size: 1.2rem; font-weight: 800; color: var(--primary); margin: 0 0 4px; }
+    .ws-sub { font-size: 0.85rem; color: #666; margin: 0 0 8px; line-height: 1.5; }
+    .category-head {
+      display: flex; align-items: center; gap: 8px;
+      padding: 16px 16px 8px;
+    }
+    .category-icon { font-size: 1.1rem; }
+    .category-title { font-size: 0.88rem; font-weight: 800; color: var(--primary); }
+    .resource-list { padding: 0 16px; display: flex; flex-direction: column; gap: 8px; margin-bottom: 4px; }
+    .resource-item {
+      background: white; border-radius: 10px;
+      border: 1.5px solid var(--accent);
+      padding: 11px 14px;
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+      transition: background 0.15s, box-shadow 0.15s;
+    }
+    .resource-item:hover { background: #f0fdfa; box-shadow: 0 2px 8px rgba(13,148,136,0.12); text-decoration: none; }
+    .ri-text { flex: 1; min-width: 0; }
+    .ri-title { font-size: 0.85rem; font-weight: 700; color: var(--accent); line-height: 1.3; }
+    .ri-desc { font-size: 0.73rem; color: #666; margin-top: 2px; line-height: 1.35; }
+    .ri-arrow { font-size: 16px; color: var(--accent); flex-shrink: 0; }
+    .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: white; border-top: 1px solid #e5e7eb; display: flex; z-index: 100; padding-bottom: env(safe-area-inset-bottom); box-shadow: 0 -2px 8px rgba(0,0,0,0.06); }
+    .bottom-nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8px 0 6px; text-decoration: none; color: #aaa; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; gap: 3px; transition: color 0.15s; }
+    .bottom-nav-item.active, .bottom-nav-item:hover { color: #0D9488; text-decoration: none; }
+    .bottom-nav-icon { font-size: 20px; line-height: 1; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-left">
+        <span class="header-title">Your Relationship Coach</span>
+      </div>
+      <button id="signOutBtn" class="sign-out-btn">Sign Out</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="ws-header">
+      <h1 class="ws-title">&#x1F4DA; Learn</h1>
+      <p class="ws-sub">Frameworks, tools and resources to help you understand each other more deeply and grow together.</p>
+    </div>
+
+    <div>
+      <div class="category-head"><span class="category-icon">&#x1F9ED;</span><span class="category-title">Understanding Your Relationship</span></div>
+      <div class="resource-list">
+        <a class="resource-item" href="resources/relationships/from-unconscious-to-conscious-love.html"><div class="ri-text"><div class="ri-title">From Unconscious to Conscious Love</div><div class="ri-desc">Why we choose the partners we do &mdash; and how to grow beyond the patterns</div></div><span class="ri-arrow">&#x203A;</span></a>
+        <a class="resource-item" href="resources/relationships/your-relationship-journey.html"><div class="ri-text"><div class="ri-title">Your Relationship Journey</div><div class="ri-desc">Mapping the stages of your relationship and what they mean</div></div><span class="ri-arrow">&#x203A;</span></a>
+        <a class="resource-item" href="resources/relationships/your-attachment-needs.html"><div class="ri-text"><div class="ri-title">Your Attachment Needs</div><div class="ri-desc">Understanding attachment styles and what you each need to feel safe</div></div><span class="ri-arrow">&#x203A;</span></a>
+        <a class="resource-item" href="resources/relationships/your-strengths-as-a-couple.html"><div class="ri-text"><div class="ri-title">Your Strengths as a Couple</div><div class="ri-desc">Identify and build on what you do brilliantly together</div></div><span class="ri-arrow">&#x203A;</span></a>
+        <a class="resource-item" href="resources/relationships/understanding-your-connection-pulse.html"><div class="ri-text"><div class="ri-title">Understanding Your Connection Pulse</div><div class="ri-desc">How to read and respond to the rhythms of your connection</div></div><span class="ri-arrow">&#x203A;</span></a>
+        <a class="resource-item" href="resources/relationships/your-relationship-reflection.html"><div class="ri-text"><div class="ri-title">Your Relationship Reflection</div><div class="ri-desc">A structured reflection exercise for deeper self-awareness as a couple</div></div><span class="ri-arrow">&#x203A;</span></a>
+      </div>
+    </div>
+
+    <div>
+      <div class="category-head"><span class="category-icon">&#x1F4AC;</span><span class="category-title">Communication</span></div>
+      <div class="resource-list">
+        <a class="resource-item" href="resources/relationships/communication-and-imago-dialogue.html"><div class="ri-text"><div class="ri-title">Communication &amp; Imago Dialogue</div><div class="ri-desc">The structured dialogue that transforms how couples listen and respond</div></div><span class="ri-arrow">&#x203A;</span></a>
+        <a class="resource-item" href="resources/relationships/love-languages.html"><div class="ri-text"><div class="ri-title">Love Languages</div><div class="ri-desc">Discover how you each give and receive love &mdash; and close the gap</div></div><span class="ri-arrow">&#x203A;</span></a>
+        <a class="resource-item" href="resources/relationships/safety-check-dialogue.html"><div class="ri-text"><div class="ri-title">Safety Check Dialogue</div><div class="ri-desc">A tool for checking emotional safety before difficult conversations</div></div><span class="ri-arrow">&#x203A;</span></a>
+        <a class="resource-item" href="resources/relationships/capacity-and-connection.html"><div class="ri-text"><div class="ri-title">Capacity &amp; Connection</div><div class="ri-desc">Understanding how bandwidth and stress affect your ability to connect</div></div><span class="ri-arrow">&#x203A;</span></a>
+      </div>
+    </div>
+
+    <div>
+      <div class="category-head"><span class="category-icon">&#x1F49A;</span><span class="category-title">Healing &amp; Trust</span></div>
+      <div class="resource-list">
+        <a class="resource-item" href="resources/relationships/rebuilding-trust.html"><div class="ri-text"><div class="ri-title">Rebuilding Trust</div><div class="ri-desc">A framework for repairing trust after rupture, big or small</div></div><span class="ri-arrow">&#x203A;</span></a>
+        <a class="resource-item" href="resources/relationships/nervous-system-and-conflict.html"><div class="ri-text"><div class="ri-title">Nervous System &amp; Conflict</div><div class="ri-desc">Why conflict escalates and how to regulate together</div></div><span class="ri-arrow">&#x203A;</span></a>
+        <a class="resource-item" href="resources/relationships/your-body-in-conflict.html"><div class="ri-text"><div class="ri-title">Your Body in Conflict</div><div class="ri-desc">Reading body signals to de-escalate before things get worse</div></div><span class="ri-arrow">&#x203A;</span></a>
+        <a class="resource-item" href="resources/relationships/the-4-relationship-killers.html"><div class="ri-text"><div class="ri-title">The 4 Relationship Killers</div><div class="ri-desc">Gottman&rsquo;s four patterns that predict breakdown &mdash; and how to turn them around</div></div><span class="ri-arrow">&#x203A;</span></a>
+      </div>
+    </div>
+
+    <div>
+      <div class="category-head"><span class="category-icon">&#x26A0;&#xFE0F;</span><span class="category-title">Navigating Challenges</span></div>
+      <div class="resource-list">
+        <a class="resource-item" href="resources/relationships/issue-clarifier.html"><div class="ri-text"><div class="ri-title">Issue Clarifier</div><div class="ri-desc">Get clear on what&rsquo;s really going on before you try to resolve it</div></div><span class="ri-arrow">&#x203A;</span></a>
+        <a class="resource-item" href="resources/relationships/pursuer-avoider-dynamics.html"><div class="ri-text"><div class="ri-title">Pursuer &mdash; Avoider Dynamics</div><div class="ri-desc">The most common relationship dance &mdash; and how to step out of it</div></div><span class="ri-arrow">&#x203A;</span></a>
+        <a class="resource-item" href="resources/relationships/adhd-and-your-relationship.html"><div class="ri-text"><div class="ri-title">ADHD &amp; Your Relationship</div><div class="ri-desc">Understanding the impact of ADHD on connection, communication and daily life</div></div><span class="ri-arrow">&#x203A;</span></a>
+        <a class="resource-item" href="resources/relationships/couples-counselling-goals-and-outcomes.html"><div class="ri-text"><div class="ri-title">Counselling Goals &amp; Outcomes</div><div class="ri-desc">What to expect and how to get the most from your sessions together</div></div><span class="ri-arrow">&#x203A;</span></a>
+        <a class="resource-item" href="resources/relationships/navigating-separation-with-care.html"><div class="ri-text"><div class="ri-title">Navigating Separation with Care</div><div class="ri-desc">A compassionate guide to moving through separation thoughtfully</div></div><span class="ri-arrow">&#x203A;</span></a>
+      </div>
+    </div>
+
+    <div>
+      <div class="category-head"><span class="category-icon">&#x1F331;</span><span class="category-title">Daily Practices</span></div>
+      <div class="resource-list">
+        <a class="resource-item" href="resources/relationships/daily-connection-rituals.html"><div class="ri-text"><div class="ri-title">Daily Connection Rituals</div><div class="ri-desc">Small practices that keep your relationship growing every day</div></div><span class="ri-arrow">&#x203A;</span></a>
+        <a class="resource-item" href="resources/relationships/weekly-connection-check-in.html"><div class="ri-text"><div class="ri-title">Weekly Connection Check-in</div><div class="ri-desc">A structured format for your weekly couple conversation</div></div><span class="ri-arrow">&#x203A;</span></a>
+        <a class="resource-item" href="resources/relationships/growing-together-weekly-check-in.html"><div class="ri-text"><div class="ri-title">Growing Together Check-in</div><div class="ri-desc">Deeper weekly questions to explore growth, gratitude and goals</div></div><span class="ri-arrow">&#x203A;</span></a>
+        <a class="resource-item" href="resources/relationships/your-relationship-toolkit.html"><div class="ri-text"><div class="ri-title">Your Relationship Toolkit</div><div class="ri-desc">A curated collection of go-to tools for everyday relationship wellbeing</div></div><span class="ri-arrow">&#x203A;</span></a>
+      </div>
+    </div>
+
+    <div>
+      <div class="category-head"><span class="category-icon">&#x1F4E5;</span><span class="category-title">Downloads</span></div>
+      <div class="resource-list">
+        <a class="resource-item" href="downloads.html"><div class="ri-text"><div class="ri-title">Printable Worksheets &amp; PDFs</div><div class="ri-desc">All downloadable resources &mdash; save or print for offline use</div></div><span class="ri-arrow">&#x203A;</span></a>
+      </div>
+    </div>
+
+    <p style="text-align:center;font-size:0.7rem;color:#bbb;margin:24px 0 8px;letter-spacing:0.5px;">v1.0.0</p>
+  </div>
+
+  <nav class="bottom-nav">
+    <a class="bottom-nav-item" href="couple.html"><span class="bottom-nav-icon">&#x1F3E0;</span><span>Home</span></a>
+    <a class="bottom-nav-item" href="couple-planning.html"><span class="bottom-nav-icon">&#x1F5FA;&#xFE0F;</span><span>Planning</span></a>
+    <a class="bottom-nav-item" href="couple-strategy.html"><span class="bottom-nav-icon">&#x1F49E;</span><span>Strategy</span></a>
+    <a class="bottom-nav-item" href="couple-operations.html"><span class="bottom-nav-icon">&#x2699;&#xFE0F;</span><span>Operations</span></a>
+    <a class="bottom-nav-item active" href="couple-learn.html"><span class="bottom-nav-icon">&#x1F4DA;</span><span>Learn</span></a>
+  </nav>
+
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+    const supabase = createClient('https://eekefsuaefgpqmjdyniy.supabase.co', 'sb_publishable_pcXHwQVMpvEojb4K3afEMw_RMvgZM-Y');
+    async function init() {
+      const { data: { user }, error } = await supabase.auth.getUser();
+      if (!user || error) { window.location.href = 'login.html'; return; }
+      const { data: profile } = await supabase.from('users').select('membership_status').eq('id', user.id).single();
+      if (!profile || profile.membership_status !== 'active') { window.location.href = 'inactive.html'; return; }
+      document.body.style.opacity = '1';
+      document.getElementById('signOutBtn').addEventListener('click', async () => {
+        await supabase.auth.signOut();
+        window.location.href = 'login.html';
+      });
+    }
+    init();
+  </script>
+</body>
+</html>

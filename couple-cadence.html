@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Planning Cadence | Your Relationship Coach</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#003366">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Your Relationship Coach">
+  <link rel="apple-touch-icon" href="assets/coach4u-icon.jpeg">
+  <style>
+    body { opacity: 0; transition: opacity 0.2s ease; background: #f4f6f9; }
+    .container { padding: 0 0 40px; }
+    .ws-header { padding: 20px 16px 0; }
+    .ws-title { font-size: 1.2rem; font-weight: 800; color: var(--primary); margin: 0 0 4px; }
+    .ws-sub { font-size: 0.85rem; color: #666; margin: 0 0 20px; line-height: 1.5; }
+    .form-card {
+      background: white; border-radius: 10px;
+      border: 1px solid var(--border);
+      margin: 0 16px 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      overflow: hidden;
+    }
+    .form-card-head {
+      padding: 11px 14px 9px; border-bottom: 1px solid #f0f0f0;
+      font-size: 0.82rem; font-weight: 800; color: var(--primary);
+    }
+    .form-card-body { padding: 14px 14px 16px; }
+    .field-group { margin-bottom: 14px; }
+    .field-group:last-child { margin-bottom: 0; }
+    .field-label { display: block; font-size: 0.78rem; font-weight: 700; color: #555; margin-bottom: 5px; }
+    .field-hint { font-size: 0.7rem; color: #888; margin-top: 3px; }
+    .field-group select,
+    .field-group input[type="time"],
+    .field-group input[type="date"] {
+      width: 100%; padding: 9px 12px;
+      border: 1px solid #ddd; border-radius: 8px;
+      font-size: 0.9rem; font-family: var(--font-body);
+      color: var(--text); background: white;
+      transition: border-color 0.2s;
+      -webkit-appearance: auto;
+    }
+    .field-group select:focus,
+    .field-group input:focus { outline: none; border-color: var(--accent); }
+    .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .save-btn {
+      display: block; width: calc(100% - 32px); margin: 0 16px;
+      padding: 13px; background: var(--accent); color: white;
+      border: none; border-radius: 10px; font-size: 0.9rem; font-weight: 700;
+      cursor: pointer; text-align: center;
+      transition: background 0.15s;
+    }
+    .save-btn:hover { background: var(--accent-dark); }
+    .save-msg { display: none; text-align: center; font-size: 0.82rem; font-weight: 700; color: #059669; margin: 10px 16px 0; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-left">
+        <a href="couple-planning.html" class="header-back">&#x2190; Planning</a>
+        <span class="header-title">Planning Cadence</span>
+      </div>
+      <button id="signOutBtn" class="sign-out-btn">Sign Out</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="ws-header">
+      <h1 class="ws-title">&#x1F4C5; Planning Cadence</h1>
+      <p class="ws-sub">Set when you do your weekly check-ins and planning sessions. These dates anchor your rhythm as a couple.</p>
+    </div>
+
+    <div class="form-card">
+      <div class="form-card-head">&#x1F4AC; Weekly Check-in</div>
+      <div class="form-card-body">
+        <div class="row-2">
+          <div class="field-group">
+            <label class="field-label" for="weeklyDay">Day</label>
+            <select id="weeklyDay">
+              <option value="">&#x2014; Select &#x2014;</option>
+              <option value="monday">Monday</option>
+              <option value="tuesday">Tuesday</option>
+              <option value="wednesday">Wednesday</option>
+              <option value="thursday">Thursday</option>
+              <option value="friday">Friday</option>
+              <option value="saturday">Saturday</option>
+              <option value="sunday">Sunday</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="weeklyTime">Time</label>
+            <input type="time" id="weeklyTime">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <div class="form-card-head">&#x1F504; Quarterly Resets</div>
+      <div class="form-card-body">
+        <div class="field-group">
+          <label class="field-label" for="q1Date">Q1 Reset</label>
+          <input type="date" id="q1Date">
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="q2Date">Q2 Reset</label>
+          <input type="date" id="q2Date">
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="q3Date">Q3 Reset</label>
+          <input type="date" id="q3Date">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <div class="form-card-head">&#x1F3AF; Annual Review</div>
+      <div class="form-card-body">
+        <div class="field-group">
+          <label class="field-label" for="annualDate">Date</label>
+          <input type="date" id="annualDate">
+          <div class="field-hint">Once a year &mdash; your big-picture relationship planning day.</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="save-btn" id="saveBtn">Save Cadence</button>
+    <div class="save-msg" id="saveMsg">&#x2713; Saved</div>
+  </div>
+
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+    const supabase = createClient('https://eekefsuaefgpqmjdyniy.supabase.co', 'sb_publishable_pcXHwQVMpvEojb4K3afEMw_RMvgZM-Y');
+
+    function readLS(key, fallback) {
+      try { const r = localStorage.getItem(key); if (r != null) return JSON.parse(r); } catch(_) {}
+      return fallback;
+    }
+
+    function loadForm() {
+      const cad = readLS('rc_couple_cadence', {});
+      if (cad.weekly_day)  document.getElementById('weeklyDay').value  = cad.weekly_day;
+      if (cad.weekly_time) document.getElementById('weeklyTime').value = cad.weekly_time;
+      if (cad.q1_date)     document.getElementById('q1Date').value     = cad.q1_date;
+      if (cad.q2_date)     document.getElementById('q2Date').value     = cad.q2_date;
+      if (cad.q3_date)     document.getElementById('q3Date').value     = cad.q3_date;
+      if (cad.annual_date) document.getElementById('annualDate').value = cad.annual_date;
+    }
+
+    async function init() {
+      const { data: { user }, error } = await supabase.auth.getUser();
+      if (!user || error) { window.location.href = 'login.html'; return; }
+      const { data: profile } = await supabase.from('users').select('membership_status').eq('id', user.id).single();
+      if (!profile || profile.membership_status !== 'active') { window.location.href = 'inactive.html'; return; }
+      loadForm();
+      document.getElementById('saveBtn').addEventListener('click', () => {
+        const cad = {
+          weekly_day:  document.getElementById('weeklyDay').value  || null,
+          weekly_time: document.getElementById('weeklyTime').value || null,
+          q1_date:     document.getElementById('q1Date').value     || null,
+          q2_date:     document.getElementById('q2Date').value     || null,
+          q3_date:     document.getElementById('q3Date').value     || null,
+          annual_date: document.getElementById('annualDate').value || null,
+        };
+        localStorage.setItem('rc_couple_cadence', JSON.stringify(cad));
+        const msg = document.getElementById('saveMsg');
+        msg.style.display = 'block';
+        setTimeout(() => { msg.style.display = 'none'; }, 2500);
+      });
+      document.body.style.opacity = '1';
+      document.getElementById('signOutBtn').addEventListener('click', async () => {
+        await supabase.auth.signOut();
+        window.location.href = 'login.html';
+      });
+    }
+    init();
+  </script>
+</body>
+</html>
