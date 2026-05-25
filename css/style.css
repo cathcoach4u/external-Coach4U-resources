@@ -315,6 +315,7 @@ button { font-family: inherit; cursor: pointer; border: none; }
   transition: box-shadow 0.2s, transform 0.2s;
 }
 .resource-item:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+.resource-title { font-size: 15px; font-weight: 700; color: var(--primary); line-height: 1.4; }
 
 /* ----- Account ----- */
 .account-section { margin-bottom: 32px; }
