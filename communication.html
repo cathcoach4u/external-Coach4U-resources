@@ -6,7 +6,12 @@
   <title>Your Relationship Coach &mdash; Communication and Connection</title>
   <link rel="stylesheet" href="css/style.css">
   <meta name="theme-color" content="#003366">
-  <style>body{visibility:hidden}</style>
+  <link rel="manifest" href="manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Your Relationship Coach">
+  <link rel="apple-touch-icon" href="assets/coach4u-icon.jpeg">
+  <style>body { opacity: 0; transition: opacity 0.2s ease; }</style>
   <script type="module">
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
     const SUPABASE_URL      = 'https://eekefsuaefgpqmjdyniy.supabase.co';
@@ -14,7 +19,7 @@
     const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     const { data: { user }, error: userError } = await supabase.auth.getUser();
     if (!user || userError) {
-      window.location.href = 'index.html';
+      window.location.href = 'login.html';
     } else {
       const { data: profile } = await supabase
         .from('users')
@@ -24,10 +29,10 @@
       if (!profile || profile.membership_status !== 'active') {
         window.location.href = 'inactive.html';
       } else {
-        document.body.style.visibility = 'visible';
+        document.body.style.opacity = '1';
         document.getElementById('signOutBtn').addEventListener('click', async () => {
           await supabase.auth.signOut();
-          window.location.href = 'index.html';
+          window.location.href = 'login.html';
         });
       }
     }
@@ -82,6 +87,13 @@
     </div>
   </div>
 
+
+  <footer class="site-footer">
+    Strengths-Based Coaching and Counselling<br>
+    <a href="http://www.coach4u.com.au">www.coach4u.com.au</a> |
+    <a href="mailto:cath@coach4u.com.au">cath@coach4u.com.au</a> |
+    0402 313 337
+  </footer>
 
 </body>
 </html>
