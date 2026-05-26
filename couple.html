@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Home | Your Relationship Coach</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#003366">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Your Relationship Coach">
+  <link rel="apple-touch-icon" href="assets/coach4u-icon.jpeg">
+  <style>
+    body { opacity: 0; transition: opacity 0.2s ease; background: #f4f6f9; }
+    .container { padding: 0 0 88px; }
+    .ws-header { padding: 20px 16px 0; }
+    .ws-title { font-size: 1.2rem; font-weight: 800; color: var(--primary); margin: 0 0 4px; }
+    .ws-sub { font-size: 0.85rem; color: #666; margin: 0 0 20px; line-height: 1.5; }
+    .meeting-btn {
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 16px 10px; padding: 13px 16px;
+      background: var(--accent); color: white;
+      border-radius: 10px; text-decoration: none;
+      font-size: 0.9rem; font-weight: 700;
+      transition: background 0.15s;
+    }
+    .meeting-btn:hover { background: var(--accent-dark); color: white; text-decoration: none; }
+    .dash-panel {
+      background: white; border-radius: 10px;
+      border: 1px solid var(--border);
+      margin: 0 16px 10px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      overflow: hidden;
+    }
+    .panel-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 11px 14px 9px; border-bottom: 1px solid #f0f0f0;
+    }
+    .panel-title { font-size: 0.82rem; font-weight: 800; color: var(--primary); }
+    .panel-link { font-size: 0.72rem; font-weight: 700; color: var(--accent); text-decoration: none; }
+    .panel-link:hover { text-decoration: underline; }
+    .panel-body { padding: 10px 14px 12px; }
+    .values-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+    .value-pill {
+      background: rgba(13,148,136,0.08); color: #0D9488;
+      border: 1px solid rgba(13,148,136,0.2);
+      border-radius: 20px; padding: 4px 11px;
+      font-size: 0.75rem; font-weight: 700;
+    }
+    .pulse-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+    .pulse-score { font-size: 2rem; font-weight: 800; line-height: 1; min-width: 44px; }
+    .pulse-bar-wrap { flex: 1; background: #f0f0f0; border-radius: 99px; height: 8px; overflow: hidden; }
+    .pulse-bar-fill { height: 100%; border-radius: 99px; }
+    .pulse-meta { font-size: 0.75rem; color: #888; }
+    .progress-wrap { background: #f0f0f0; border-radius: 99px; height: 5px; margin-bottom: 3px; overflow: hidden; }
+    .progress-fill { height: 100%; border-radius: 99px; background: #0D9488; }
+    .progress-label { font-size: 0.7rem; color: #aaa; margin-bottom: 10px; }
+    .goal-list { display: flex; flex-direction: column; gap: 7px; }
+    .goal-row { display: flex; align-items: center; gap: 8px; }
+    .goal-desc { font-size: 0.78rem; font-weight: 600; color: var(--primary); flex: 1; line-height: 1.3; }
+    .status-pill { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; padding: 2px 7px; border-radius: 99px; white-space: nowrap; flex-shrink: 0; }
+    .pill-green { background: #D1FAE5; color: #059669; }
+    .pill-amber { background: #FEF3C7; color: #D97706; }
+    .pill-red   { background: #FEE2E2; color: #DC2626; }
+    .pill-grey  { background: #F3F4F6; color: #6B7280; }
+    .flow-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; position: relative; }
+    .flow-row + .flow-row::before { content: ''; position: absolute; left: 11px; top: -5px; height: 12px; width: 2px; background: #e5e7eb; }
+    .flow-dot { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 800; flex-shrink: 0; background: white; border: 2px solid #e5e7eb; color: #888; }
+    .flow-row.past .flow-dot { background: #f0fdfa; border-color: #0D9488; color: #0D9488; }
+    .flow-row.next .flow-dot { background: #0D9488; border-color: #0D9488; color: white; box-shadow: 0 0 0 4px rgba(13,148,136,0.15); }
+    .flow-info { flex: 1; min-width: 0; }
+    .flow-label { font-size: 0.85rem; font-weight: 700; color: var(--primary); line-height: 1.3; }
+    .flow-date { font-size: 0.78rem; color: #888; margin-top: 1px; }
+    .flow-row.past .flow-label { color: #6b7280; }
+    .flow-status { font-size: 0.62rem; font-weight: 800; letter-spacing: 0.5px; padding: 3px 8px; border-radius: 12px; text-transform: uppercase; flex-shrink: 0; background: #f3f4f6; color: #888; }
+    .flow-status.past { background: #ecfdf5; color: #047857; }
+    .flow-status.next { background: rgba(13,148,136,0.15); color: #0D9488; }
+    .flow-empty { padding: 14px 0; text-align: center; color: #888; font-size: 0.85rem; line-height: 1.5; }
+    .flow-empty a { color: var(--accent); font-weight: 700; }
+    .flow-weekly { background: #f8fafc; border-left: 3px solid var(--accent); padding: 8px 12px; margin-top: 12px; font-size: 0.82rem; color: var(--primary); border-radius: 6px; font-weight: 600; }
+    .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: white; border-top: 1px solid #e5e7eb; display: flex; z-index: 100; padding-bottom: env(safe-area-inset-bottom); box-shadow: 0 -2px 8px rgba(0,0,0,0.06); }
+    .bottom-nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8px 0 6px; text-decoration: none; color: #aaa; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; gap: 3px; transition: color 0.15s; }
+    .bottom-nav-item.active, .bottom-nav-item:hover { color: #0D9488; text-decoration: none; }
+    .bottom-nav-icon { font-size: 20px; line-height: 1; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-left">
+        <a href="https://cathcoach4u.github.io/yourcoachingportal/" class="header-back">&#x2190; Portal</a>
+        <span class="header-title">Your Relationship Coach</span>
+      </div>
+      <button id="signOutBtn" class="sign-out-btn">Sign Out</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="ws-header">
+      <h1 class="ws-title">&#x1F3E0; Home</h1>
+      <p class="ws-sub">Your relationship at a glance &mdash; connection pulse, your shared values, and what you&rsquo;re building together.</p>
+    </div>
+
+    <a class="meeting-btn" href="couple-checkin.html">&#x1F4AC;&nbsp; Start Weekly Check-in</a>
+
+    <div class="dash-panel">
+      <div class="panel-head">
+        <span class="panel-title">&#x1F49A; Connection Pulse</span>
+        <a class="panel-link" href="couple-checkin.html">Check in &#x203A;</a>
+      </div>
+      <div class="panel-body" id="pulsePanel">
+        <div style="font-size:0.82rem;color:#aaa;">No check-in yet this week.</div>
+        <a href="couple-checkin.html" style="display:inline-block;margin-top:8px;font-size:0.78rem;font-weight:700;color:var(--accent);">Do your check-in &#x2192;</a>
+      </div>
+    </div>
+
+    <div class="dash-panel">
+      <div class="panel-head">
+        <span class="panel-title">&#x2B50; Our Shared Values</span>
+        <a class="panel-link" href="couple-strategy.html">Edit &#x203A;</a>
+      </div>
+      <div class="panel-body">
+        <div class="values-pills" id="valuesPills">
+          <span style="font-size:0.78rem;color:#aaa;">No shared values set yet.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dash-panel">
+      <div class="panel-head">
+        <span class="panel-title">&#x1F3AF; This Quarter&rsquo;s Focus</span>
+        <a class="panel-link" href="couple-operations.html">Edit &#x203A;</a>
+      </div>
+      <div class="panel-body">
+        <div class="progress-wrap">
+          <div class="progress-fill" id="quarterProgress" style="width:0%"></div>
+        </div>
+        <div class="progress-label" id="quarterLabel">No focus areas set yet</div>
+        <div class="goal-list" id="quarterGoals"></div>
+      </div>
+    </div>
+
+    <div class="dash-panel">
+      <div class="panel-head">
+        <span class="panel-title">&#x1F4C5; Planning Cadence</span>
+        <a class="panel-link" href="couple-cadence.html">Edit &#x203A;</a>
+      </div>
+      <div class="panel-body" id="cadenceFlow">
+        <div class="flow-empty">Set your planning rhythm to see what&rsquo;s coming up.<br>
+          <a href="couple-cadence.html">Set it up &#x2192;</a></div>
+      </div>
+    </div>
+
+    <p style="text-align:center;font-size:0.7rem;color:#bbb;margin:24px 0 8px;letter-spacing:0.5px;">v1.0.0</p>
+  </div>
+
+  <nav class="bottom-nav">
+    <a class="bottom-nav-item active" href="couple.html"><span class="bottom-nav-icon">&#x1F3E0;</span><span>Home</span></a>
+    <a class="bottom-nav-item" href="couple-planning.html"><span class="bottom-nav-icon">&#x1F5FA;&#xFE0F;</span><span>Planning</span></a>
+    <a class="bottom-nav-item" href="couple-strategy.html"><span class="bottom-nav-icon">&#x1F49E;</span><span>Strategy</span></a>
+    <a class="bottom-nav-item" href="couple-operations.html"><span class="bottom-nav-icon">&#x2699;&#xFE0F;</span><span>Operations</span></a>
+    <a class="bottom-nav-item" href="couple-learn.html"><span class="bottom-nav-icon">&#x1F4DA;</span><span>Learn</span></a>
+  </nav>
+
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+    const supabase = createClient('https://eekefsuaefgpqmjdyniy.supabase.co', 'sb_publishable_pcXHwQVMpvEojb4K3afEMw_RMvgZM-Y');
+
+    function readLS(key, fallback) {
+      try { const r = localStorage.getItem(key); if (r != null) return JSON.parse(r); } catch(_) {}
+      return fallback;
+    }
+    function esc(s) {
+      return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+    function thisWeekIso() {
+      const d = new Date();
+      d.setDate(d.getDate() - d.getDay());
+      return d.toISOString().slice(0,10);
+    }
+
+    function renderPulse() {
+      const pulse = readLS('rc_couple_pulse', {});
+      const entry = pulse[thisWeekIso()];
+      const panel = document.getElementById('pulsePanel');
+      if (entry && entry.score != null) {
+        const score = Number(entry.score);
+        const pct = (score / 10) * 100;
+        const color = score >= 7 ? '#10b981' : score >= 4 ? '#f59e0b' : '#ef4444';
+        panel.innerHTML = `
+          <div class="pulse-row">
+            <div class="pulse-score" style="color:${color}">${score}</div>
+            <div class="pulse-bar-wrap"><div class="pulse-bar-fill" style="width:${pct}%;background:${color}"></div></div>
+          </div>
+          ${entry.highlight ? `<div class="pulse-meta">${esc(entry.highlight)}</div>` : ''}
+          <a href="couple-checkin.html" style="display:inline-block;margin-top:8px;font-size:0.78rem;font-weight:700;color:var(--accent);">Update &#x2192;</a>
+        `;
+      }
+    }
+
+    function renderValues() {
+      const vals = readLS('rc_couple_values', []);
+      const el = document.getElementById('valuesPills');
+      const active = vals.filter(v => v && v.trim());
+      el.innerHTML = active.length
+        ? active.map(v => `<span class="value-pill">${esc(v)}</span>`).join('')
+        : '<span style="font-size:0.78rem;color:#aaa;">No shared values set yet.</span>';
+    }
+
+    function renderQuarter() {
+      const goals = readLS('rc_couple_quarter_goals', []);
+      const LABEL = { on_track:'On Track', at_risk:'At Risk', off_track:'Off Track', done:'Done', not_started:'Not Started' };
+      const PILL  = { on_track:'pill-green', at_risk:'pill-amber', off_track:'pill-red', done:'pill-green', not_started:'pill-grey' };
+      const onTrack = goals.filter(g => g.status === 'on_track').length;
+      const total = goals.length;
+      const pct = total ? Math.round((onTrack / total) * 100) : 0;
+      document.getElementById('quarterProgress').style.width = pct + '%';
+      document.getElementById('quarterLabel').textContent = total
+        ? `${onTrack} of ${total} ${total === 1 ? 'focus area' : 'focus areas'} on track`
+        : 'No focus areas set yet';
+      document.getElementById('quarterGoals').innerHTML = goals.slice(0, 5).map(g => `
+        <div class="goal-row">
+          <div class="goal-desc">${esc(g.description || '')}</div>
+          <span class="status-pill ${PILL[g.status] || 'pill-grey'}">${LABEL[g.status] || (g.status || '—')}</span>
+        </div>`).join('');
+    }
+
+    function renderCadence() {
+      const cad = readLS('rc_couple_cadence', null);
+      const wrap = document.getElementById('cadenceFlow');
+      if (!cad) return;
+      const items = [
+        cad.q1_date && { icon: '1', label: 'Q1 Reset', date: cad.q1_date },
+        cad.q2_date && { icon: '2', label: 'Q2 Reset', date: cad.q2_date },
+        cad.q3_date && { icon: '3', label: 'Q3 Reset', date: cad.q3_date },
+        cad.annual_date && { icon: '&#x1F3AF;', label: 'Annual Review', date: cad.annual_date },
+      ].filter(Boolean).sort((a,b) => a.date.localeCompare(b.date));
+      if (!items.length) return;
+      const todayIso = new Date().toISOString().slice(0,10);
+      const nextIdx = items.findIndex(i => i.date >= todayIso);
+      const rows = items.map((it, idx) => {
+        const status = it.date < todayIso ? 'past' : idx === nextIdx ? 'next' : 'upcoming';
+        const d = new Date(it.date + 'T00:00:00');
+        const dateLabel = d.toLocaleDateString('en-AU', {day:'numeric',month:'short',year:'numeric'});
+        const statusLabel = {past:'&#x2713; Done', next:'Next up', upcoming:'Upcoming'}[status];
+        return `<div class="flow-row ${status}">
+          <div class="flow-dot">${it.icon}</div>
+          <div class="flow-info">
+            <div class="flow-label">${esc(it.label)}</div>
+            <div class="flow-date">${esc(dateLabel)}</div>
+          </div>
+          <div class="flow-status ${status}">${statusLabel}</div>
+        </div>`;
+      }).join('');
+      const weekly = cad.weekly_day
+        ? `<div class="flow-weekly">&#x1F4AC; Weekly check-in: ${esc(cad.weekly_day.charAt(0).toUpperCase() + cad.weekly_day.slice(1))}s${cad.weekly_time ? ' at ' + esc(cad.weekly_time) : ''}</div>`
+        : '';
+      wrap.innerHTML = rows + weekly;
+    }
+
+    async function init() {
+      const { data: { user }, error } = await supabase.auth.getUser();
+      if (!user || error) { window.location.href = 'login.html'; return; }
+      const { data: profile } = await supabase.from('users').select('membership_status').eq('id', user.id).single();
+      if (!profile || profile.membership_status !== 'active') { window.location.href = 'inactive.html'; return; }
+      renderPulse();
+      renderValues();
+      renderQuarter();
+      renderCadence();
+      document.body.style.opacity = '1';
+      document.getElementById('signOutBtn').addEventListener('click', async () => {
+        await supabase.auth.signOut();
+        window.location.href = 'login.html';
+      });
+    }
+    init();
+  </script>
+</body>
+</html>

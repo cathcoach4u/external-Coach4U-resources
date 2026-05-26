@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Planning | Your Relationship Coach</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#003366">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Your Relationship Coach">
+  <link rel="apple-touch-icon" href="assets/coach4u-icon.jpeg">
+  <style>
+    body { opacity: 0; transition: opacity 0.2s ease; background: #f4f6f9; }
+    .container { padding: 0 0 88px; }
+    .ws-header { padding: 20px 16px 0; }
+    .ws-title { font-size: 1.2rem; font-weight: 800; color: var(--primary); margin: 0 0 4px; }
+    .ws-sub { font-size: 0.85rem; color: #666; margin: 0 0 20px; line-height: 1.5; }
+    .activities-section { padding: 0 16px; }
+    .activity-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 480px) { .activity-grid { grid-template-columns: 1fr; } }
+    .activity-card {
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px 12px; border-radius: 10px;
+      border: 1.5px solid var(--accent); background: white;
+      text-decoration: none;
+      transition: box-shadow 0.15s, background 0.15s;
+    }
+    .activity-card:hover { background: #f0fdfa; box-shadow: 0 2px 8px rgba(13,148,136,0.12); text-decoration: none; }
+    .act-icon { width: 36px; height: 36px; border-radius: 8px; background: rgba(13,148,136,0.1); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .act-text { flex: 1; min-width: 0; }
+    .act-name { font-size: 0.88rem; font-weight: 700; color: var(--accent); line-height: 1.3; margin-bottom: 2px; }
+    .act-desc { font-size: 0.76rem; color: #666; line-height: 1.35; }
+    .act-arrow { font-size: 16px; color: var(--accent); flex-shrink: 0; }
+    .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: white; border-top: 1px solid #e5e7eb; display: flex; z-index: 100; padding-bottom: env(safe-area-inset-bottom); box-shadow: 0 -2px 8px rgba(0,0,0,0.06); }
+    .bottom-nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8px 0 6px; text-decoration: none; color: #aaa; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; gap: 3px; transition: color 0.15s; }
+    .bottom-nav-item.active, .bottom-nav-item:hover { color: #0D9488; text-decoration: none; }
+    .bottom-nav-icon { font-size: 20px; line-height: 1; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-left">
+        <span class="header-title">Your Relationship Coach</span>
+      </div>
+      <button id="signOutBtn" class="sign-out-btn">Sign Out</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="ws-header">
+      <h1 class="ws-title">&#x1F5FA;&#xFE0F; Planning</h1>
+      <p class="ws-sub">Your rhythm as a couple &mdash; annual, quarterly and weekly check-ins to keep growing together.</p>
+    </div>
+
+    <div class="activities-section">
+      <div class="activity-grid">
+        <a class="activity-card" href="couple-cadence.html">
+          <div class="act-icon">&#x1F4C5;</div>
+          <div class="act-text">
+            <div class="act-name">Planning Cadence</div>
+            <div class="act-desc">Set when you do annual, quarterly and weekly check-ins &mdash; anchors your whole year</div>
+          </div>
+          <span class="act-arrow">&#x203A;</span>
+        </a>
+        <a class="activity-card" href="couple-annual.html">
+          <div class="act-icon">&#x1F3AF;</div>
+          <div class="act-text">
+            <div class="act-name">Annual Review</div>
+            <div class="act-desc">Once a year &mdash; reflect, dream together, and set the direction for the year ahead</div>
+          </div>
+          <span class="act-arrow">&#x203A;</span>
+        </a>
+        <a class="activity-card" href="couple-quarterly.html">
+          <div class="act-icon">&#x1F504;</div>
+          <div class="act-text">
+            <div class="act-name">Quarterly Reset</div>
+            <div class="act-desc">Three times a year &mdash; review the last quarter and agree what matters most next</div>
+          </div>
+          <span class="act-arrow">&#x203A;</span>
+        </a>
+        <a class="activity-card" href="couple-checkin.html">
+          <div class="act-icon">&#x1F4AC;</div>
+          <div class="act-text">
+            <div class="act-name">Weekly Check-in</div>
+            <div class="act-desc">A short weekly conversation to stay connected, surface what matters and set your intention</div>
+          </div>
+          <span class="act-arrow">&#x203A;</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <nav class="bottom-nav">
+    <a class="bottom-nav-item" href="couple.html"><span class="bottom-nav-icon">&#x1F3E0;</span><span>Home</span></a>
+    <a class="bottom-nav-item active" href="couple-planning.html"><span class="bottom-nav-icon">&#x1F5FA;&#xFE0F;</span><span>Planning</span></a>
+    <a class="bottom-nav-item" href="couple-strategy.html"><span class="bottom-nav-icon">&#x1F49E;</span><span>Strategy</span></a>
+    <a class="bottom-nav-item" href="couple-operations.html"><span class="bottom-nav-icon">&#x2699;&#xFE0F;</span><span>Operations</span></a>
+    <a class="bottom-nav-item" href="couple-learn.html"><span class="bottom-nav-icon">&#x1F4DA;</span><span>Learn</span></a>
+  </nav>
+
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+    const supabase = createClient('https://eekefsuaefgpqmjdyniy.supabase.co', 'sb_publishable_pcXHwQVMpvEojb4K3afEMw_RMvgZM-Y');
+    async function init() {
+      const { data: { user }, error } = await supabase.auth.getUser();
+      if (!user || error) { window.location.href = 'login.html'; return; }
+      const { data: profile } = await supabase.from('users').select('membership_status').eq('id', user.id).single();
+      if (!profile || profile.membership_status !== 'active') { window.location.href = 'inactive.html'; return; }
+      document.body.style.opacity = '1';
+      document.getElementById('signOutBtn').addEventListener('click', async () => {
+        await supabase.auth.signOut();
+        window.location.href = 'login.html';
+      });
+    }
+    init();
+  </script>
+</body>
+</html>
