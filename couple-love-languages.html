@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Love Languages | Your Relationship Coach</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#003366">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Your Relationship Coach">
+  <link rel="apple-touch-icon" href="assets/coach4u-icon.jpeg">
+  <style>
+    body { opacity: 0; transition: opacity 0.2s ease; background: #f4f6f9; }
+    .container { padding: 0 0 40px; }
+    .ws-header { padding: 20px 16px 0; }
+    .ws-title { font-size: 1.2rem; font-weight: 800; color: var(--primary); margin: 0 0 4px; }
+    .ws-sub { font-size: 0.85rem; color: #666; margin: 0 0 20px; line-height: 1.5; }
+    .form-card { background: white; border-radius: 10px; border: 1px solid var(--border); margin: 0 16px 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); overflow: hidden; }
+    .form-card-head { padding: 11px 14px 9px; border-bottom: 1px solid #f0f0f0; font-size: 0.82rem; font-weight: 800; color: var(--primary); }
+    .form-card-body { padding: 14px; }
+    .field-group { margin-bottom: 12px; }
+    .field-group:last-child { margin-bottom: 0; }
+    .field-label { display: block; font-size: 0.78rem; font-weight: 700; color: #555; margin-bottom: 5px; }
+    .field-group input[type="text"],
+    .field-group select,
+    .field-group textarea { width: 100%; padding: 9px 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 0.88rem; font-family: var(--font-body); color: var(--text); background: white; transition: border-color 0.2s; }
+    .field-group input:focus, .field-group select:focus, .field-group textarea:focus { outline: none; border-color: var(--accent); }
+    .field-group textarea { min-height: 64px; resize: vertical; }
+    .save-btn { display: block; width: calc(100% - 32px); margin: 0 16px; padding: 13px; background: var(--accent); color: white; border: none; border-radius: 10px; font-size: 0.9rem; font-weight: 700; cursor: pointer; transition: background 0.15s; }
+    .save-btn:hover { background: var(--accent-dark); }
+    .save-msg { display: none; text-align: center; font-size: 0.82rem; font-weight: 700; color: #059669; margin: 10px 16px 0; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-left">
+        <a href="couple-strategy.html" class="header-back">&#x2190; Strategy</a>
+        <span class="header-title">Love Languages</span>
+      </div>
+      <button id="signOutBtn" class="sign-out-btn">Sign Out</button>
+    </div>
+  </header>
+  <div class="container">
+    <div class="ws-header">
+      <h1 class="ws-title">&#x1F497; Love Languages</h1>
+      <p class="ws-sub">Understanding how you each give and receive love helps you connect more intentionally. Set both partners&rsquo; languages here.</p>
+    </div>
+    <div class="form-card">
+      <div class="form-card-head">&#x1F9D1; Partner 1</div>
+      <div class="form-card-body">
+        <div class="field-group"><label class="field-label" for="p1name">Name</label><input type="text" id="p1name" placeholder="e.g. Alex"></div>
+        <div class="field-group"><label class="field-label" for="p1primary">Primary Love Language</label>
+          <select id="p1primary">
+            <option value="">&#x2014; Select &#x2014;</option>
+            <option value="words">Words of Affirmation</option>
+            <option value="acts">Acts of Service</option>
+            <option value="gifts">Receiving Gifts</option>
+            <option value="time">Quality Time</option>
+            <option value="touch">Physical Touch</option>
+          </select>
+        </div>
+        <div class="field-group"><label class="field-label" for="p1secondary">Secondary Love Language</label>
+          <select id="p1secondary">
+            <option value="">&#x2014; Select &#x2014;</option>
+            <option value="words">Words of Affirmation</option>
+            <option value="acts">Acts of Service</option>
+            <option value="gifts">Receiving Gifts</option>
+            <option value="time">Quality Time</option>
+            <option value="touch">Physical Touch</option>
+          </select>
+        </div>
+        <div class="field-group"><label class="field-label" for="p1notes">What this looks like for me</label><textarea id="p1notes" placeholder="e.g. I feel most loved when you say thank you for the small things, or send a message just to check in..."></textarea></div>
+      </div>
+    </div>
+    <div class="form-card">
+      <div class="form-card-head">&#x1F9D1; Partner 2</div>
+      <div class="form-card-body">
+        <div class="field-group"><label class="field-label" for="p2name">Name</label><input type="text" id="p2name" placeholder="e.g. Sam"></div>
+        <div class="field-group"><label class="field-label" for="p2primary">Primary Love Language</label>
+          <select id="p2primary">
+            <option value="">&#x2014; Select &#x2014;</option>
+            <option value="words">Words of Affirmation</option>
+            <option value="acts">Acts of Service</option>
+            <option value="gifts">Receiving Gifts</option>
+            <option value="time">Quality Time</option>
+            <option value="touch">Physical Touch</option>
+          </select>
+        </div>
+        <div class="field-group"><label class="field-label" for="p2secondary">Secondary Love Language</label>
+          <select id="p2secondary">
+            <option value="">&#x2014; Select &#x2014;</option>
+            <option value="words">Words of Affirmation</option>
+            <option value="acts">Acts of Service</option>
+            <option value="gifts">Receiving Gifts</option>
+            <option value="time">Quality Time</option>
+            <option value="touch">Physical Touch</option>
+          </select>
+        </div>
+        <div class="field-group"><label class="field-label" for="p2notes">What this looks like for me</label><textarea id="p2notes" placeholder="e.g. I feel most loved when you put your phone down and just sit with me..."></textarea></div>
+      </div>
+    </div>
+    <button class="save-btn" id="saveBtn">Save Love Languages</button>
+    <div class="save-msg" id="saveMsg">&#x2713; Saved</div>
+  </div>
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+    const supabase = createClient('https://eekefsuaefgpqmjdyniy.supabase.co','sb_publishable_pcXHwQVMpvEojb4K3afEMw_RMvgZM-Y');
+    function readLS(key, fallback) { try { const r = localStorage.getItem(key); if (r != null) return JSON.parse(r); } catch(_) {} return fallback; }
+    async function init() {
+      const { data: { user }, error } = await supabase.auth.getUser();
+      if (!user || error) { window.location.href = 'login.html'; return; }
+      const { data: profile } = await supabase.from('users').select('membership_status').eq('id', user.id).single();
+      if (!profile || profile.membership_status !== 'active') { window.location.href = 'inactive.html'; return; }
+      const ll = readLS('rc_couple_love_languages', {});
+      const fields = ['p1name','p1primary','p1secondary','p1notes','p2name','p2primary','p2secondary','p2notes'];
+      const keys   = ['p1_name','p1_primary','p1_secondary','p1_notes','p2_name','p2_primary','p2_secondary','p2_notes'];
+      fields.forEach((id,i) => { if (ll[keys[i]]) document.getElementById(id).value = ll[keys[i]]; });
+      document.getElementById('saveBtn').addEventListener('click', () => {
+        const data = {};
+        fields.forEach((id,i) => data[keys[i]] = document.getElementById(id).value.trim());
+        localStorage.setItem('rc_couple_love_languages', JSON.stringify(data));
+        const msg = document.getElementById('saveMsg');
+        msg.style.display = 'block';
+        setTimeout(() => msg.style.display = 'none', 2500);
+      });
+      document.body.style.opacity = '1';
+      document.getElementById('signOutBtn').addEventListener('click', async () => { await supabase.auth.signOut(); window.location.href = 'login.html'; });
+    }
+    init();
+  </script>
+</body>
+</html>

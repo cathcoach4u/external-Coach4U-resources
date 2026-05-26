@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Big Life Goals | Your Relationship Coach</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#003366">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Your Relationship Coach">
+  <link rel="apple-touch-icon" href="assets/coach4u-icon.jpeg">
+  <style>
+    body { opacity: 0; transition: opacity 0.2s ease; background: #f4f6f9; }
+    .container { padding: 0 0 40px; }
+    .ws-header { padding: 20px 16px 0; }
+    .ws-title { font-size: 1.2rem; font-weight: 800; color: var(--primary); margin: 0 0 4px; }
+    .ws-sub { font-size: 0.85rem; color: #666; margin: 0 0 20px; line-height: 1.5; }
+    .form-card { background: white; border-radius: 10px; border: 1px solid var(--border); margin: 0 16px 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); overflow: hidden; }
+    .form-card-head { padding: 11px 14px 9px; border-bottom: 1px solid #f0f0f0; font-size: 0.82rem; font-weight: 800; color: var(--primary); }
+    .form-card-body { padding: 14px; }
+    .form-card-prompt { font-size: 0.75rem; color: #888; margin-bottom: 8px; line-height: 1.4; }
+    .form-card-body textarea { width: 100%; padding: 9px 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 0.88rem; font-family: var(--font-body); color: var(--text); resize: vertical; min-height: 80px; transition: border-color 0.2s; }
+    .form-card-body textarea:focus { outline: none; border-color: var(--accent); }
+    .save-btn { display: block; width: calc(100% - 32px); margin: 0 16px; padding: 13px; background: var(--accent); color: white; border: none; border-radius: 10px; font-size: 0.9rem; font-weight: 700; cursor: pointer; transition: background 0.15s; }
+    .save-btn:hover { background: var(--accent-dark); }
+    .save-msg { display: none; text-align: center; font-size: 0.82rem; font-weight: 700; color: #059669; margin: 10px 16px 0; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-left">
+        <a href="couple-strategy.html" class="header-back">&#x2190; Strategy</a>
+        <span class="header-title">Big Life Goals</span>
+      </div>
+      <button id="signOutBtn" class="sign-out-btn">Sign Out</button>
+    </div>
+  </header>
+  <div class="container">
+    <div class="ws-header">
+      <h1 class="ws-title">&#x1F31F; Big Life Goals</h1>
+      <p class="ws-sub">The milestones, experiences and adventures you&rsquo;re aiming for together. Write freely &mdash; dream big.</p>
+    </div>
+    <div class="form-card">
+      <div class="form-card-head">&#x1F552; 3-Year Goal</div>
+      <div class="form-card-body">
+        <div class="form-card-prompt">What&rsquo;s the biggest thing you want to have achieved or experienced together in 3 years?</div>
+        <textarea id="threeYear" placeholder="In 3 years we want to..."></textarea>
+      </div>
+    </div>
+    <div class="form-card">
+      <div class="form-card-head">&#x1F558; 5-Year Goal</div>
+      <div class="form-card-body">
+        <div class="form-card-prompt">What does a successful 5 years look like? Where are you living, working, growing?</div>
+        <textarea id="fiveYear" placeholder="In 5 years we want to..."></textarea>
+      </div>
+    </div>
+    <div class="form-card">
+      <div class="form-card-head">&#x1F31C; 10-Year Dream</div>
+      <div class="form-card-body">
+        <div class="form-card-prompt">The long-horizon dream &mdash; where do you truly want to end up together?</div>
+        <textarea id="tenYear" placeholder="One day we want to..."></textarea>
+      </div>
+    </div>
+    <div class="form-card">
+      <div class="form-card-head">&#x1F5FA;&#xFE0F; Bucket List</div>
+      <div class="form-card-body">
+        <div class="form-card-prompt">Things you want to do, see or experience together &mdash; one per line.</div>
+        <textarea id="bucketList" style="min-height:120px;" placeholder="Travel to Japan&#10;Learn to dance&#10;Buy a home together&#10;Run a half-marathon..."></textarea>
+      </div>
+    </div>
+    <button class="save-btn" id="saveBtn">Save Goals</button>
+    <div class="save-msg" id="saveMsg">&#x2713; Saved</div>
+  </div>
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+    const supabase = createClient('https://eekefsuaefgpqmjdyniy.supabase.co','sb_publishable_pcXHwQVMpvEojb4K3afEMw_RMvgZM-Y');
+    function readLS(key, fallback) { try { const r = localStorage.getItem(key); if (r != null) return JSON.parse(r); } catch(_) {} return fallback; }
+    async function init() {
+      const { data: { user }, error } = await supabase.auth.getUser();
+      if (!user || error) { window.location.href = 'login.html'; return; }
+      const { data: profile } = await supabase.from('users').select('membership_status').eq('id', user.id).single();
+      if (!profile || profile.membership_status !== 'active') { window.location.href = 'inactive.html'; return; }
+      const g = readLS('rc_couple_goals', {});
+      if (g.three_year)  document.getElementById('threeYear').value  = g.three_year;
+      if (g.five_year)   document.getElementById('fiveYear').value   = g.five_year;
+      if (g.ten_year)    document.getElementById('tenYear').value    = g.ten_year;
+      if (g.bucket_list) document.getElementById('bucketList').value = g.bucket_list;
+      document.getElementById('saveBtn').addEventListener('click', () => {
+        const data = {
+          three_year:  document.getElementById('threeYear').value.trim(),
+          five_year:   document.getElementById('fiveYear').value.trim(),
+          ten_year:    document.getElementById('tenYear').value.trim(),
+          bucket_list: document.getElementById('bucketList').value.trim(),
+        };
+        localStorage.setItem('rc_couple_goals', JSON.stringify(data));
+        const msg = document.getElementById('saveMsg');
+        msg.style.display = 'block';
+        setTimeout(() => msg.style.display = 'none', 2500);
+      });
+      document.body.style.opacity = '1';
+      document.getElementById('signOutBtn').addEventListener('click', async () => { await supabase.auth.signOut(); window.location.href = 'login.html'; });
+    }
+    init();
+  </script>
+</body>
+</html>

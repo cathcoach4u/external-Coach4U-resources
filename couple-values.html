@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shared Values | Your Relationship Coach</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#003366">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Your Relationship Coach">
+  <link rel="apple-touch-icon" href="assets/coach4u-icon.jpeg">
+  <style>
+    body { opacity: 0; transition: opacity 0.2s ease; background: #f4f6f9; }
+    .container { padding: 0 0 40px; }
+    .ws-header { padding: 20px 16px 0; }
+    .ws-title { font-size: 1.2rem; font-weight: 800; color: var(--primary); margin: 0 0 4px; }
+    .ws-sub { font-size: 0.85rem; color: #666; margin: 0 0 20px; line-height: 1.5; }
+    .form-card { background: white; border-radius: 10px; border: 1px solid var(--border); margin: 0 16px 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); overflow: hidden; }
+    .form-card-head { padding: 11px 14px 9px; border-bottom: 1px solid #f0f0f0; font-size: 0.82rem; font-weight: 800; color: var(--primary); }
+    .form-card-body { padding: 14px; }
+    .values-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    @media (max-width: 400px) { .values-grid { grid-template-columns: 1fr; } }
+    .value-field { display: flex; flex-direction: column; gap: 4px; }
+    .value-label { font-size: 0.72rem; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 0.4px; }
+    .value-input { padding: 9px 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 0.9rem; font-family: var(--font-body); color: var(--text); background: white; transition: border-color 0.2s; }
+    .value-input:focus { outline: none; border-color: var(--accent); }
+    .field-hint { font-size: 0.72rem; color: #aaa; margin: -4px 16px 12px; }
+    .save-btn { display: block; width: calc(100% - 32px); margin: 0 16px; padding: 13px; background: var(--accent); color: white; border: none; border-radius: 10px; font-size: 0.9rem; font-weight: 700; cursor: pointer; transition: background 0.15s; }
+    .save-btn:hover { background: var(--accent-dark); }
+    .save-msg { display: none; text-align: center; font-size: 0.82rem; font-weight: 700; color: #059669; margin: 10px 16px 0; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-left">
+        <a href="couple-strategy.html" class="header-back">&#x2190; Strategy</a>
+        <span class="header-title">Shared Values</span>
+      </div>
+      <button id="signOutBtn" class="sign-out-btn">Sign Out</button>
+    </div>
+  </header>
+  <div class="container">
+    <div class="ws-header">
+      <h1 class="ws-title">&#x2B50; Shared Values</h1>
+      <p class="ws-sub">The non-negotiables that guide how you live and love. Aim for 3&ndash;6 values you both genuinely own. Name each in 1&ndash;3 words.</p>
+    </div>
+    <div class="field-hint">Examples: Deep Honesty, Adventure, Family First, Growth Together, Presence</div>
+    <div class="form-card">
+      <div class="form-card-head">Your Values</div>
+      <div class="form-card-body">
+        <div class="values-grid" id="valuesGrid"></div>
+      </div>
+    </div>
+    <button class="save-btn" id="saveBtn">Save Values</button>
+    <div class="save-msg" id="saveMsg">&#x2713; Saved</div>
+  </div>
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+    const supabase = createClient('https://eekefsuaefgpqmjdyniy.supabase.co','sb_publishable_pcXHwQVMpvEojb4K3afEMw_RMvgZM-Y');
+    function readLS(key, fallback) { try { const r = localStorage.getItem(key); if (r != null) return JSON.parse(r); } catch(_) {} return fallback; }
+    function buildGrid(vals) {
+      const grid = document.getElementById('valuesGrid');
+      grid.innerHTML = Array.from({length: 8}, (_, i) => `
+        <div class="value-field">
+          <label class="value-label">Value ${i+1}</label>
+          <input class="value-input" id="v${i}" type="text" placeholder="e.g. Honesty" value="${(vals[i]||'').replace(/"/g,'&quot;')}">
+        </div>`).join('');
+    }
+    async function init() {
+      const { data: { user }, error } = await supabase.auth.getUser();
+      if (!user || error) { window.location.href = 'login.html'; return; }
+      const { data: profile } = await supabase.from('users').select('membership_status').eq('id', user.id).single();
+      if (!profile || profile.membership_status !== 'active') { window.location.href = 'inactive.html'; return; }
+      buildGrid(readLS('rc_couple_values', []));
+      document.getElementById('saveBtn').addEventListener('click', () => {
+        const vals = Array.from({length:8}, (_,i) => (document.getElementById('v'+i).value||'').trim());
+        localStorage.setItem('rc_couple_values', JSON.stringify(vals));
+        const msg = document.getElementById('saveMsg');
+        msg.style.display = 'block';
+        setTimeout(() => msg.style.display = 'none', 2500);
+      });
+      document.body.style.opacity = '1';
+      document.getElementById('signOutBtn').addEventListener('click', async () => { await supabase.auth.signOut(); window.location.href = 'login.html'; });
+    }
+    init();
+  </script>
+</body>
+</html>
