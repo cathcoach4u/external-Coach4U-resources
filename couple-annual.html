@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Annual Review | Your Relationship Coach</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#003366">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Your Relationship Coach">
+  <link rel="apple-touch-icon" href="assets/coach4u-icon.jpeg">
+  <style>
+    body { opacity: 0; transition: opacity 0.2s ease; background: #f4f6f9; }
+    .container { padding: 0 0 40px; }
+    .ws-header { padding: 20px 16px 0; }
+    .ws-title { font-size: 1.2rem; font-weight: 800; color: var(--primary); margin: 0 0 4px; }
+    .ws-sub { font-size: 0.85rem; color: #666; margin: 0 0 8px; line-height: 1.5; }
+    .year-badge {
+      display: inline-block; font-size: 0.72rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.5px;
+      color: var(--accent); background: rgba(13,148,136,0.1);
+      padding: 3px 10px; border-radius: 20px; margin: 0 16px 16px;
+    }
+    .form-card {
+      background: white; border-radius: 10px;
+      border: 1px solid var(--border);
+      margin: 0 16px 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      overflow: hidden;
+    }
+    .form-card-head {
+      padding: 11px 14px 9px; border-bottom: 1px solid #f0f0f0;
+      font-size: 0.82rem; font-weight: 800; color: var(--primary);
+    }
+    .form-card-prompt {
+      padding: 8px 14px 0;
+      font-size: 0.78rem; color: #888; font-style: italic; line-height: 1.5;
+    }
+    .form-card-body { padding: 10px 14px 16px; }
+    .field-group textarea {
+      width: 100%; padding: 9px 12px;
+      border: 1px solid #ddd; border-radius: 8px;
+      font-size: 0.88rem; font-family: var(--font-body);
+      color: var(--text); background: white; resize: vertical;
+      min-height: 80px;
+      transition: border-color 0.2s;
+    }
+    .field-group textarea:focus { outline: none; border-color: var(--accent); }
+    .save-btn {
+      display: block; width: calc(100% - 32px); margin: 0 16px;
+      padding: 13px; background: var(--accent); color: white;
+      border: none; border-radius: 10px; font-size: 0.9rem; font-weight: 700;
+      cursor: pointer; transition: background 0.15s;
+    }
+    .save-btn:hover { background: var(--accent-dark); }
+    .saved-view { display: none; }
+    .saved-card {
+      background: #f0fdf4; border: 1.5px solid #86efac;
+      border-radius: 10px; margin: 0 16px 12px;
+      padding: 20px 16px;
+    }
+    .saved-title { font-size: 1rem; font-weight: 700; color: #166534; margin-bottom: 4px; }
+    .saved-year { font-size: 0.78rem; color: #4ade80; font-weight: 600; margin-bottom: 16px; }
+    .saved-row { margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #d1fae5; }
+    .saved-row:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .saved-q { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; color: #059669; margin-bottom: 3px; }
+    .saved-a { font-size: 0.85rem; color: #1f2937; line-height: 1.5; }
+    .home-btn {
+      display: block; width: 100%; margin-top: 16px;
+      padding: 11px; background: var(--accent); color: white;
+      border: none; border-radius: 10px; font-size: 0.88rem; font-weight: 700;
+      cursor: pointer; text-decoration: none; text-align: center;
+    }
+    .home-btn:hover { background: var(--accent-dark); color: white; text-decoration: none; }
+    .edit-btn {
+      display: block; width: 100%; margin-top: 10px;
+      padding: 11px; background: white; color: var(--primary);
+      border: 1.5px solid var(--primary); border-radius: 10px;
+      font-size: 0.88rem; font-weight: 700; cursor: pointer;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-left">
+        <a href="couple-planning.html" class="header-back">&#x2190; Planning</a>
+        <span class="header-title">Annual Review</span>
+      </div>
+      <button id="signOutBtn" class="sign-out-btn">Sign Out</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <div id="formView">
+      <div class="ws-header">
+        <h1 class="ws-title">&#x1F4C5; Annual Review</h1>
+        <p class="ws-sub">Set aside an hour together. Reflect honestly on your year as a couple before looking ahead.</p>
+      </div>
+      <div id="yearBadge" class="year-badge"></div>
+
+      <div class="form-card">
+        <div class="form-card-head">&#x1F3C6; What did we achieve together?</div>
+        <div class="form-card-prompt">Wins, milestones, goals reached, moments you&rsquo;re proud of&hellip;</div>
+        <div class="form-card-body">
+          <div class="field-group">
+            <textarea id="achieved" placeholder="This year we achieved&hellip;"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <div class="form-card-head">&#x1F914; What didn&rsquo;t go as planned?</div>
+        <div class="form-card-prompt">Honest reflection &mdash; not blame. What fell short or stayed stuck?</div>
+        <div class="form-card-body">
+          <div class="field-group">
+            <textarea id="not_planned" placeholder="Things that didn&rsquo;t go as we hoped&hellip;"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <div class="form-card-head">&#x1F4A1; What did we learn?</div>
+        <div class="form-card-prompt">About each other, about yourselves, about how you work as a team&hellip;</div>
+        <div class="form-card-body">
+          <div class="field-group">
+            <textarea id="learned" placeholder="We learned that&hellip;"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <div class="form-card-head">&#x2B06;&#xFE0F; What do we want more of next year?</div>
+        <div class="form-card-prompt">Experiences, feelings, habits, time together&hellip;</div>
+        <div class="form-card-body">
+          <div class="field-group">
+            <textarea id="more_of" placeholder="Next year we want more of&hellip;"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <div class="form-card-head">&#x2B07;&#xFE0F; What do we want less of?</div>
+        <div class="form-card-prompt">Drains, patterns, habits, or dynamics to let go of&hellip;</div>
+        <div class="form-card-body">
+          <div class="field-group">
+            <textarea id="less_of" placeholder="Next year we want less of&hellip;"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <div class="form-card-head">&#x1F31F; Our word for next year</div>
+        <div class="form-card-prompt">One word or short phrase that captures the feeling or intention you want to carry into next year.</div>
+        <div class="form-card-body">
+          <div class="field-group">
+            <textarea id="theme" placeholder="e.g. Adventure, Presence, Growth, Us&hellip;" style="min-height:52px;"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <button class="save-btn" id="saveBtn">Save Annual Review</button>
+    </div>
+
+    <div id="savedView" class="saved-view">
+      <div class="ws-header">
+        <h1 class="ws-title">&#x1F4C5; Annual Review</h1>
+      </div>
+      <div class="saved-card">
+        <div class="saved-title">Review saved &#x2713;</div>
+        <div class="saved-year" id="savedYear"></div>
+        <div id="savedSummary"></div>
+        <a class="home-btn" href="couple-planning.html">&#x2190; Back to Planning</a>
+        <button class="edit-btn" id="editBtn">Edit Review</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+    const supabase = createClient('https://eekefsuaefgpqmjdyniy.supabase.co', 'sb_publishable_pcXHwQVMpvEojb4K3afEMw_RMvgZM-Y');
+
+    function readLS(key, fallback) {
+      try { const r = localStorage.getItem(key); if (r != null) return JSON.parse(r); } catch(_) {}
+      return fallback;
+    }
+    function esc(s) {
+      return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+
+    const FIELDS = [
+      { id: 'achieved',    label: 'What we achieved' },
+      { id: 'not_planned', label: 'What didn’t go as planned' },
+      { id: 'learned',     label: 'What we learned' },
+      { id: 'more_of',     label: 'More of next year' },
+      { id: 'less_of',     label: 'Less of next year' },
+      { id: 'theme',       label: 'Our word for next year' },
+    ];
+
+    function currentYear() { return new Date().getFullYear(); }
+
+    function showSaved(entry, year) {
+      document.getElementById('formView').style.display = 'none';
+      const sv = document.getElementById('savedView');
+      sv.style.display = '';
+      document.getElementById('savedYear').textContent = String(year) + ' Annual Review';
+      document.getElementById('savedSummary').innerHTML = FIELDS
+        .filter(f => entry[f.id])
+        .map(f => `<div class="saved-row"><div class="saved-q">${esc(f.label)}</div><div class="saved-a">${esc(entry[f.id])}</div></div>`)
+        .join('');
+    }
+
+    async function init() {
+      const { data: { user }, error } = await supabase.auth.getUser();
+      if (!user || error) { window.location.href = 'login.html'; return; }
+      const { data: profile } = await supabase.from('users').select('membership_status').eq('id', user.id).single();
+      if (!profile || profile.membership_status !== 'active') { window.location.href = 'inactive.html'; return; }
+
+      const year = currentYear();
+      document.getElementById('yearBadge').textContent = year + ' Annual Review';
+
+      const reviews = readLS('rc_couple_annual_reviews', {});
+      const existing = reviews[year];
+      if (existing) {
+        FIELDS.forEach(f => { if (existing[f.id]) document.getElementById(f.id).value = existing[f.id]; });
+      }
+
+      document.getElementById('saveBtn').addEventListener('click', () => {
+        const entry = { saved_at: new Date().toISOString() };
+        FIELDS.forEach(f => { entry[f.id] = document.getElementById(f.id).value.trim(); });
+        const reviews = readLS('rc_couple_annual_reviews', {});
+        reviews[year] = entry;
+        localStorage.setItem('rc_couple_annual_reviews', JSON.stringify(reviews));
+        showSaved(entry, year);
+      });
+
+      document.getElementById('editBtn').addEventListener('click', () => {
+        document.getElementById('savedView').style.display = 'none';
+        document.getElementById('formView').style.display = '';
+      });
+
+      document.body.style.opacity = '1';
+      document.getElementById('signOutBtn').addEventListener('click', async () => {
+        await supabase.auth.signOut();
+        window.location.href = 'login.html';
+      });
+    }
+    init();
+  </script>
+</body>
+</html>
