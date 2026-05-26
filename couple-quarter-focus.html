@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quarter Focus | Your Relationship Coach</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#003366">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Your Relationship Coach">
+  <link rel="apple-touch-icon" href="assets/coach4u-icon.jpeg">
+  <style>
+    body { opacity: 0; transition: opacity 0.2s ease; background: #f4f6f9; }
+    .container { padding: 0 0 100px; }
+    .ws-header { padding: 20px 16px 0; }
+    .ws-title { font-size: 1.2rem; font-weight: 800; color: var(--primary); margin: 0 0 4px; }
+    .ws-sub { font-size: 0.85rem; color: #666; margin: 0 0 16px; line-height: 1.5; }
+    .quarter-badge { display: inline-block; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); background: rgba(13,148,136,0.1); padding: 3px 10px; border-radius: 20px; margin: 0 16px 16px; }
+    .add-row { display: flex; gap: 8px; margin: 0 16px 12px; }
+    .add-input { flex: 1; padding: 11px 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 0.9rem; font-family: var(--font-body); transition: border-color 0.2s; background: white; }
+    .add-input:focus { outline: none; border-color: var(--accent); }
+    .add-btn { padding: 11px 16px; background: var(--accent); color: white; border: none; border-radius: 8px; font-size: 0.88rem; font-weight: 700; cursor: pointer; white-space: nowrap; transition: background 0.15s; }
+    .add-btn:hover { background: var(--accent-dark); }
+    .items-card { background: white; border-radius: 10px; border: 1px solid var(--border); margin: 0 16px 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); overflow: hidden; }
+    .item-row { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-bottom: 1px solid #f0f0f0; }
+    .item-row:last-child { border-bottom: none; }
+    .item-text { flex: 1; font-size: 0.85rem; color: var(--primary); line-height: 1.4; }
+    .status-select { font-size: 0.72rem; font-weight: 700; border: none; border-radius: 6px; padding: 3px 6px; cursor: pointer; flex-shrink: 0; }
+    .status-select:focus { outline: none; }
+    .s-not_started { background: #F3F4F6; color: #6B7280; }
+    .s-on_track    { background: #D1FAE5; color: #059669; }
+    .s-at_risk     { background: #FEF3C7; color: #D97706; }
+    .s-off_track   { background: #FEE2E2; color: #DC2626; }
+    .s-done        { background: #D1FAE5; color: #059669; }
+    .item-del { background: none; border: none; color: #ccc; font-size: 16px; cursor: pointer; padding: 0; line-height: 1; flex-shrink: 0; }
+    .item-del:hover { color: #ef4444; }
+    .empty-state { padding: 24px; text-align: center; color: #aaa; font-size: 0.85rem; line-height: 1.6; }
+    .summary-row { font-size: 0.75rem; color: #888; padding: 0 16px 12px; }
+    .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: white; border-top: 1px solid #e5e7eb; display: flex; z-index: 100; padding-bottom: env(safe-area-inset-bottom); box-shadow: 0 -2px 8px rgba(0,0,0,0.06); }
+    .bottom-nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8px 0 6px; text-decoration: none; color: #aaa; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; gap: 3px; transition: color 0.15s; }
+    .bottom-nav-item.active, .bottom-nav-item:hover { color: #0D9488; text-decoration: none; }
+    .bottom-nav-icon { font-size: 20px; line-height: 1; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-left">
+        <a href="couple-operations.html" class="header-back">&#x2190; Operations</a>
+        <span class="header-title">Quarter Focus</span>
+      </div>
+      <button id="signOutBtn" class="sign-out-btn">Sign Out</button>
+    </div>
+  </header>
+  <div class="container">
+    <div class="ws-header">
+      <h1 class="ws-title">&#x1F3AF; Quarter Focus</h1>
+      <p class="ws-sub">The 1&ndash;3 things that matter most for your relationship this quarter. Keep it focused &mdash; less is more.</p>
+    </div>
+    <div id="quarterBadge" class="quarter-badge"></div>
+    <div class="add-row">
+      <input class="add-input" id="addInput" type="text" placeholder="Add a focus area&hellip;">
+      <button class="add-btn" id="addBtn">Add</button>
+    </div>
+    <div id="summary" class="summary-row"></div>
+    <div class="items-card" id="itemsCard">
+      <div class="empty-state">No focus areas yet.<br>Add what matters most this quarter.</div>
+    </div>
+  </div>
+  <nav class="bottom-nav">
+    <a class="bottom-nav-item" href="couple.html"><span class="bottom-nav-icon">&#x1F3E0;</span><span>Home</span></a>
+    <a class="bottom-nav-item" href="couple-planning.html"><span class="bottom-nav-icon">&#x1F5FA;&#xFE0F;</span><span>Planning</span></a>
+    <a class="bottom-nav-item" href="couple-strategy.html"><span class="bottom-nav-icon">&#x1F49E;</span><span>Strategy</span></a>
+    <a class="bottom-nav-item active" href="couple-operations.html"><span class="bottom-nav-icon">&#x2699;&#xFE0F;</span><span>Operations</span></a>
+    <a class="bottom-nav-item" href="couple-learn.html"><span class="bottom-nav-icon">&#x1F4DA;</span><span>Learn</span></a>
+  </nav>
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+    const supabase = createClient('https://eekefsuaefgpqmjdyniy.supabase.co','sb_publishable_pcXHwQVMpvEojb4K3afEMw_RMvgZM-Y');
+    const KEY = 'rc_couple_quarter_goals';
+    function readLS(key, fallback) { try { const r = localStorage.getItem(key); if (r != null) return JSON.parse(r); } catch(_) {} return fallback; }
+    function writeLS(key, data) { localStorage.setItem(key, JSON.stringify(data)); }
+    function esc(s) { return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+    function currentQuarter() {
+      const d = new Date(), m = d.getMonth(), y = d.getFullYear();
+      return 'Q' + (Math.floor(m/3)+1) + ' ' + y;
+    }
+    const STATUS_OPTS = [
+      {v:'not_started', l:'Not Started'}, {v:'on_track', l:'On Track'},
+      {v:'at_risk', l:'At Risk'}, {v:'off_track', l:'Off Track'}, {v:'done', l:'Done'}
+    ];
+    function renderItems() {
+      const items = readLS(KEY, []);
+      const card = document.getElementById('itemsCard');
+      const summary = document.getElementById('summary');
+      if (!items.length) {
+        card.innerHTML = '<div class="empty-state">No focus areas yet.<br>Add what matters most this quarter.</div>';
+        summary.textContent = '';
+        return;
+      }
+      const onTrack = items.filter(i => i.status === 'on_track' || i.status === 'done').length;
+      summary.textContent = `${onTrack} of ${items.length} on track`;
+      card.innerHTML = items.map(item => `
+        <div class="item-row" data-id="${item.id}">
+          <div class="item-text">${esc(item.description)}</div>
+          <select class="status-select s-${item.status||'not_started'}" data-action="status">
+            ${STATUS_OPTS.map(o=>`<option value="${o.v}"${item.status===o.v?' selected':''}>${o.l}</option>`).join('')}
+          </select>
+          <button class="item-del" data-action="delete" title="Remove">&#x2715;</button>
+        </div>`).join('');
+    }
+    function addItem() {
+      const input = document.getElementById('addInput');
+      const text = input.value.trim();
+      if (!text) return;
+      const items = readLS(KEY, []);
+      items.push({ id: Date.now(), description: text, status: 'not_started' });
+      writeLS(KEY, items);
+      input.value = '';
+      renderItems();
+    }
+    async function init() {
+      const { data: { user }, error } = await supabase.auth.getUser();
+      if (!user || error) { window.location.href = 'login.html'; return; }
+      const { data: profile } = await supabase.from('users').select('membership_status').eq('id', user.id).single();
+      if (!profile || profile.membership_status !== 'active') { window.location.href = 'inactive.html'; return; }
+      document.getElementById('quarterBadge').textContent = currentQuarter();
+      renderItems();
+      document.getElementById('addBtn').addEventListener('click', addItem);
+      document.getElementById('addInput').addEventListener('keydown', e => { if (e.key === 'Enter') addItem(); });
+      document.getElementById('itemsCard').addEventListener('change', e => {
+        const row = e.target.closest('[data-id]');
+        if (!row || e.target.dataset.action !== 'status') return;
+        const id = Number(row.dataset.id);
+        const items = readLS(KEY, []);
+        const item = items.find(i => i.id === id);
+        if (item) { item.status = e.target.value; writeLS(KEY, items); renderItems(); }
+      });
+      document.getElementById('itemsCard').addEventListener('click', e => {
+        const row = e.target.closest('[data-id]');
+        if (!row || e.target.dataset.action !== 'delete') return;
+        const id = Number(row.dataset.id);
+        writeLS(KEY, readLS(KEY,[]).filter(i => i.id !== id));
+        renderItems();
+      });
+      document.body.style.opacity = '1';
+      document.getElementById('signOutBtn').addEventListener('click', async () => { await supabase.auth.signOut(); window.location.href = 'login.html'; });
+    }
+    init();
+  </script>
+</body>
+</html>

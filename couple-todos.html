@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shared To-Dos | Your Relationship Coach</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#003366">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Your Relationship Coach">
+  <link rel="apple-touch-icon" href="assets/coach4u-icon.jpeg">
+  <style>
+    body { opacity: 0; transition: opacity 0.2s ease; background: #f4f6f9; }
+    .container { padding: 0 0 100px; }
+    .ws-header { padding: 20px 16px 0; }
+    .ws-title { font-size: 1.2rem; font-weight: 800; color: var(--primary); margin: 0 0 4px; }
+    .ws-sub { font-size: 0.85rem; color: #666; margin: 0 0 16px; line-height: 1.5; }
+    .header-row { display: flex; align-items: center; justify-content: space-between; padding: 0 16px 10px; }
+    .clear-btn { font-size: 0.75rem; font-weight: 700; color: #aaa; background: none; border: none; cursor: pointer; padding: 0; }
+    .clear-btn:hover { color: #ef4444; }
+    .add-row { display: flex; gap: 8px; margin: 0 16px 12px; }
+    .add-input { flex: 1; padding: 11px 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 0.9rem; font-family: var(--font-body); background: white; transition: border-color 0.2s; }
+    .add-input:focus { outline: none; border-color: var(--accent); }
+    .add-btn { padding: 11px 16px; background: var(--accent); color: white; border: none; border-radius: 8px; font-size: 0.88rem; font-weight: 700; cursor: pointer; white-space: nowrap; transition: background 0.15s; }
+    .add-btn:hover { background: var(--accent-dark); }
+    .items-card { background: white; border-radius: 10px; border: 1px solid var(--border); margin: 0 16px 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); overflow: hidden; }
+    .item-row { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-bottom: 1px solid #f0f0f0; }
+    .item-row:last-child { border-bottom: none; }
+    .item-check { width: 18px; height: 18px; border-radius: 4px; border: 2px solid #ddd; cursor: pointer; flex-shrink: 0; accent-color: var(--accent); }
+    .item-text { flex: 1; font-size: 0.85rem; color: var(--primary); line-height: 1.4; }
+    .item-text.done { text-decoration: line-through; color: #bbb; }
+    .item-del { background: none; border: none; color: #ccc; font-size: 16px; cursor: pointer; padding: 0; line-height: 1; flex-shrink: 0; }
+    .item-del:hover { color: #ef4444; }
+    .empty-state { padding: 24px; text-align: center; color: #aaa; font-size: 0.85rem; line-height: 1.6; }
+    .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: white; border-top: 1px solid #e5e7eb; display: flex; z-index: 100; padding-bottom: env(safe-area-inset-bottom); box-shadow: 0 -2px 8px rgba(0,0,0,0.06); }
+    .bottom-nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8px 0 6px; text-decoration: none; color: #aaa; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; gap: 3px; transition: color 0.15s; }
+    .bottom-nav-item.active, .bottom-nav-item:hover { color: #0D9488; text-decoration: none; }
+    .bottom-nav-icon { font-size: 20px; line-height: 1; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-left">
+        <a href="couple-operations.html" class="header-back">&#x2190; Operations</a>
+        <span class="header-title">Shared To-Dos</span>
+      </div>
+      <button id="signOutBtn" class="sign-out-btn">Sign Out</button>
+    </div>
+  </header>
+  <div class="container">
+    <div class="ws-header">
+      <h1 class="ws-title">&#x2705; Shared To-Dos</h1>
+      <p class="ws-sub">Open action items from your conversations. Keep it short &mdash; if it&rsquo;s done, tick it off.</p>
+    </div>
+    <div class="header-row">
+      <span id="todoCount" style="font-size:0.75rem;color:#888;"></span>
+      <button class="clear-btn" id="clearBtn">Clear completed</button>
+    </div>
+    <div class="add-row">
+      <input class="add-input" id="addInput" type="text" placeholder="Add a to-do&hellip;">
+      <button class="add-btn" id="addBtn">Add</button>
+    </div>
+    <div class="items-card" id="itemsCard">
+      <div class="empty-state">No to-dos yet.<br>Add action items as they come up in your check-ins.</div>
+    </div>
+  </div>
+  <nav class="bottom-nav">
+    <a class="bottom-nav-item" href="couple.html"><span class="bottom-nav-icon">&#x1F3E0;</span><span>Home</span></a>
+    <a class="bottom-nav-item" href="couple-planning.html"><span class="bottom-nav-icon">&#x1F5FA;&#xFE0F;</span><span>Planning</span></a>
+    <a class="bottom-nav-item" href="couple-strategy.html"><span class="bottom-nav-icon">&#x1F49E;</span><span>Strategy</span></a>
+    <a class="bottom-nav-item active" href="couple-operations.html"><span class="bottom-nav-icon">&#x2699;&#xFE0F;</span><span>Operations</span></a>
+    <a class="bottom-nav-item" href="couple-learn.html"><span class="bottom-nav-icon">&#x1F4DA;</span><span>Learn</span></a>
+  </nav>
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+    const supabase = createClient('https://eekefsuaefgpqmjdyniy.supabase.co','sb_publishable_pcXHwQVMpvEojb4K3afEMw_RMvgZM-Y');
+    const KEY = 'rc_couple_todos';
+    function readLS(key, fallback) { try { const r = localStorage.getItem(key); if (r != null) return JSON.parse(r); } catch(_) {} return fallback; }
+    function writeLS(key, data) { localStorage.setItem(key, JSON.stringify(data)); }
+    function esc(s) { return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+    function renderItems() {
+      const items = readLS(KEY, []);
+      const card = document.getElementById('itemsCard');
+      const count = document.getElementById('todoCount');
+      const open = items.filter(i => !i.done).length;
+      count.textContent = items.length ? `${open} open` : '';
+      document.getElementById('clearBtn').style.display = items.some(i=>i.done) ? '' : 'none';
+      if (!items.length) {
+        card.innerHTML = '<div class="empty-state">No to-dos yet.<br>Add action items as they come up in your check-ins.</div>';
+        return;
+      }
+      const sorted = [...items.filter(i=>!i.done), ...items.filter(i=>i.done)];
+      card.innerHTML = sorted.map(item => `
+        <div class="item-row" data-id="${item.id}">
+          <input type="checkbox" class="item-check" data-action="toggle" ${item.done?'checked':''}>
+          <div class="item-text${item.done?' done':''}">${esc(item.text)}</div>
+          <button class="item-del" data-action="delete" title="Remove">&#x2715;</button>
+        </div>`).join('');
+    }
+    function addItem() {
+      const input = document.getElementById('addInput');
+      const text = input.value.trim();
+      if (!text) return;
+      const items = readLS(KEY, []);
+      items.unshift({ id: Date.now(), text, done: false });
+      writeLS(KEY, items);
+      input.value = '';
+      renderItems();
+    }
+    async function init() {
+      const { data: { user }, error } = await supabase.auth.getUser();
+      if (!user || error) { window.location.href = 'login.html'; return; }
+      const { data: profile } = await supabase.from('users').select('membership_status').eq('id', user.id).single();
+      if (!profile || profile.membership_status !== 'active') { window.location.href = 'inactive.html'; return; }
+      renderItems();
+      document.getElementById('addBtn').addEventListener('click', addItem);
+      document.getElementById('addInput').addEventListener('keydown', e => { if (e.key === 'Enter') addItem(); });
+      document.getElementById('clearBtn').addEventListener('click', () => {
+        writeLS(KEY, readLS(KEY,[]).filter(i=>!i.done));
+        renderItems();
+      });
+      document.getElementById('itemsCard').addEventListener('change', e => {
+        const row = e.target.closest('[data-id]');
+        if (!row || e.target.dataset.action !== 'toggle') return;
+        const id = Number(row.dataset.id);
+        const items = readLS(KEY,[]);
+        const item = items.find(i=>i.id===id);
+        if (item) { item.done = e.target.checked; writeLS(KEY, items); renderItems(); }
+      });
+      document.getElementById('itemsCard').addEventListener('click', e => {
+        const row = e.target.closest('[data-id]');
+        if (!row || e.target.dataset.action !== 'delete') return;
+        writeLS(KEY, readLS(KEY,[]).filter(i=>i.id!==Number(row.dataset.id)));
+        renderItems();
+      });
+      document.body.style.opacity = '1';
+      document.getElementById('signOutBtn').addEventListener('click', async () => { await supabase.auth.signOut(); window.location.href = 'login.html'; });
+    }
+    init();
+  </script>
+</body>
+</html>
