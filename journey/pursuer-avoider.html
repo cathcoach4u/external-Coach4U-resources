@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Dance: Pursuer and Avoider &mdash; Coach4U</title>
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#003366">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Your Relationship Coach">
+  <link rel="apple-touch-icon" href="../assets/coach4u-icon.jpeg">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: 'Aptos', 'Calibri', 'Segoe UI', sans-serif; background: #ffffff; color: #333333; margin: 0; }
+    .top-bar { display: flex; justify-content: space-between; align-items: center; padding: 24px 24px 0; max-width: 760px; margin: 0 auto; }
+    .back-link { font-size: 0.85rem; color: #003366; text-decoration: none; font-weight: 600; }
+    .back-link:hover { text-decoration: underline; }
+    .page { max-width: 760px; margin: 0 auto; padding: 12px 24px 48px; }
+    .eyebrow { color: #be185d; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin: 18px 0 6px; }
+    h1 { color: #003366; font-size: 1.9rem; margin: 0 0 8px; line-height: 1.15; }
+    .lede { color: #646464; font-size: 1.02rem; margin: 0 0 22px; }
+    .video-wrap { position: relative; width: 100%; aspect-ratio: 1/1; max-width: 540px; margin: 0 auto 8px; border-radius: 14px; overflow: hidden; background: #003366; }
+    .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .video-coming { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: #ffffff; text-align: center; padding: 24px; }
+    .video-coming .vc-title { font-size: 1.15rem; font-weight: 700; }
+    .video-coming .vc-sub { font-size: 0.9rem; color: rgba(255,255,255,.75); }
+    .video-note { text-align: center; color: #888888; font-size: 0.82rem; margin: 6px 0 26px; }
+    .section { margin: 26px 0; }
+    .section h2 { color: #003366; font-size: 1.18rem; margin: 0 0 12px; }
+    .confirm-row { display: flex; align-items: flex-start; gap: 12px; padding: 9px 0; }
+    .confirm-check { flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; background: #16a34a; color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700; margin-top: 1px; }
+    .confirm-row p { margin: 2px 0 0; line-height: 1.45; }
+    .role-cards { display: flex; gap: 14px; margin-top: 8px; }
+    .role-card { flex: 1; border-radius: 14px; padding: 18px 18px 16px; }
+    .role-card.pursuer { background: #FFF5EB; border: 2px solid #E8C9A0; }
+    .role-card.avoider { background: #EBF3FF; border: 2px solid #A0C4E8; }
+    .role-card h3 { margin: 0 0 4px; font-size: 1.02rem; color: #003366; }
+    .role-card .role-sub { font-size: 0.82rem; font-style: italic; margin: 0 0 10px; }
+    .role-card.pursuer .role-sub { color: #996633; }
+    .role-card.avoider .role-sub { color: #336699; }
+    .role-card ul { margin: 0; padding-left: 18px; }
+    .role-card li { font-size: 0.92rem; padding: 3px 0; line-height: 1.4; }
+    .role-fear { margin-top: 12px; padding: 10px 12px; border-radius: 10px; font-size: 0.85rem; font-weight: 600; text-align: center; }
+    .pursuer .role-fear { background: rgba(204,136,51,0.15); color: #996633; }
+    .avoider .role-fear { background: rgba(51,119,170,0.15); color: #336699; }
+    .names-box { background: #fdf2f8; border-left: 4px solid #be185d; border-radius: 0 12px 12px 0; padding: 16px 18px; margin-top: 14px; }
+    .names-box p { margin: 0; font-size: 0.95rem; line-height: 1.5; }
+    .reframe { background: #003366; color: #ffffff; border-radius: 14px; padding: 22px 24px; text-align: center; margin: 26px 0; }
+    .reframe h2 { color: #ffffff; font-size: 1.25rem; margin: 0 0 8px; }
+    .reframe p { margin: 0; color: #dbe7f3; line-height: 1.5; }
+    .reframe .quote { font-style: italic; font-weight: 600; color: #ffffff; margin-top: 12px; }
+    .step { display: flex; gap: 14px; align-items: flex-start; padding: 12px 0; }
+    .step-num { flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%; background: #be185d; color: #ffffff; font-weight: 700; font-size: 0.92rem; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
+    .step p { margin: 3px 0 0; line-height: 1.45; }
+    .step strong { color: #003366; }
+    .worksheet-link { display: block; border: 2px solid #0D9488; border-radius: 12px; padding: 16px 18px; text-decoration: none; margin-top: 10px; }
+    .worksheet-link .wl-title { color: #003366; font-weight: 700; }
+    .worksheet-link .wl-sub { color: #888888; font-size: 0.86rem; margin-top: 3px; }
+    .worksheet-link:hover { background: #f0fdfa; }
+    .contact { text-align: center; color: #646464; font-size: 0.92rem; margin-top: 34px; }
+    .site-footer { text-align: center; color: #888888; font-size: 0.82rem; line-height: 1.7; margin-top: 28px; padding-top: 20px; border-top: 1px solid #eeeeee; }
+    @media (max-width: 640px) { .role-cards { flex-direction: column; } }
+  </style>
+  <style>body { opacity: 0; transition: opacity 0.2s ease; }</style>
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+    const supabase = createClient('https://eekefsuaefgpqmjdyniy.supabase.co', 'sb_publishable_pcXHwQVMpvEojb4K3afEMw_RMvgZM-Y');
+    const { data: { user }, error: userError } = await supabase.auth.getUser();
+    if (!user || userError) {
+      window.location.href = '../index.html';
+    } else {
+      const { data: profile } = await supabase.from('users').select('membership_status').eq('id', user.id).single();
+      if (!profile || profile.membership_status !== 'active') {
+        window.location.href = '../inactive.html';
+      } else {
+        document.body.style.opacity = '1';
+      }
+    }
+    // Vimeo ID for The Dance video. Once the MP4 is uploaded to Vimeo, paste the numeric ID
+    // here and the player replaces the coming-soon panel automatically.
+    const VIMEO_ID = '';
+    if (VIMEO_ID) {
+      document.getElementById('videoWrap').innerHTML =
+        '<iframe src="https://player.vimeo.com/video/' + VIMEO_ID + '" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
+    }
+  </script>
+</head>
+<body>
+
+  <div class="top-bar">
+    <a href="../couple-learn.html" class="back-link">&larr; Back to Learn</a>
+  </div>
+
+  <div class="page">
+    <div class="eyebrow">Your Journey &middot; After Your Session</div>
+    <h1>The Dance: Pursuer and Avoider</h1>
+    <p class="lede">The pattern you named in session, on one page. Watch the short video together, then have a look at the steps below.</p>
+
+    <div class="video-wrap" id="videoWrap">
+      <div class="video-coming">
+        <div class="vc-title">Your video is on its way</div>
+        <div class="vc-sub">A 90 second explainer from Cath will appear here.</div>
+      </div>
+    </div>
+    <p class="video-note">Best watched together, with sound on.</p>
+
+    <div class="section">
+      <h2>What you did in session</h2>
+      <div class="confirm-row"><div class="confirm-check">&#10003;</div><p>You named your cycle, and worked out who tends to move towards and who tends to move away.</p></div>
+      <div class="confirm-row"><div class="confirm-check">&#10003;</div><p>You heard that the pattern is the problem, not either of you.</p></div>
+      <div class="confirm-row"><div class="confirm-check">&#10003;</div><p>You practised slowing the dance down instead of dancing it faster.</p></div>
+    </div>
+
+    <div class="section">
+      <h2>The two steps of the dance</h2>
+      <div class="role-cards">
+        <div class="role-card pursuer">
+          <h3>The Pursuer</h3>
+          <p class="role-sub">moves towards connection</p>
+          <ul>
+            <li>Wants to talk about it now</li>
+            <li>Asks, follows, seeks reassurance</li>
+            <li>Reaching out is their repair attempt</li>
+          </ul>
+          <div class="role-fear">Core fear: &ldquo;If I stop reaching, we will drift apart.&rdquo;</div>
+        </div>
+        <div class="role-card avoider">
+          <h3>The Avoider</h3>
+          <p class="role-sub">moves away to self-protect</p>
+          <ul>
+            <li>Goes quiet, needs space</li>
+            <li>Waits for things to settle</li>
+            <li>Withdrawing is how they keep the peace</li>
+          </ul>
+          <div class="role-fear">Core fear: &ldquo;If I engage, I will make it worse.&rdquo;</div>
+        </div>
+      </div>
+      <div class="names-box">
+        <p><strong>Same dance, different names.</strong> Harville Hendrix, who created Imago therapy, calls this pair the <strong>hailstorm</strong> and the <strong>turtle</strong>. The hailstorm gets louder and bigger; the turtle pulls deeper into its shell. Other researchers call it pursue and withdraw. Whatever the label, it is the most common pattern couples bring to coaching, and it is workable.</p>
+      </div>
+    </div>
+
+    <div class="reframe">
+      <h2>The part to hold onto</h2>
+      <p>It is not your characters. It is a cycle. The pursuing feels like a storm, so the turtle hides. The hiding feels like abandonment, so the storm grows. Each of you is protecting yourself, and each move sets off the other.</p>
+      <p class="quote">&ldquo;I think we are in our dance right now. Can we slow down?&rdquo;</p>
+    </div>
+
+    <div class="section">
+      <h2>Stepping out of the dance</h2>
+      <div class="step"><div class="step-num">1</div><p><strong>Name it when you see it.</strong> Either of you can call it, gently: &ldquo;I think we are in our dance right now.&rdquo;</p></div>
+      <div class="step"><div class="step-num">2</div><p><strong>The turtle says when.</strong> Space is allowed. Coming out of the shell just enough to say when you will be back makes the space safe instead of frightening.</p></div>
+      <div class="step"><div class="step-num">3</div><p><strong>The storm softens.</strong> Easing off enough to let your partner take that space, trusting they will return, is what lets the turtle come back out.</p></div>
+    </div>
+
+    <div class="section">
+      <h2>This week</h2>
+      <p>You do not have to fix the dance yet. Just notice it, and notice which step is yours. Noticing is the first step out.</p>
+      <a class="worksheet-link" href="../resources/relationships/pursuer-avoider-dynamics.html">
+        <div class="wl-title">Go deeper: Pursuer and Avoider Dynamics worksheet</div>
+        <div class="wl-sub">The full one-page guide, good for printing and keeping on the fridge.</div>
+      </a>
+    </div>
+
+    <p class="contact">Questions before your next session? Message Cath any time.</p>
+
+    <div class="site-footer">
+      Strengths-Based Coaching and Counselling<br>
+      www.coach4u.com.au<br>
+      cath@coach4u.com.au<br>
+      0402 313 337
+    </div>
+  </div>
+
+</body>
+</html>
