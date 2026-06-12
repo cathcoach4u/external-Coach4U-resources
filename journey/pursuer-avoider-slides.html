@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="../css/style.css">
   <style>
     /* ThriveHQ video design system: navy #003366, teal #0D9488, mint #5eead4, bg #eef3f8,
-       white cards with teal top border. Pursuer amber / avoider blue stay as content colours. */
+       white cards with teal top border. Roles: pursuer pink, avoider violet (deliberately non-gendered). Gallup domain colours match the CRM. */
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; }
     body { font-family: 'Aptos', 'Calibri', 'Segoe UI', sans-serif; background: #eef3f8; color: #333; overflow: hidden; }
@@ -23,7 +23,7 @@
     .slide.active { display: flex; animation: slidein .35s ease; }
     @keyframes slidein { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
     .chip { background: #ccfbf1; color: #0F766E; font-size: clamp(.7rem, 1.6vw, .95rem); font-weight: 800; letter-spacing: .12em; text-transform: uppercase; padding: 9px 22px; border-radius: 99px; margin-bottom: 26px; }
-    .chip.amber { background: #fef3c7; color: #b45309; }
+    .chip.amber { background: #fce7f3; color: #be185d; }
     h1 { color: #003366; font-size: clamp(2rem, 6vw, 4.2rem); line-height: 1.06; letter-spacing: -1px; }
     h1 .mint { color: #0D9488; }
     h2 { color: #003366; font-size: clamp(1.5rem, 4vw, 2.8rem); line-height: 1.12; letter-spacing: -.5px; }
@@ -42,12 +42,12 @@
     .pcircle { width: clamp(130px, 22vw, 230px); height: clamp(130px, 22vw, 230px); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; font-weight: 800; color: #fff; box-shadow: 0 14px 36px rgba(2,32,71,.18); }
     .pcircle .nm { font-size: clamp(1rem, 2.4vw, 1.5rem); }
     .pcircle .mv { font-size: clamp(.72rem, 1.6vw, .95rem); font-weight: 600; opacity: .92; }
-    .pcircle.pursuer { background: radial-gradient(circle at 32% 28%, #e2a85e, #CC8833 70%); }
-    .pcircle.avoider { background: radial-gradient(circle at 32% 28%, #6fa3cc, #3377AA 70%); }
+    .pcircle.pursuer { background: radial-gradient(circle at 32% 28%, #d8569b, #be185d 70%); }
+    .pcircle.avoider { background: radial-gradient(circle at 32% 28%, #9a76e8, #6d28d9 70%); }
     .between { display: flex; flex-direction: column; gap: 8px; align-items: center; }
     .arr { font-size: clamp(1.4rem, 3.4vw, 2.4rem); line-height: 1; }
-    .arr.toward { color: #CC8833; }
-    .arr.away { color: #3377AA; }
+    .arr.toward { color: #be185d; }
+    .arr.away { color: #6d28d9; }
     .between .lbl { font-size: clamp(.7rem, 1.5vw, .9rem); color: #64748b; font-weight: 700; }
     /* role slide */
     .role-wrap { display: flex; align-items: center; gap: clamp(18px, 4vw, 46px); max-width: 920px; }
@@ -57,20 +57,20 @@
     .role-copy ul { list-style: none; }
     .role-copy li { font-size: clamp(.95rem, 2.2vw, 1.35rem); line-height: 1.45; padding: 6px 0 6px 26px; position: relative; color: #444; }
     .role-copy li::before { content: ''; position: absolute; left: 4px; top: 16px; width: 9px; height: 9px; border-radius: 50%; }
-    .role-wrap.pursuer .tagline { color: #996633; }
-    .role-wrap.pursuer li::before { background: #CC8833; }
-    .role-wrap.avoider .tagline { color: #336699; }
-    .role-wrap.avoider li::before { background: #3377AA; }
+    .role-wrap.pursuer .tagline { color: #9d174d; }
+    .role-wrap.pursuer li::before { background: #be185d; }
+    .role-wrap.avoider .tagline { color: #5b21b6; }
+    .role-wrap.avoider li::before { background: #6d28d9; }
     .fear-pill { display: inline-block; margin-top: 14px; padding: 10px 18px; border-radius: 12px; font-weight: 700; font-size: clamp(.85rem, 1.9vw, 1.15rem); }
-    .role-wrap.pursuer .fear-pill { background: rgba(204,136,51,.15); color: #996633; }
-    .role-wrap.avoider .fear-pill { background: rgba(51,119,170,.15); color: #336699; }
+    .role-wrap.pursuer .fear-pill { background: rgba(190,24,93,.12); color: #9d174d; }
+    .role-wrap.avoider .fear-pill { background: rgba(109,40,217,.12); color: #5b21b6; }
     /* loop slide */
     .loop-wrap { position: relative; width: min(64vw, 560px); aspect-ratio: 1; margin-top: 10px; }
     .loop-ring { position: absolute; inset: 14%; border-radius: 50%; border: 4px dashed #b9c6d8; }
     .loop-stop { position: absolute; padding: clamp(8px, 1.6vw, 14px) clamp(12px, 2.2vw, 22px); border-radius: 99px; font-weight: 700; font-size: clamp(.72rem, 1.7vw, 1.05rem); box-shadow: 0 8px 22px rgba(2,32,71,.12); white-space: nowrap; }
-    .loop-stop.n { top: 0; left: 50%; transform: translateX(-50%); background: #FFF5EB; border: 2px solid #CC8833; color: #996633; }
+    .loop-stop.n { top: 0; left: 50%; transform: translateX(-50%); background: #fdf2f8; border: 2px solid #be185d; color: #9d174d; }
     .loop-stop.e { right: 0; top: 50%; transform: translate(18%,-50%); background: #fff; border: 2px solid #d7dee8; color: #64748b; }
-    .loop-stop.s { bottom: 0; left: 50%; transform: translateX(-50%); background: #EBF3FF; border: 2px solid #3377AA; color: #336699; }
+    .loop-stop.s { bottom: 0; left: 50%; transform: translateX(-50%); background: #f5f3ff; border: 2px solid #6d28d9; color: #5b21b6; }
     .loop-stop.w { left: 0; top: 50%; transform: translate(-18%,-50%); background: #fff; border: 2px solid #d7dee8; color: #64748b; }
     .loop-core { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
     .loop-core div { max-width: 13ch; color: #003366; font-weight: 800; font-size: clamp(.95rem, 2.4vw, 1.5rem); line-height: 1.3; }
@@ -80,26 +80,32 @@
     /* fears slide */
     .fear-cards { display: flex; gap: 18px; max-width: 920px; width: 100%; margin-top: 8px; }
     .fearc { flex: 1; background: #fff; border-radius: 18px; padding: clamp(18px, 3vw, 30px); box-shadow: 0 12px 32px rgba(2,32,71,.12); text-align: left; }
-    .fearc.pu { border-top: 8px solid #CC8833; }
-    .fearc.av { border-top: 8px solid #3377AA; }
+    .fearc.pu { border-top: 8px solid #be185d; }
+    .fearc.av { border-top: 8px solid #6d28d9; }
     .fearc .fl { font-size: clamp(.7rem, 1.5vw, .9rem); font-weight: 800; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 10px; }
-    .fearc.pu .fl { color: #996633; }
-    .fearc.av .fl { color: #336699; }
+    .fearc.pu .fl { color: #9d174d; }
+    .fearc.av .fl { color: #5b21b6; }
     .fearc .fq { color: #003366; font-weight: 700; font-size: clamp(1rem, 2.4vw, 1.5rem); line-height: 1.35; }
     .fearc .fx { color: #64748b; font-size: clamp(.85rem, 1.8vw, 1.1rem); margin-top: 10px; line-height: 1.45; }
     /* hendrix slide */
     .imago { display: flex; gap: 18px; max-width: 920px; width: 100%; }
     .imago > div { flex: 1; border-radius: 20px; padding: clamp(18px, 3vw, 32px); }
-    .imago .hail { background: #FFF5EB; border: 3px solid #CC8833; }
-    .imago .turt { background: #EBF3FF; border: 3px solid #3377AA; }
+    .imago .hail { background: #fdf2f8; border: 3px solid #be185d; }
+    .imago .turt { background: #f5f3ff; border: 3px solid #6d28d9; }
     .imago h3 { font-size: clamp(1.1rem, 2.6vw, 1.7rem); margin-top: 10px; }
-    .imago .hail h3 { color: #996633; }
-    .imago .turt h3 { color: #336699; }
+    .imago .hail h3 { color: #9d174d; }
+    .imago .turt h3 { color: #5b21b6; }
     .imago p { color: #64748b; font-weight: 600; font-size: clamp(.85rem, 1.9vw, 1.15rem); margin-top: 6px; }
     /* steps */
     .step-num { width: clamp(48px, 7vw, 72px); height: clamp(48px, 7vw, 72px); border-radius: 50%; background: #003366; color: #fff; font-weight: 800; font-size: clamp(1.3rem, 3vw, 2rem); display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
     .says { margin-top: 22px; background: #fff; border-left: 6px solid #0D9488; border-radius: 0 14px 14px 0; padding: clamp(12px, 2.4vw, 20px) clamp(16px, 3vw, 26px); font-style: italic; color: #334; font-size: clamp(1rem, 2.4vw, 1.5rem); box-shadow: 0 10px 26px rgba(2,32,71,.1); max-width: 720px; }
     .navy-slide .says { background: rgba(255,255,255,.1); border-left-color: #5eead4; color: #fff; box-shadow: none; }
+    /* strengths domains (Gallup colours, matched to the CRM) */
+    .domains { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 920px; width: 100%; margin-top: 8px; }
+    .dom { background: #fff; border-radius: 16px; border-left: 8px solid var(--dc); box-shadow: 0 10px 28px rgba(2,32,71,.1); padding: clamp(14px, 2.4vw, 24px); text-align: left; }
+    .dom .dl { color: var(--dc); font-weight: 800; font-size: clamp(.9rem, 2vw, 1.25rem); margin-bottom: 6px; }
+    .dom p { color: #555; font-size: clamp(.82rem, 1.8vw, 1.08rem); line-height: 1.45; }
+    @media (max-width: 640px) { .domains { grid-template-columns: 1fr; } }
     /* controls */
     .controls { position: fixed; bottom: 0; left: 0; right: 0; padding: 16px 18px 20px; display: flex; align-items: center; justify-content: space-between; gap: 14px; background: linear-gradient(transparent, rgba(238,243,248,.92) 40%); z-index: 20; }
     .navy-on .controls { background: linear-gradient(transparent, rgba(0,30,60,.5) 40%); }
@@ -167,7 +173,7 @@
         </div>
         <div class="pcircle avoider"><span class="nm">One of you</span><span class="mv">moves away</span></div>
       </div>
-      <p class="sub">Neither is wrong. Both are instincts, learned long before you met.</p>
+      <p class="sub">Neither is wrong, and either of you can be either circle. The roles can even swap depending on the topic.</p>
     </section>
 
     <!-- 4 · Pursuer -->
@@ -224,12 +230,12 @@
       <div class="chip">Same dance, different names</div>
       <div class="imago">
         <div class="hail">
-          <svg class="icon" viewBox="0 0 64 64"><path d="M18 30a10 10 0 0 1 1-20 14 14 0 0 1 27 3 9 9 0 0 1-1 17H18z" fill="none" stroke="#CC8833" stroke-width="4" stroke-linejoin="round"/><circle cx="20" cy="42" r="3" fill="#CC8833"/><circle cx="32" cy="48" r="3" fill="#CC8833"/><circle cx="44" cy="42" r="3" fill="#CC8833"/><circle cx="26" cy="56" r="3" fill="#CC8833"/><circle cx="40" cy="58" r="3" fill="#CC8833"/></svg>
+          <svg class="icon" viewBox="0 0 64 64"><path d="M18 30a10 10 0 0 1 1-20 14 14 0 0 1 27 3 9 9 0 0 1-1 17H18z" fill="none" stroke="#be185d" stroke-width="4" stroke-linejoin="round"/><circle cx="20" cy="42" r="3" fill="#be185d"/><circle cx="32" cy="48" r="3" fill="#be185d"/><circle cx="44" cy="42" r="3" fill="#be185d"/><circle cx="26" cy="56" r="3" fill="#be185d"/><circle cx="40" cy="58" r="3" fill="#be185d"/></svg>
           <h3>The Hailstorm</h3>
           <p>gets louder and bigger</p>
         </div>
         <div class="turt">
-          <svg class="icon" viewBox="0 0 64 64"><path d="M14 40a18 12 0 0 1 36 0z" fill="none" stroke="#3377AA" stroke-width="4" stroke-linejoin="round"/><path d="M22 34l6 6M32 30v10M42 34l-6 6" stroke="#3377AA" stroke-width="3" stroke-linecap="round"/><path d="M50 40c6 0 8-4 6-7-2 2-4 2-6 2" fill="none" stroke="#3377AA" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 40h44M18 40l-3 8M46 40l3 8" fill="none" stroke="#3377AA" stroke-width="4" stroke-linecap="round"/></svg>
+          <svg class="icon" viewBox="0 0 64 64"><path d="M14 40a18 12 0 0 1 36 0z" fill="none" stroke="#6d28d9" stroke-width="4" stroke-linejoin="round"/><path d="M22 34l6 6M32 30v10M42 34l-6 6" stroke="#6d28d9" stroke-width="3" stroke-linecap="round"/><path d="M50 40c6 0 8-4 6-7-2 2-4 2-6 2" fill="none" stroke="#6d28d9" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 40h44M18 40l-3 8M46 40l3 8" fill="none" stroke="#6d28d9" stroke-width="4" stroke-linecap="round"/></svg>
           <h3>The Turtle</h3>
           <p>pulls deeper into the shell</p>
         </div>
@@ -244,7 +250,33 @@
       <p class="note">You are not a nag, and your partner is not cold. Those are the roles the dance hands you. And a cycle can be changed.</p>
     </section>
 
-    <!-- 9 · Step 1 -->
+    <!-- 9 · Strengths shape the dance -->
+    <section class="slide">
+      <div class="chip">Your strengths in the dance</div>
+      <h2>Where your strengths live changes how you dance</h2>
+      <div class="domains">
+        <div class="dom" style="--dc:#7B2D8E;"><div class="dl">Executing</div><p>&ldquo;Fix it now&rdquo; energy can fuel the chase. Unresolved feels unbearable.</p></div>
+        <div class="dom" style="--dc:#E97200;"><div class="dl">Influencing</div><p>Needing to be heard can turn the volume up when it matters most.</p></div>
+        <div class="dom" style="--dc:#0070CD;"><div class="dl">Relationship Building</div><p>Feels the disconnection first. The radar that starts the reach.</p></div>
+        <div class="dom" style="--dc:#00945B;"><div class="dl">Strategic Thinking</div><p>Retreats to think it through. The pause that can read as hiding.</p></div>
+      </div>
+      <p class="sub">None of this is a flaw. It is your talent under pressure.</p>
+    </section>
+
+    <!-- 10 · Strengths walk you out -->
+    <section class="slide">
+      <div class="chip">Your strengths on the way out</div>
+      <h2>The same strengths walk you out</h2>
+      <div class="domains">
+        <div class="dom" style="--dc:#7B2D8E;"><div class="dl">Executing</div><p>Keep the return-time promise. Reliability rebuilds safety.</p></div>
+        <div class="dom" style="--dc:#E97200;"><div class="dl">Influencing</div><p>Be the one who names the dance out loud, warmly.</p></div>
+        <div class="dom" style="--dc:#0070CD;"><div class="dl">Relationship Building</div><p>Make the first repair bid. The text, the hand, the cup of tea.</p></div>
+        <div class="dom" style="--dc:#00945B;"><div class="dl">Strategic Thinking</div><p>Design the pause that suits you both. When, how long, how you come back.</p></div>
+      </div>
+      <p class="sub">Aimed at the cycle instead of each other, your strengths become the way out.</p>
+    </section>
+
+    <!-- 11 · Step 1 -->
     <section class="slide">
       <div class="chip">Stepping out &middot; 1 of 3</div>
       <div class="step-num">1</div>
