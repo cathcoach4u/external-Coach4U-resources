@@ -113,6 +113,7 @@
     .imago .turt .who { color: #134e4a; }
     .imago p { color: #555; font-weight: 600; font-size: clamp(.82rem, 1.8vw, 1.08rem); margin-top: 8px; line-height: 1.45; }
     .imago .voice { font-style: italic; color: #334; background: rgba(255,255,255,.7); border-radius: 10px; padding: 8px 12px; margin-top: 10px; font-weight: 600; }
+    .imago .origin { color: #64748b; font-weight: 600; font-size: clamp(.76rem, 1.6vw, .98rem); margin-top: 8px; }
     /* the trap — circular pattern with arrows running around it */
     .loop-wrap { position: relative; width: min(54vw, 460px); aspect-ratio: 1; margin-top: 8px; }
     .loop-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
@@ -343,6 +344,7 @@
           <div class="who">The maximiser</div>
           <h3>The Hailstorm</h3>
           <p>Maximises the conflict. Expresses feelings loudly and passionately, needing to be heard.</p>
+          <p class="origin">Often grew up having to be loud for their needs to be met.</p>
           <div class="voice">For a hailstorm, silence feels like abandonment.</div>
         </div>
         <div class="turt">
@@ -350,10 +352,11 @@
           <div class="who">The minimiser</div>
           <h3>The Turtle</h3>
           <p>Minimises the conflict. Retreats into the shell, holds feelings in, avoids confrontation.</p>
+          <p class="origin">Often grew up with too much intrusion or overwhelm.</p>
           <div class="voice">For a turtle, an intense conversation feels like an attack.</div>
         </div>
       </div>
-      <p class="sub">The louder the hailstorm hails, the deeper the turtle retreats. Not personality flaws, adaptations learned in childhood.</p>
+      <p class="sub">The louder the hailstorm hails, the deeper the turtle retreats. Hendrix and Hunt observed that turtles and hailstorms almost always marry each other.</p>
     </section>
 
     <!-- 9 · The trap: the circle with arrows running around it -->
@@ -391,7 +394,17 @@
       <p class="sub">That is the hope in this. Nobody has to wait for their partner to go first.</p>
     </section>
 
-    <!-- 11 · Reframe (light, high contrast) -->
+    <!-- 11 · The scared child (empathy peak) -->
+    <section class="slide">
+      <div class="chip">The turn</div>
+      <div class="quotebox">
+        <div class="q">&ldquo;When you see the scared child behind your partner's reaction, the anger begins to turn into empathy.&rdquo;</div>
+        <div class="qa">Efrat Fridman, Imago therapist.</div>
+      </div>
+      <p class="sub">The storm is a scared child asking to be heard. The shell is a scared child asking to be safe.</p>
+    </section>
+
+    <!-- 12 · Reframe (light, high contrast) -->
     <section class="slide">
       <div class="chip">The part to hold onto</div>
       <div class="big" style="color:#003366;">It is not your characters.<br>It is a <span style="color:#0D9488;">cycle</span>.</div>
@@ -412,7 +425,7 @@
       <div class="chip">Stepping out &middot; 2 of 3</div>
       <div class="step-num">2</div>
       <h2>The turtle says when</h2>
-      <p class="sub">Space is allowed. A pause with a return time feels safe. A pause without one feels like abandonment.</p>
+      <p class="sub">Space is allowed. A pause with a return time feels safe. A pause without one feels like abandonment. Imago calls this stretching, deliberately acting against your instinct.</p>
       <div class="says">&ldquo;I need half an hour. I am not going anywhere, and I will come back at eight.&rdquo;</div>
     </section>
 
@@ -458,7 +471,7 @@
       });
       const dots = Array.from(dotsEl.children);
       // Which of the three parts each slide belongs to (0 = none: title/roadmap).
-      const PART_OF = [0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3];
+      const PART_OF = [0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3];
       const stepperEl = document.getElementById('stepper');
       const stepSpans = stepperEl ? Array.from(stepperEl.children) : [];
       function go(i) {
