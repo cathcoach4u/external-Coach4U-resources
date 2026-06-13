@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Dance: Pursuer and Avoider &mdash; Coach4U</title>
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#003366">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Your Relationship Coach">
+  <link rel="apple-touch-icon" href="../assets/coach4u-icon.jpeg">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* Light landing hub. Video is the hero; the doors lead deeper.
+       Matches the locked deck: navy #003366 / teal #0D9488, two-teal roles. */
+    * { box-sizing: border-box; }
+    body { font-family: 'Aptos', 'Calibri', 'Segoe UI', sans-serif; background: #ffffff; color: #333333; margin: 0; line-height: 1.6; }
+    .brand-strip { height: 8px; background: linear-gradient(90deg, #003366, #0D9488); }
+    .top-bar { display: flex; justify-content: space-between; align-items: center; padding: 22px 24px 0; max-width: 760px; margin: 0 auto; }
+    .back-link { font-size: 0.85rem; color: #003366; text-decoration: none; font-weight: 600; }
+    .back-link:hover { text-decoration: underline; }
+    .page { max-width: 760px; margin: 0 auto; padding: 14px 24px 52px; text-align: center; }
+    .eyebrow { color: #0D9488; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin: 18px 0 8px; }
+    h1 { color: #003366; font-size: 2rem; margin: 0 0 10px; line-height: 1.14; }
+    h1 em { color: #0D9488; font-style: normal; }
+    .promise { color: #555; font-size: 1.08rem; margin: 0 auto 24px; max-width: 30ch; line-height: 1.5; }
+    .video-wrap { position: relative; width: 100%; aspect-ratio: 1/1; max-width: 540px; margin: 0 auto 8px; border-radius: 16px; overflow: hidden; background: #003366; }
+    .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .video-coming { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: #ffffff; text-align: center; padding: 24px; }
+    .video-coming .vc-title { font-size: 1.15rem; font-weight: 700; }
+    .video-coming .vc-sub { font-size: 0.9rem; color: rgba(255,255,255,.75); }
+    .video-note { color: #888888; font-size: 0.82rem; margin: 8px 0 32px; }
+    .section-label { color: #0D9488; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin: 8px 0 14px; }
+    .doors { display: grid; grid-template-columns: 1fr; gap: 12px; max-width: 520px; margin: 0 auto; text-align: left; }
+    .door { display: flex; align-items: center; gap: 16px; border: 2px solid #e2e8f0; border-radius: 14px; padding: 18px 20px; text-decoration: none; transition: border-color .15s, background .15s; }
+    .door:hover { border-color: #0D9488; background: #f0fdfa; }
+    .door .icon { flex-shrink: 0; width: 46px; height: 46px; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+    .door .icon svg { width: 26px; height: 26px; }
+    .door.deck .icon { background: #e0f2fe; }
+    .door.science .icon { background: #ede9fe; }
+    .door.sheet .icon { background: #dcfce7; }
+    .door .dt { display: block; color: #003366; font-weight: 700; font-size: 1.05rem; }
+    .door .ds { display: block; color: #888; font-size: 0.86rem; margin-top: 2px; }
+    .door .arrow { margin-left: auto; color: #0D9488; font-size: 1.3rem; flex-shrink: 0; }
+    .closer { margin-top: 44px; padding: 30px 24px; background: #f8fbfb; border-radius: 18px; }
+    .closer .figs { display: flex; justify-content: center; gap: 6px; margin-bottom: 16px; }
+    .closer .figs svg { width: 64px; height: auto; }
+    .closer .big { color: #003366; font-size: 1.6rem; font-weight: 800; letter-spacing: -0.5px; }
+    .closer .big em { color: #0D9488; font-style: normal; }
+    .closer .sub { color: #64748b; font-size: 1rem; font-weight: 600; margin-top: 6px; }
+    .contact { color: #646464; font-size: 0.92rem; margin-top: 30px; }
+    .site-footer { text-align: center; color: #888888; font-size: 0.82rem; line-height: 1.7; margin-top: 26px; padding-top: 20px; border-top: 1px solid #eeeeee; }
+  </style>
+  <style>body { opacity: 0; transition: opacity 0.2s ease; }</style>
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+    const supabase = createClient('https://eekefsuaefgpqmjdyniy.supabase.co', 'sb_publishable_pcXHwQVMpvEojb4K3afEMw_RMvgZM-Y');
+    const { data: { user }, error: userError } = await supabase.auth.getUser();
+    if (!user || userError) {
+      window.location.href = '../index.html';
+    } else {
+      const { data: profile } = await supabase.from('users').select('membership_status').eq('id', user.id).single();
+      if (!profile || profile.membership_status !== 'active') {
+        window.location.href = '../inactive.html';
+      } else {
+        document.body.style.opacity = '1';
+      }
+    }
+    // Vimeo ID for The Dance video. Paste the numeric ID here once the MP4 is on Vimeo,
+    // and the player replaces the coming-soon panel automatically.
+    const VIMEO_ID = '';
+    if (VIMEO_ID) {
+      document.getElementById('videoWrap').innerHTML =
+        '<iframe src="https://player.vimeo.com/video/' + VIMEO_ID + '" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
+    }
+  </script>
+</head>
+<body>
+  <div class="brand-strip"></div>
+
+  <div class="top-bar">
+    <a href="../couple-learn.html" class="back-link">&larr; Back to Learn</a>
+  </div>
+
+  <div class="page">
+    <div class="eyebrow">Your Journey &middot; After Your Session</div>
+    <h1>The <em>Dance</em>: Pursuer and Avoider</h1>
+    <p class="promise">The pattern you named in session. Start with the short video, together.</p>
+
+    <div class="video-wrap" id="videoWrap">
+      <div class="video-coming">
+        <div class="vc-title">Your video is on its way</div>
+        <div class="vc-sub">A short explainer from Cath will appear here.</div>
+      </div>
+    </div>
+    <p class="video-note">Best watched together, with sound on.</p>
+
+    <div class="section-label">Go deeper, in your own way</div>
+    <div class="doors">
+      <a class="door deck" href="pursuer-avoider-slides.html">
+        <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#0369a1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span>
+        <span><span class="dt">Watch the presentation</span><span class="ds">The click-through version, good on a screen together</span></span>
+        <span class="arrow">&#8594;</span>
+      </a>
+      <a class="door science" href="pursuer-avoider-science.html">
+        <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#6d28d9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
+        <span><span class="dt">Read the science</span><span class="ds">The deeper read, for when you like to understand the why</span></span>
+        <span class="arrow">&#8594;</span>
+      </a>
+      <a class="door sheet" href="../resources/relationships/pursuer-avoider-dynamics.html">
+        <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#15803d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8"/></svg></span>
+        <span><span class="dt">Print the worksheet</span><span class="ds">The one-page guide, good for the fridge</span></span>
+        <span class="arrow">&#8594;</span>
+      </a>
+    </div>
+
+    <div class="closer">
+      <div class="figs">
+        <svg viewBox="0 0 120 170"><circle cx="60" cy="28" r="19" fill="none" stroke="#0fa28d" stroke-width="8"/><path d="M60 47v58M60 62l36-10M60 62l-26 22M60 105l26 50M60 105l-22 52" fill="none" stroke="#0fa28d" stroke-width="8" stroke-linecap="round"/></svg>
+        <svg viewBox="0 0 120 170" style="transform:scaleX(-1);"><circle cx="60" cy="28" r="19" fill="none" stroke="#134e4a" stroke-width="8"/><path d="M60 47v58M60 62l36-10M60 62l-26 22M60 105l26 50M60 105l-22 52" fill="none" stroke="#134e4a" stroke-width="8" stroke-linecap="round"/></svg>
+      </div>
+      <div class="big">Back to <em>each other</em>.</div>
+      <div class="sub">Truly connected, fully present.</div>
+    </div>
+
+    <p class="contact">Questions before your next session? Message Cath any time.</p>
+
+    <div class="site-footer">
+      Strengths-Based Coaching and Counselling<br>
+      www.coach4u.com.au<br>
+      cath@coach4u.com.au<br>
+      0402 313 337
+    </div>
+  </div>
+
+</body>
+</html>
