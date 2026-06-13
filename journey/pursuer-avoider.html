@@ -12,75 +12,45 @@
   <link rel="apple-touch-icon" href="../assets/coach4u-icon.jpeg">
   <link rel="stylesheet" href="../css/style.css">
   <style>
+    /* Light landing hub. Video is the hero; the doors lead deeper.
+       Matches the locked deck: navy #003366 / teal #0D9488, two-teal roles. */
     * { box-sizing: border-box; }
-    body { font-family: 'Aptos', 'Calibri', 'Segoe UI', sans-serif; background: #ffffff; color: #333333; margin: 0; }
-    .top-bar { display: flex; justify-content: space-between; align-items: center; padding: 24px 24px 0; max-width: 760px; margin: 0 auto; }
+    body { font-family: 'Aptos', 'Calibri', 'Segoe UI', sans-serif; background: #ffffff; color: #333333; margin: 0; line-height: 1.6; }
+    .brand-strip { height: 8px; background: linear-gradient(90deg, #003366, #0D9488); }
+    .top-bar { display: flex; justify-content: space-between; align-items: center; padding: 22px 24px 0; max-width: 760px; margin: 0 auto; }
     .back-link { font-size: 0.85rem; color: #003366; text-decoration: none; font-weight: 600; }
     .back-link:hover { text-decoration: underline; }
-    .page { max-width: 760px; margin: 0 auto; padding: 12px 24px 48px; }
-    .eyebrow { color: #be185d; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin: 18px 0 6px; }
-    h1 { color: #003366; font-size: 1.95rem; margin: 0 0 8px; line-height: 1.15; }
-    .lede { color: #646464; font-size: 1.05rem; margin: 0 0 22px; line-height: 1.5; }
-    .video-wrap { position: relative; width: 100%; aspect-ratio: 1/1; max-width: 540px; margin: 0 auto 8px; border-radius: 14px; overflow: hidden; background: #003366; }
+    .page { max-width: 760px; margin: 0 auto; padding: 14px 24px 52px; text-align: center; }
+    .eyebrow { color: #0D9488; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin: 18px 0 8px; }
+    h1 { color: #003366; font-size: 2rem; margin: 0 0 10px; line-height: 1.14; }
+    h1 em { color: #0D9488; font-style: normal; }
+    .promise { color: #555; font-size: 1.08rem; margin: 0 auto 24px; max-width: 30ch; line-height: 1.5; }
+    .video-wrap { position: relative; width: 100%; aspect-ratio: 1/1; max-width: 540px; margin: 0 auto 8px; border-radius: 16px; overflow: hidden; background: #003366; }
     .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
     .video-coming { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: #ffffff; text-align: center; padding: 24px; }
     .video-coming .vc-title { font-size: 1.15rem; font-weight: 700; }
     .video-coming .vc-sub { font-size: 0.9rem; color: rgba(255,255,255,.75); }
-    .video-note { text-align: center; color: #888888; font-size: 0.82rem; margin: 6px 0 30px; }
-    .section { margin: 34px 0; }
-    .section h2 { color: #003366; font-size: 1.3rem; margin: 0 0 12px; }
-    .section p { line-height: 1.6; margin: 0 0 14px; }
-    .vignette { background: #f8f9fb; border-radius: 14px; padding: 22px 24px; }
-    .vignette p { margin: 0 0 12px; line-height: 1.65; color: #444444; }
-    .vignette p:last-child { margin-bottom: 0; }
-    .vignette .v-kicker { color: #be185d; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
-    .role-cards { display: flex; gap: 14px; margin-top: 16px; }
-    .role-card { flex: 1; border-radius: 14px; padding: 18px 18px 16px; }
-    .role-card.pursuer { background: #FFF5EB; border: 2px solid #E8C9A0; }
-    .role-card.avoider { background: #EBF3FF; border: 2px solid #A0C4E8; }
-    .role-card h3 { margin: 0 0 4px; font-size: 1.05rem; color: #003366; }
-    .role-card .role-sub { font-size: 0.82rem; font-style: italic; margin: 0 0 10px; }
-    .role-card.pursuer .role-sub { color: #996633; }
-    .role-card.avoider .role-sub { color: #336699; }
-    .role-card p { font-size: 0.93rem; line-height: 1.55; margin: 0; }
-    .cycle-box { background: #003366; border-radius: 16px; padding: 28px 22px 24px; margin-top: 16px; }
-    .cycle-title { color: #ffffff; text-align: center; font-weight: 700; font-size: 1.05rem; margin-bottom: 20px; }
-    .cycle-loop { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; max-width: 560px; margin: 0 auto; }
-    .cycle-step { border-radius: 12px; padding: 13px 14px; font-size: 0.9rem; font-weight: 600; text-align: center; position: relative; }
-    .cycle-step.warm { background: #FFF5EB; color: #996633; }
-    .cycle-step.cool { background: #EBF3FF; color: #336699; }
-    .cycle-step.neutral { background: rgba(255,255,255,.12); color: #dbe7f3; font-weight: 500; font-style: italic; }
-    .cycle-arrow { text-align: center; color: #7fa3c8; font-size: 1.1rem; line-height: 1; padding: 2px 0; }
-    .cycle-note { color: #aec5dc; text-align: center; font-size: 0.85rem; margin-top: 18px; line-height: 1.5; }
-    .fear-cards { display: flex; gap: 14px; margin-top: 16px; }
-    .fear-card { flex: 1; border-radius: 12px; padding: 16px 18px; font-size: 0.95rem; line-height: 1.5; }
-    .fear-card.pursuer { background: rgba(204,136,51,0.12); border-left: 4px solid #CC8833; }
-    .fear-card.avoider { background: rgba(51,119,170,0.12); border-left: 4px solid #3377AA; }
-    .fear-card .f-label { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
-    .fear-card.pursuer .f-label { color: #996633; }
-    .fear-card.avoider .f-label { color: #336699; }
-    .fear-card em { color: #003366; font-weight: 600; font-style: normal; }
-    .names-box { background: #fdf2f8; border-left: 4px solid #be185d; border-radius: 0 12px 12px 0; padding: 18px 20px; margin-top: 16px; }
-    .names-box p { margin: 0 0 10px; font-size: 0.95rem; line-height: 1.6; }
-    .names-box p:last-child { margin-bottom: 0; }
-    .reframe { background: linear-gradient(135deg, #003366 0%, #5b2a59 100%); color: #ffffff; border-radius: 16px; padding: 26px 26px; text-align: center; margin: 34px 0; }
-    .reframe h2 { color: #f9a8d4; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin: 0 0 10px; }
-    .reframe .big { font-size: 1.45rem; font-weight: 700; line-height: 1.35; margin: 0 0 10px; }
-    .reframe p { margin: 0; color: #e6d3e2; line-height: 1.55; font-size: 0.98rem; }
-    .out-step { display: flex; gap: 16px; align-items: flex-start; padding: 14px 0; }
-    .out-num { flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; background: #be185d; color: #ffffff; font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
-    .out-step h3 { margin: 0 0 4px; font-size: 1.02rem; color: #003366; }
-    .out-step p { margin: 0; line-height: 1.55; font-size: 0.95rem; }
-    .says { display: inline-block; background: #f8f9fb; border-radius: 8px; padding: 3px 10px; font-style: italic; color: #555; margin-top: 6px; }
-    .hope { background: #f0fdf9; border: 2px solid #99e3d2; border-radius: 14px; padding: 20px 22px; }
-    .hope p { margin: 0; line-height: 1.6; }
-    .worksheet-link { display: block; border: 2px solid #0D9488; border-radius: 12px; padding: 16px 18px; text-decoration: none; margin-top: 14px; }
-    .worksheet-link .wl-title { color: #003366; font-weight: 700; }
-    .worksheet-link .wl-sub { color: #888888; font-size: 0.86rem; margin-top: 3px; }
-    .worksheet-link:hover { background: #f0fdfa; }
-    .contact { text-align: center; color: #646464; font-size: 0.92rem; margin-top: 34px; }
-    .site-footer { text-align: center; color: #888888; font-size: 0.82rem; line-height: 1.7; margin-top: 28px; padding-top: 20px; border-top: 1px solid #eeeeee; }
-    @media (max-width: 640px) { .role-cards, .fear-cards { flex-direction: column; } }
+    .video-note { color: #888888; font-size: 0.82rem; margin: 8px 0 32px; }
+    .section-label { color: #0D9488; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin: 8px 0 14px; }
+    .doors { display: grid; grid-template-columns: 1fr; gap: 12px; max-width: 520px; margin: 0 auto; text-align: left; }
+    .door { display: flex; align-items: center; gap: 16px; border: 2px solid #e2e8f0; border-radius: 14px; padding: 18px 20px; text-decoration: none; transition: border-color .15s, background .15s; }
+    .door:hover { border-color: #0D9488; background: #f0fdfa; }
+    .door .icon { flex-shrink: 0; width: 46px; height: 46px; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+    .door .icon svg { width: 26px; height: 26px; }
+    .door.deck .icon { background: #e0f2fe; }
+    .door.science .icon { background: #ede9fe; }
+    .door.sheet .icon { background: #dcfce7; }
+    .door .dt { display: block; color: #003366; font-weight: 700; font-size: 1.05rem; }
+    .door .ds { display: block; color: #888; font-size: 0.86rem; margin-top: 2px; }
+    .door .arrow { margin-left: auto; color: #0D9488; font-size: 1.3rem; flex-shrink: 0; }
+    .closer { margin-top: 44px; padding: 30px 24px; background: #f8fbfb; border-radius: 18px; }
+    .closer .figs { display: flex; justify-content: center; gap: 6px; margin-bottom: 16px; }
+    .closer .figs svg { width: 64px; height: auto; }
+    .closer .big { color: #003366; font-size: 1.6rem; font-weight: 800; letter-spacing: -0.5px; }
+    .closer .big em { color: #0D9488; font-style: normal; }
+    .closer .sub { color: #64748b; font-size: 1rem; font-weight: 600; margin-top: 6px; }
+    .contact { color: #646464; font-size: 0.92rem; margin-top: 30px; }
+    .site-footer { text-align: center; color: #888888; font-size: 0.82rem; line-height: 1.7; margin-top: 26px; padding-top: 20px; border-top: 1px solid #eeeeee; }
   </style>
   <style>body { opacity: 0; transition: opacity 0.2s ease; }</style>
   <script type="module">
@@ -97,8 +67,8 @@
         document.body.style.opacity = '1';
       }
     }
-    // Vimeo ID for The Dance video. Once the MP4 is uploaded to Vimeo, paste the numeric ID
-    // here and the player replaces the coming-soon panel automatically.
+    // Vimeo ID for The Dance video. Paste the numeric ID here once the MP4 is on Vimeo,
+    // and the player replaces the coming-soon panel automatically.
     const VIMEO_ID = '';
     if (VIMEO_ID) {
       document.getElementById('videoWrap').innerHTML =
@@ -107,15 +77,16 @@
   </script>
 </head>
 <body>
+  <div class="brand-strip"></div>
 
   <div class="top-bar">
     <a href="../couple-learn.html" class="back-link">&larr; Back to Learn</a>
   </div>
 
   <div class="page">
-    <div class="eyebrow">Understanding Your Pattern</div>
-    <h1>The Dance: Pursuer and Avoider</h1>
-    <p class="lede">Why the harder one of you tries to talk, the faster the other one disappears. This page explains the most common pattern couples bring to coaching, and how to step out of it together.</p>
+    <div class="eyebrow">Your Journey &middot; After Your Session</div>
+    <h1>The <em>Dance</em>: Pursuer and Avoider</h1>
+    <p class="promise">The pattern you named in session. Start with the short video, together.</p>
 
     <div class="video-wrap" id="videoWrap">
       <div class="video-coming">
@@ -125,114 +96,32 @@
     </div>
     <p class="video-note">Best watched together, with sound on.</p>
 
-    <div class="section">
-      <div class="vignette">
-        <div class="v-kicker">Does this sound familiar?</div>
-        <p>Something small sets it off. One of you wants to sort it out right now, so you follow your partner into the kitchen, still explaining your point. The other goes quiet, finds something that suddenly needs doing, and leaves the room.</p>
-        <p>An hour later nothing is resolved. One of you feels shut out. The other feels hounded. And the silence in the house is somehow louder than the argument was.</p>
-      </div>
-    </div>
-
-    <div class="section">
-      <h2>What is actually happening</h2>
-      <p>When a couple feels disconnected, each partner protects themselves, and most of us protect ourselves in one of two opposite directions. One moves towards. One moves away. Neither move is wrong, and neither is chosen on purpose. They are instincts, usually learned long before you met each other.</p>
-      <div class="role-cards">
-        <div class="role-card pursuer">
-          <h3>The Pursuer</h3>
-          <p class="role-sub">moves towards connection</p>
-          <p>The pursuer cannot relax while something is unresolved. They want to talk about it now, fix it now, feel close again now. They ask questions, seek reassurance, sometimes follow from room to room. Reaching out is their way of trying to repair, even when it comes out sharp.</p>
-        </div>
-        <div class="role-card avoider">
-          <h3>The Avoider</h3>
-          <p class="role-sub">moves away to self-protect</p>
-          <p>The avoider feels flooded when things get intense. They go quiet, need space, and prefer to let things settle before talking. They can look calm or even uninterested on the outside while feeling overwhelmed on the inside. Withdrawing is their way of keeping the peace and not making things worse.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="section">
-      <h2>Why it becomes a cycle</h2>
-      <p>Here is the trap. Each partner's way of staying safe is exactly the thing that sets off the other. The pattern feeds itself, which is why it never feels finished and why it starts faster each time.</p>
-      <div class="cycle-box">
-        <div class="cycle-title">The loop, one trigger at a time</div>
-        <div class="cycle-loop">
-          <div class="cycle-step warm">The pursuer reaches, pushes, asks again</div>
-          <div class="cycle-step neutral">&hellip;which feels like a storm coming, so&hellip;</div>
-          <div class="cycle-step neutral" style="grid-row: 2;">&hellip;which feels like abandonment, so&hellip;</div>
-          <div class="cycle-step cool" style="grid-row: 2;">the avoider goes quiet and pulls away</div>
-        </div>
-        <div class="cycle-arrow">&#8635;</div>
-        <div class="cycle-note">Round and round it goes. The more one pursues, the more the other withdraws. The more one withdraws, the harder the other pursues.</div>
-      </div>
-    </div>
-
-    <div class="section">
-      <h2>What is underneath</h2>
-      <p>Under the surface, both of you are afraid of the same thing, losing each other. You just show it in opposite ways.</p>
-      <div class="fear-cards">
-        <div class="fear-card pursuer">
-          <div class="f-label">The pursuer's fear</div>
-          <em>&ldquo;If I stop reaching, we will drift apart.&rdquo;</em> Silence feels dangerous, so they fill it.
-        </div>
-        <div class="fear-card avoider">
-          <div class="f-label">The avoider's fear</div>
-          <em>&ldquo;If I engage, I will get it wrong and make it worse.&rdquo;</em> Conflict feels dangerous, so they leave it.
-        </div>
-      </div>
-      <p style="margin-top:14px;">Both fears make sense. Neither of you is the villain in this story. You are two people using opposite strategies to protect the same relationship.</p>
-    </div>
-
-    <div class="section">
-      <h2>Same dance, different names</h2>
-      <div class="names-box">
-        <p>Relationship researchers have been describing this pattern for decades. <strong>Harville Hendrix</strong>, who created Imago therapy, calls the two roles the <strong>hailstorm</strong> and the <strong>turtle</strong>. When things get tense, the hailstorm gets louder and bigger, and the turtle pulls deeper into its shell. The harder it hails, the deeper the turtle hides.</p>
-        <p><strong>Sue Johnson</strong>, who developed Emotionally Focused Therapy, calls the same pattern <strong>pursue and withdraw</strong>, and found it sits underneath most repeating arguments. Different researchers, same dance. If you remember one image, remember the hailstorm and the turtle.</p>
-      </div>
-    </div>
-
-    <div class="reframe">
-      <h2>The part to hold onto</h2>
-      <p class="big">It is not your characters. It is a cycle. And a cycle can be changed.</p>
-      <p>You are not a nag, and your partner is not cold. Those are the roles the dance hands you. The dance itself is the problem, and naming it is how you both step off the floor.</p>
-    </div>
-
-    <div class="section">
-      <h2>How couples step out</h2>
-      <div class="out-step">
-        <div class="out-num">1</div>
-        <div>
-          <h3>Name the dance, not the partner</h3>
-          <p>The moment either of you spots the pattern, say so gently. Naming it turns the two of you against the cycle, instead of against each other.</p>
-          <span class="says">&ldquo;I think we are in our dance right now. Can we slow down?&rdquo;</span>
-        </div>
-      </div>
-      <div class="out-step">
-        <div class="out-num">2</div>
-        <div>
-          <h3>The turtle says when</h3>
-          <p>Space is allowed. What changes everything is the turtle coming out of the shell just far enough to say when they will be back. A pause with a return time feels safe. A pause without one feels like abandonment.</p>
-          <span class="says">&ldquo;I need half an hour. I am not going anywhere, and I will come back at eight.&rdquo;</span>
-        </div>
-      </div>
-      <div class="out-step">
-        <div class="out-num">3</div>
-        <div>
-          <h3>The storm softens</h3>
-          <p>The pursuer's job is to let that space happen, trusting the return. Easing off is not giving up on the conversation. It is what makes the conversation possible.</p>
-          <span class="says">&ldquo;Okay. Eight works. Thank you for telling me.&rdquo;</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="section">
-      <h2>What changes with practice</h2>
-      <div class="hope">
-        <p>The dance does not disappear, and it does not need to. What changes is that you both start to see it sooner, name it faster, and recover from it quicker. The storms get shorter. The shell gets shallower. And over time, the energy you spent on the cycle becomes energy you spend on each other. Start by simply noticing the dance this week, and noticing which step is yours. Noticing is the first step out.</p>
-      </div>
-      <a class="worksheet-link" href="../resources/relationships/pursuer-avoider-dynamics.html">
-        <div class="wl-title">Go deeper: Pursuer and Avoider Dynamics worksheet</div>
-        <div class="wl-sub">The full one-page guide, good for printing and keeping on the fridge.</div>
+    <div class="section-label">Go deeper, in your own way</div>
+    <div class="doors">
+      <a class="door deck" href="pursuer-avoider-slides.html">
+        <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#0369a1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span>
+        <span><span class="dt">Watch the presentation</span><span class="ds">The click-through version, good on a screen together</span></span>
+        <span class="arrow">&#8594;</span>
       </a>
+      <a class="door science" href="pursuer-avoider-science.html">
+        <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#6d28d9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
+        <span><span class="dt">Read the science</span><span class="ds">The deeper read, for when you like to understand the why</span></span>
+        <span class="arrow">&#8594;</span>
+      </a>
+      <a class="door sheet" href="../resources/relationships/pursuer-avoider-dynamics.html">
+        <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#15803d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8"/></svg></span>
+        <span><span class="dt">Print the worksheet</span><span class="ds">The one-page guide, good for the fridge</span></span>
+        <span class="arrow">&#8594;</span>
+      </a>
+    </div>
+
+    <div class="closer">
+      <div class="figs">
+        <svg viewBox="0 0 120 170"><circle cx="60" cy="28" r="19" fill="none" stroke="#0fa28d" stroke-width="8"/><path d="M60 47v58M60 62l36-10M60 62l-26 22M60 105l26 50M60 105l-22 52" fill="none" stroke="#0fa28d" stroke-width="8" stroke-linecap="round"/></svg>
+        <svg viewBox="0 0 120 170" style="transform:scaleX(-1);"><circle cx="60" cy="28" r="19" fill="none" stroke="#134e4a" stroke-width="8"/><path d="M60 47v58M60 62l36-10M60 62l-26 22M60 105l26 50M60 105l-22 52" fill="none" stroke="#134e4a" stroke-width="8" stroke-linecap="round"/></svg>
+      </div>
+      <div class="big">Back to <em>each other</em>.</div>
+      <div class="sub">Truly connected, fully present.</div>
     </div>
 
     <p class="contact">Questions before your next session? Message Cath any time.</p>
