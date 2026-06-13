@@ -73,6 +73,13 @@
     .pcircle .mv { font-size: clamp(.72rem, 1.6vw, .95rem); font-weight: 600; opacity: .92; }
     .pcircle.pursuer { background: radial-gradient(circle at 32% 28%, #45d6c0, #0fa28d 72%); }
     .pcircle.avoider { background: radial-gradient(circle at 32% 28%, #2f7e72, #134e4a 72%); }
+    .person-wrap { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .person { width: clamp(100px, 14vw, 160px); height: auto; }
+    .person-wrap .nm, .role-side .nm { font-weight: 800; font-size: clamp(1rem, 2.4vw, 1.5rem); }
+    .person-wrap .mv, .role-side .mv { font-weight: 600; font-size: clamp(.75rem, 1.7vw, 1rem); color: #64748b; }
+    .nm.pu-t { color: #0F766E; }
+    .nm.av-t { color: #134e4a; }
+    .role-side .person { width: clamp(90px, 12vw, 140px); }
     .between { display: flex; flex-direction: column; gap: 8px; align-items: center; }
     .arr { font-size: clamp(1.4rem, 3.4vw, 2.4rem); line-height: 1; }
     .arr.toward { color: #0fa28d; }
@@ -245,15 +252,21 @@
       <div class="chip">Two people, two instincts</div>
       <h2>When couples feel disconnected, each partner<br>protects themselves in opposite directions</h2>
       <div class="circles">
-        <div class="pcircle pursuer"><span class="nm">One partner</span><span class="mv">moves towards</span></div>
+        <div class="person-wrap">
+          <svg class="person" viewBox="0 0 120 170"><circle cx="60" cy="28" r="19" fill="none" stroke="#0fa28d" stroke-width="8"/><path d="M60 47v58M60 62l34-14M60 62l-26 22M60 105l26 50M60 105l-22 52" fill="none" stroke="#0fa28d" stroke-width="8" stroke-linecap="round"/></svg>
+          <span class="nm pu-t">One partner</span><span class="mv">moves towards</span>
+        </div>
         <div class="between">
           <span class="arr toward">&#8594;</span>
           <span class="lbl">the dance happens here</span>
           <span class="arr away">&#8592;</span>
         </div>
-        <div class="pcircle avoider"><span class="nm">One partner</span><span class="mv">moves away</span></div>
+        <div class="person-wrap">
+          <svg class="person" viewBox="0 0 120 170" style="transform:scaleX(-1);"><circle cx="60" cy="28" r="19" fill="none" stroke="#134e4a" stroke-width="8"/><path d="M60 47v58M60 62l30 18M60 62l-24 20M60 105l30 48M60 105l-18 54" fill="none" stroke="#134e4a" stroke-width="8" stroke-linecap="round"/></svg>
+          <span class="nm av-t">One partner</span><span class="mv">moves away</span>
+        </div>
       </div>
-      <p class="sub">Neither is wrong. Either partner can be either circle, and the roles can swap depending on the topic.</p>
+      <p class="sub">Neither is wrong. Either partner can be either role, and the roles can swap depending on the topic.</p>
     </section>
 
     <!-- 6 · The Pursuer (worksheet wording) -->
@@ -261,7 +274,8 @@
       <div class="chip">See the dance</div>
       <div class="role-grid">
         <div class="role-side">
-          <div class="pcircle pursuer" style="width:clamp(110px,15vw,170px);height:clamp(110px,15vw,170px);"><span class="nm">The Pursuer</span><span class="mv">moves towards connection</span></div>
+          <svg class="person" viewBox="0 0 120 170"><circle cx="60" cy="28" r="19" fill="none" stroke="#0fa28d" stroke-width="8"/><path d="M60 47v58M60 62l34-14M60 62l-26 22M60 105l26 50M60 105l-22 52" fill="none" stroke="#0fa28d" stroke-width="8" stroke-linecap="round"/></svg>
+          <span class="nm pu-t">The Pursuer</span><span class="mv">moves towards connection</span>
         </div>
         <div class="role-cols">
           <div class="role-col">
@@ -292,7 +306,8 @@
       <div class="chip">See the dance</div>
       <div class="role-grid">
         <div class="role-side">
-          <div class="pcircle avoider" style="width:clamp(110px,15vw,170px);height:clamp(110px,15vw,170px);"><span class="nm">The Avoider</span><span class="mv">moves away to self-protect</span></div>
+          <svg class="person" viewBox="0 0 120 170" style="transform:scaleX(-1);"><circle cx="60" cy="28" r="19" fill="none" stroke="#134e4a" stroke-width="8"/><path d="M60 47v58M60 62l30 18M60 62l-24 20M60 105l30 48M60 105l-18 54" fill="none" stroke="#134e4a" stroke-width="8" stroke-linecap="round"/></svg>
+          <span class="nm av-t" style="transform:none;">The Avoider</span><span class="mv">moves away to self-protect</span>
         </div>
         <div class="role-cols">
           <div class="role-col">
