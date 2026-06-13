@@ -12,22 +12,30 @@
   <link rel="apple-touch-icon" href="../assets/coach4u-icon.jpeg">
   <link rel="stylesheet" href="../css/style.css">
   <style>
-    /* ThriveHQ video design system: navy #003366, teal #0D9488, mint #5eead4, bg #eef3f8,
-       white cards with teal top border. Roles: pursuer pink, avoider violet (deliberately non-gendered). Gallup domain colours match the CRM. */
+    /* ══════════════════════════════════════════════════════════════════════
+       COACH4U CONCEPT DECK TEMPLATE (v1) — the strengths domains are the
+       DESIGN FRAMEWORK, never named on slides. Every concept deck must give:
+       - Relationship Building → open with a warm, recognisable story
+       - Strategic Thinking   → show the big-picture map early + part stepper
+       - Influencing          → cite the researchers and evidence (authority)
+       - Executing            → land on concrete moves + ONE action this week
+       Chrome: navy #003366 / teal #0D9488 / mint #5eead4 on #eef3f8.
+       Roles here: pursuer = bright teal, avoider = deep teal (non-gendered).
+       ══════════════════════════════════════════════════════════════════════ */
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; }
     body { font-family: 'Aptos', 'Calibri', 'Segoe UI', sans-serif; background: #eef3f8; color: #333; overflow: hidden; }
     .brand-strip { height: 8px; background: linear-gradient(90deg, #003366, #0D9488); }
     .deck { position: fixed; inset: 8px 0 0 0; }
-    .slide { position: absolute; inset: 0; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 56px 7vw 110px; text-align: center; }
+    .slide { position: absolute; inset: 0; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 70px 7vw 110px; text-align: center; }
     .slide.active { display: flex; animation: slidein .35s ease; }
     @keyframes slidein { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
-    .chip { background: #ccfbf1; color: #0F766E; font-size: clamp(.7rem, 1.6vw, .95rem); font-weight: 800; letter-spacing: .12em; text-transform: uppercase; padding: 9px 22px; border-radius: 99px; margin-bottom: 26px; }
-    .chip.amber { background: #fce7f3; color: #be185d; }
+    .chip { background: #ccfbf1; color: #0F766E; font-size: clamp(.7rem, 1.6vw, .95rem); font-weight: 800; letter-spacing: .12em; text-transform: uppercase; padding: 9px 22px; border-radius: 99px; margin-bottom: 24px; }
+    .chip.soft { background: #fce7f3; color: #be185d; }
     h1 { color: #003366; font-size: clamp(2rem, 6vw, 4.2rem); line-height: 1.06; letter-spacing: -1px; }
     h1 .mint { color: #0D9488; }
-    h2 { color: #003366; font-size: clamp(1.5rem, 4vw, 2.8rem); line-height: 1.12; letter-spacing: -.5px; }
-    .sub { color: #64748b; font-size: clamp(1rem, 2.3vw, 1.5rem); line-height: 1.45; max-width: 30ch; margin-top: 18px; font-weight: 600; }
+    h2 { color: #003366; font-size: clamp(1.4rem, 3.8vw, 2.7rem); line-height: 1.12; letter-spacing: -.5px; }
+    .sub { color: #64748b; font-size: clamp(.95rem, 2.2vw, 1.45rem); line-height: 1.45; max-width: 34ch; margin-top: 18px; font-weight: 600; }
     .card { background: #fff; border-radius: 24px; border-top: 10px solid #0D9488; box-shadow: 0 16px 44px rgba(2,32,71,.14); padding: clamp(22px, 4vw, 44px); max-width: 880px; width: 100%; }
     .card p { font-size: clamp(1rem, 2.4vw, 1.45rem); line-height: 1.55; color: #444; }
     .card p + p { margin-top: 14px; }
@@ -36,87 +44,86 @@
     .navy-slide .chip { background: rgba(94,234,212,.18); color: #5eead4; }
     .big { font-size: clamp(1.7rem, 4.6vw, 3.4rem); font-weight: 800; line-height: 1.2; letter-spacing: -1px; max-width: 18ch; }
     .big .mint { color: #5eead4; }
-    .navy-slide .note { color: rgba(255,255,255,.8); font-size: clamp(1rem, 2.2vw, 1.4rem); margin-top: 22px; max-width: 34ch; line-height: 1.5; }
-    /* two circles */
-    .circles { display: flex; align-items: center; justify-content: center; gap: clamp(10px, 3vw, 40px); margin: 26px 0 6px; }
-    .pcircle { width: clamp(130px, 22vw, 230px); height: clamp(130px, 22vw, 230px); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; font-weight: 800; color: #fff; box-shadow: 0 14px 36px rgba(2,32,71,.18); }
-    .pcircle .nm { font-size: clamp(1rem, 2.4vw, 1.5rem); }
-    .pcircle .mv { font-size: clamp(.72rem, 1.6vw, .95rem); font-weight: 600; opacity: .92; }
-    .pcircle.pursuer { background: radial-gradient(circle at 32% 28%, #d8569b, #be185d 70%); }
-    .pcircle.avoider { background: radial-gradient(circle at 32% 28%, #9a76e8, #6d28d9 70%); }
-    .between { display: flex; flex-direction: column; gap: 8px; align-items: center; }
-    .arr { font-size: clamp(1.4rem, 3.4vw, 2.4rem); line-height: 1; }
-    .arr.toward { color: #be185d; }
-    .arr.away { color: #6d28d9; }
-    .between .lbl { font-size: clamp(.7rem, 1.5vw, .9rem); color: #64748b; font-weight: 700; }
-    /* role slide */
-    .role-wrap { display: flex; align-items: center; gap: clamp(18px, 4vw, 46px); max-width: 920px; }
-    .role-copy { text-align: left; }
-    .role-copy h2 { margin-bottom: 6px; }
-    .role-copy .tagline { font-style: italic; font-weight: 700; margin-bottom: 14px; font-size: clamp(.95rem, 2vw, 1.3rem); }
-    .role-copy ul { list-style: none; }
-    .role-copy li { font-size: clamp(.95rem, 2.2vw, 1.35rem); line-height: 1.45; padding: 6px 0 6px 26px; position: relative; color: #444; }
-    .role-copy li::before { content: ''; position: absolute; left: 4px; top: 16px; width: 9px; height: 9px; border-radius: 50%; }
-    .role-wrap.pursuer .tagline { color: #9d174d; }
-    .role-wrap.pursuer li::before { background: #be185d; }
-    .role-wrap.avoider .tagline { color: #5b21b6; }
-    .role-wrap.avoider li::before { background: #6d28d9; }
-    .fear-pill { display: inline-block; margin-top: 14px; padding: 10px 18px; border-radius: 12px; font-weight: 700; font-size: clamp(.85rem, 1.9vw, 1.15rem); }
-    .role-wrap.pursuer .fear-pill { background: rgba(190,24,93,.12); color: #9d174d; }
-    .role-wrap.avoider .fear-pill { background: rgba(109,40,217,.12); color: #5b21b6; }
-    /* loop slide */
-    .loop-wrap { position: relative; width: min(64vw, 560px); aspect-ratio: 1; margin-top: 10px; }
-    .loop-ring { position: absolute; inset: 14%; border-radius: 50%; border: 4px dashed #b9c6d8; }
-    .loop-stop { position: absolute; padding: clamp(8px, 1.6vw, 14px) clamp(12px, 2.2vw, 22px); border-radius: 99px; font-weight: 700; font-size: clamp(.72rem, 1.7vw, 1.05rem); box-shadow: 0 8px 22px rgba(2,32,71,.12); white-space: nowrap; }
-    .loop-stop.n { top: 0; left: 50%; transform: translateX(-50%); background: #fdf2f8; border: 2px solid #be185d; color: #9d174d; }
-    .loop-stop.e { right: 0; top: 50%; transform: translate(18%,-50%); background: #fff; border: 2px solid #d7dee8; color: #64748b; }
-    .loop-stop.s { bottom: 0; left: 50%; transform: translateX(-50%); background: #f5f3ff; border: 2px solid #6d28d9; color: #5b21b6; }
-    .loop-stop.w { left: 0; top: 50%; transform: translate(-18%,-50%); background: #fff; border: 2px solid #d7dee8; color: #64748b; }
-    .loop-core { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
-    .loop-core div { max-width: 13ch; color: #003366; font-weight: 800; font-size: clamp(.95rem, 2.4vw, 1.5rem); line-height: 1.3; }
-    .loop-arrow { position: absolute; font-size: clamp(1.2rem, 2.6vw, 1.9rem); color: #0D9488; }
-    .loop-arrow.ne { top: 16%; right: 18%; transform: rotate(45deg); }
-    .loop-arrow.sw { bottom: 16%; left: 18%; transform: rotate(-135deg); }
-    /* fears slide */
-    .fear-cards { display: flex; gap: 18px; max-width: 920px; width: 100%; margin-top: 8px; }
-    .fearc { flex: 1; background: #fff; border-radius: 18px; padding: clamp(18px, 3vw, 30px); box-shadow: 0 12px 32px rgba(2,32,71,.12); text-align: left; }
-    .fearc.pu { border-top: 8px solid #be185d; }
-    .fearc.av { border-top: 8px solid #6d28d9; }
-    .fearc .fl { font-size: clamp(.7rem, 1.5vw, .9rem); font-weight: 800; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 10px; }
-    .fearc.pu .fl { color: #9d174d; }
-    .fearc.av .fl { color: #5b21b6; }
-    .fearc .fq { color: #003366; font-weight: 700; font-size: clamp(1rem, 2.4vw, 1.5rem); line-height: 1.35; }
-    .fearc .fx { color: #64748b; font-size: clamp(.85rem, 1.8vw, 1.1rem); margin-top: 10px; line-height: 1.45; }
-    /* hendrix slide */
-    .imago { display: flex; gap: 18px; max-width: 920px; width: 100%; }
-    .imago > div { flex: 1; border-radius: 20px; padding: clamp(18px, 3vw, 32px); }
-    .imago .hail { background: #fdf2f8; border: 3px solid #be185d; }
-    .imago .turt { background: #f5f3ff; border: 3px solid #6d28d9; }
-    .imago h3 { font-size: clamp(1.1rem, 2.6vw, 1.7rem); margin-top: 10px; }
-    .imago .hail h3 { color: #9d174d; }
-    .imago .turt h3 { color: #5b21b6; }
-    .imago p { color: #64748b; font-weight: 600; font-size: clamp(.85rem, 1.9vw, 1.15rem); margin-top: 6px; }
-    /* steps */
-    .step-num { width: clamp(48px, 7vw, 72px); height: clamp(48px, 7vw, 72px); border-radius: 50%; background: #003366; color: #fff; font-weight: 800; font-size: clamp(1.3rem, 3vw, 2rem); display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
-    .says { margin-top: 22px; background: #fff; border-left: 6px solid #0D9488; border-radius: 0 14px 14px 0; padding: clamp(12px, 2.4vw, 20px) clamp(16px, 3vw, 26px); font-style: italic; color: #334; font-size: clamp(1rem, 2.4vw, 1.5rem); box-shadow: 0 10px 26px rgba(2,32,71,.1); max-width: 720px; }
-    .navy-slide .says { background: rgba(255,255,255,.1); border-left-color: #5eead4; color: #fff; box-shadow: none; }
-    /* big-picture roadmap */
+    .navy-slide .note { color: rgba(255,255,255,.8); font-size: clamp(1rem, 2.2vw, 1.4rem); margin-top: 22px; max-width: 36ch; line-height: 1.5; }
+    /* roadmap (big picture) */
     .roadmap { display: flex; flex-direction: column; gap: 16px; width: 100%; max-width: 760px; margin-top: 10px; }
     .rm-row { display: flex; align-items: center; gap: 20px; background: #fff; border-radius: 18px; border-left: 10px solid #0D9488; box-shadow: 0 10px 28px rgba(2,32,71,.1); padding: clamp(16px, 2.6vw, 26px) clamp(18px, 3vw, 30px); text-align: left; }
     .rm-n { flex-shrink: 0; width: clamp(40px, 5vw, 54px); height: clamp(40px, 5vw, 54px); border-radius: 50%; background: #003366; color: #fff; font-weight: 800; font-size: clamp(1.1rem, 2.2vw, 1.5rem); display: flex; align-items: center; justify-content: center; }
     .rm-t { color: #003366; font-weight: 800; font-size: clamp(1.1rem, 2.6vw, 1.7rem); }
     .rm-s { color: #64748b; font-size: clamp(.85rem, 1.9vw, 1.15rem); margin-top: 3px; line-height: 1.4; }
-    /* part stepper (always know where you are) */
+    /* part stepper */
     .stepper { position: fixed; top: 18px; left: 50%; transform: translateX(-50%); z-index: 30; display: flex; gap: 6px; background: rgba(255,255,255,.88); border-radius: 99px; padding: 7px 10px; }
     .stepper span { font-size: .74rem; font-weight: 700; color: #94a3b8; padding: 4px 12px; border-radius: 99px; white-space: nowrap; }
     .stepper span.on { background: #0D9488; color: #fff; }
     @media (max-width: 760px) { .stepper { display: none; } }
-    /* strengths domains (Gallup colours, matched to the CRM) */
-    .domains { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 920px; width: 100%; margin-top: 8px; }
-    .dom { background: #fff; border-radius: 16px; border-left: 8px solid var(--dc); box-shadow: 0 10px 28px rgba(2,32,71,.1); padding: clamp(14px, 2.4vw, 24px); text-align: left; }
-    .dom .dl { color: var(--dc); font-weight: 800; font-size: clamp(.9rem, 2vw, 1.25rem); margin-bottom: 6px; }
-    .dom p { color: #555; font-size: clamp(.82rem, 1.8vw, 1.08rem); line-height: 1.45; }
-    @media (max-width: 640px) { .domains { grid-template-columns: 1fr; } }
+    /* research / authority slide */
+    .stat-banner { background: #fff; border-radius: 18px; border-left: 10px solid #003366; box-shadow: 0 12px 32px rgba(2,32,71,.12); padding: clamp(16px, 2.6vw, 28px) clamp(18px, 3vw, 32px); max-width: 860px; width: 100%; text-align: left; margin-bottom: 16px; }
+    .stat-banner .st { color: #003366; font-weight: 800; font-size: clamp(1.05rem, 2.6vw, 1.65rem); line-height: 1.3; }
+    .stat-banner .ss { color: #64748b; font-size: clamp(.8rem, 1.7vw, 1.02rem); margin-top: 6px; line-height: 1.4; }
+    .researchers { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; max-width: 860px; width: 100%; }
+    .res { background: #fff; border-radius: 14px; box-shadow: 0 8px 22px rgba(2,32,71,.09); padding: clamp(12px, 2.2vw, 20px) clamp(14px, 2.4vw, 22px); text-align: left; border-left: 6px solid #0D9488; }
+    .res .rn { color: #003366; font-weight: 800; font-size: clamp(.9rem, 2vw, 1.2rem); }
+    .res .rt { color: #0F766E; font-weight: 700; font-size: clamp(.8rem, 1.7vw, 1.02rem); margin-top: 2px; }
+    .res .rd { color: #64748b; font-size: clamp(.74rem, 1.5vw, .92rem); margin-top: 4px; line-height: 1.35; }
+    @media (max-width: 640px) { .researchers { grid-template-columns: 1fr; } }
+    /* two circles — two teals */
+    .circles { display: flex; align-items: center; justify-content: center; gap: clamp(10px, 3vw, 40px); margin: 26px 0 6px; }
+    .pcircle { width: clamp(130px, 22vw, 230px); height: clamp(130px, 22vw, 230px); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; font-weight: 800; color: #fff; box-shadow: 0 14px 36px rgba(2,32,71,.18); }
+    .pcircle .nm { font-size: clamp(1rem, 2.4vw, 1.5rem); }
+    .pcircle .mv { font-size: clamp(.72rem, 1.6vw, .95rem); font-weight: 600; opacity: .92; }
+    .pcircle.pursuer { background: radial-gradient(circle at 32% 28%, #45d6c0, #0fa28d 72%); }
+    .pcircle.avoider { background: radial-gradient(circle at 32% 28%, #2f7e72, #134e4a 72%); }
+    .between { display: flex; flex-direction: column; gap: 8px; align-items: center; }
+    .arr { font-size: clamp(1.4rem, 3.4vw, 2.4rem); line-height: 1; }
+    .arr.toward { color: #0fa28d; }
+    .arr.away { color: #134e4a; }
+    .between .lbl { font-size: clamp(.7rem, 1.5vw, .9rem); color: #64748b; font-weight: 700; }
+    /* role slides — full worksheet wording */
+    .role-grid { display: flex; gap: clamp(16px, 3vw, 32px); max-width: 980px; width: 100%; align-items: stretch; }
+    .role-side { flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; }
+    .role-cols { display: flex; gap: 14px; flex: 1; }
+    .role-col { flex: 1; background: #fff; border-radius: 16px; box-shadow: 0 10px 26px rgba(2,32,71,.1); padding: clamp(14px, 2.2vw, 22px); text-align: left; }
+    .role-col h4 { font-size: clamp(.72rem, 1.5vw, .9rem); font-weight: 800; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 8px; }
+    .role-col ul { list-style: none; }
+    .role-col li { font-size: clamp(.8rem, 1.8vw, 1.05rem); line-height: 1.4; padding: 4px 0 4px 20px; position: relative; color: #444; }
+    .role-col li::before { content: ''; position: absolute; left: 2px; top: 13px; width: 8px; height: 8px; border-radius: 50%; }
+    .role-pu .role-col h4 { color: #0F766E; }
+    .role-pu .role-col li::before { background: #0fa28d; }
+    .role-av .role-col h4 { color: #134e4a; }
+    .role-av .role-col li::before { background: #134e4a; }
+    .fear-strip { margin-top: 14px; padding: 12px 20px; border-radius: 12px; font-weight: 700; font-size: clamp(.85rem, 1.9vw, 1.2rem); max-width: 980px; width: 100%; }
+    .fear-strip.pu { background: rgba(15,162,141,.12); color: #0F766E; }
+    .fear-strip.av { background: rgba(19,78,74,.12); color: #134e4a; }
+    @media (max-width: 760px) { .role-grid { flex-direction: column; } .role-cols { flex-direction: column; } }
+    /* hendrix slide */
+    .imago { display: flex; gap: 18px; max-width: 920px; width: 100%; }
+    .imago > div { flex: 1; border-radius: 20px; padding: clamp(16px, 2.6vw, 28px); }
+    .imago .hail { background: #e9faf6; border: 3px solid #0fa28d; }
+    .imago .turt { background: #e7efee; border: 3px solid #134e4a; }
+    .imago h3 { font-size: clamp(1.05rem, 2.4vw, 1.6rem); margin-top: 8px; color: #003366; }
+    .imago .who { font-size: clamp(.72rem, 1.5vw, .9rem); font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .imago .hail .who { color: #0F766E; }
+    .imago .turt .who { color: #134e4a; }
+    .imago p { color: #555; font-weight: 600; font-size: clamp(.82rem, 1.8vw, 1.08rem); margin-top: 8px; line-height: 1.45; }
+    .imago .voice { font-style: italic; color: #334; background: rgba(255,255,255,.7); border-radius: 10px; padding: 8px 12px; margin-top: 10px; font-weight: 600; }
+    /* the trap — circular pattern with arrows running around it */
+    .loop-wrap { position: relative; width: min(54vw, 460px); aspect-ratio: 1; margin-top: 8px; }
+    .loop-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .loop-stop { position: absolute; padding: clamp(8px, 1.6vw, 14px) clamp(12px, 2.2vw, 22px); border-radius: 99px; font-weight: 700; font-size: clamp(.7rem, 1.6vw, 1rem); box-shadow: 0 8px 22px rgba(2,32,71,.12); white-space: nowrap; }
+    .loop-stop.n { top: 0; left: 50%; transform: translateX(-50%); background: #e9faf6; border: 2px solid #0fa28d; color: #0F766E; }
+    .loop-stop.e { right: 0; top: 50%; transform: translate(16%,-50%); background: #fff; border: 2px solid #d7dee8; color: #64748b; }
+    .loop-stop.s { bottom: 0; left: 50%; transform: translateX(-50%); background: #e7efee; border: 2px solid #134e4a; color: #134e4a; }
+    .loop-stop.w { left: 0; top: 50%; transform: translate(-16%,-50%); background: #fff; border: 2px solid #d7dee8; color: #64748b; }
+    .loop-core { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+    .loop-core div { max-width: 10ch; color: #003366; font-weight: 800; font-size: clamp(.85rem, 2vw, 1.2rem); line-height: 1.3; }
+    /* lerner slide */
+    .quotebox { background: #fff; border-radius: 20px; border-left: 12px solid #0D9488; box-shadow: 0 16px 40px rgba(2,32,71,.14); padding: clamp(22px, 3.6vw, 40px); max-width: 860px; width: 100%; text-align: left; }
+    .quotebox .q { color: #003366; font-size: clamp(1.15rem, 2.9vw, 1.9rem); font-weight: 700; line-height: 1.4; }
+    .quotebox .qa { color: #64748b; font-size: clamp(.85rem, 1.8vw, 1.1rem); margin-top: 12px; font-weight: 600; }
+    /* steps */
+    .step-num { width: clamp(48px, 7vw, 72px); height: clamp(48px, 7vw, 72px); border-radius: 50%; background: #003366; color: #fff; font-weight: 800; font-size: clamp(1.3rem, 3vw, 2rem); display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
+    .says { margin-top: 22px; background: #fff; border-left: 6px solid #0D9488; border-radius: 0 14px 14px 0; padding: clamp(12px, 2.4vw, 20px) clamp(16px, 3vw, 26px); font-style: italic; color: #334; font-size: clamp(1rem, 2.4vw, 1.5rem); box-shadow: 0 10px 26px rgba(2,32,71,.1); max-width: 720px; }
+    .navy-slide .says { background: rgba(255,255,255,.1); border-left-color: #5eead4; color: #fff; box-shadow: none; }
     /* controls */
     .controls { position: fixed; bottom: 0; left: 0; right: 0; padding: 16px 18px 20px; display: flex; align-items: center; justify-content: space-between; gap: 14px; background: linear-gradient(transparent, rgba(238,243,248,.92) 40%); z-index: 20; }
     .navy-on .controls { background: linear-gradient(transparent, rgba(0,30,60,.5) 40%); }
@@ -128,7 +135,7 @@
     .slideno { font-size: .85rem; color: #64748b; font-weight: 700; min-width: 52px; text-align: right; }
     .exit-link { position: fixed; top: 18px; left: 18px; z-index: 30; font-size: .82rem; color: #003366; background: rgba(255,255,255,.85); padding: 8px 14px; border-radius: 99px; text-decoration: none; font-weight: 700; }
     .tap-hint { position: fixed; top: 18px; right: 18px; z-index: 30; font-size: .78rem; color: #64748b; background: rgba(255,255,255,.85); padding: 8px 14px; border-radius: 99px; font-weight: 600; }
-    svg.icon { width: clamp(70px, 10vw, 110px); height: auto; }
+    svg.icon { width: clamp(64px, 9vw, 100px); height: auto; }
   </style>
   <style>body { opacity: 0; transition: opacity 0.2s ease; }</style>
   <script type="module">
@@ -163,7 +170,7 @@
     <section class="slide active">
       <div class="chip">Your Relationship Coach</div>
       <h1>The <span class="mint">Dance</span></h1>
-      <p class="sub">Why one of you reaches, and one of you retreats. The most common pattern couples bring to coaching.</p>
+      <p class="sub">Why one partner reaches, and the other retreats. The most researched conflict pattern in couples.</p>
     </section>
 
     <!-- 2 · Big picture roadmap -->
@@ -171,165 +178,209 @@
       <div class="chip">The big picture</div>
       <h2>Where we are going today</h2>
       <div class="roadmap">
-        <div class="rm-row"><div class="rm-n">1</div><div><div class="rm-t">See the dance</div><div class="rm-s">Recognise the pattern you are both caught in</div></div></div>
+        <div class="rm-row"><div class="rm-n">1</div><div><div class="rm-t">See the dance</div><div class="rm-s">Recognise the pattern, and what the research says about it</div></div></div>
         <div class="rm-row"><div class="rm-n">2</div><div><div class="rm-t">Understand what drives it</div><div class="rm-s">The fears underneath, and why it is nobody's fault</div></div></div>
         <div class="rm-row"><div class="rm-n">3</div><div><div class="rm-t">Step out together</div><div class="rm-s">Three concrete moves, and one action for this week</div></div></div>
       </div>
     </section>
 
-    <!-- 3 · Vignette -->
+    <!-- 3 · Story -->
     <section class="slide">
-      <div class="chip amber">Does this sound familiar?</div>
+      <div class="chip soft">Does this sound familiar?</div>
       <div class="card">
-        <p>Something small sets it off. One of you wants to sort it out right now, and follows the other into the kitchen, still explaining.</p>
-        <p>The other goes quiet, finds something that suddenly needs doing, and leaves the room.</p>
-        <p>An hour later, the silence is louder than the argument was.</p>
+        <p>An argument starts. Halfway through, one partner walks out of the room, and does not come back. No &ldquo;I need a minute&rdquo;. No return time. Just gone, to the shed, the bedroom, the phone.</p>
+        <p>The other is left standing there with everything still unsaid. Hurt, churning, wanting one thing only, to feel connected again. So they follow, or text, or bring it up again at dinner.</p>
+        <p>And the more one reaches, the further the other goes.</p>
       </div>
     </section>
 
-    <!-- 3 · Two circles -->
+    <!-- 4 · What research shows (authority) -->
+    <section class="slide">
+      <div class="chip">What the research shows</div>
+      <div class="stat-banner">
+        <div class="st">A review of 74 studies found this pattern more strongly linked to relationship unhappiness than any other communication pattern studied.</div>
+        <div class="ss">Schrodt, Witt &amp; Shimkowski (2014), meta-analysis of the demand/withdraw pattern.</div>
+      </div>
+      <div class="researchers">
+        <div class="res"><div class="rn">Harriet Lerner</div><div class="rt">The Dance of Anger (1985)</div><div class="rd">Named these patterns dances, including pursuer and distancer.</div></div>
+        <div class="res"><div class="rn">Harville Hendrix &amp; Helen LaKelly Hunt</div><div class="rt">Imago Therapy</div><div class="rd">The hailstorm and the turtle, two primal ways of staying safe.</div></div>
+        <div class="res"><div class="rn">Dr Sue Johnson</div><div class="rt">Emotionally Focused Therapy</div><div class="rd">Pursue and withdraw, the cycle beneath most repeating arguments.</div></div>
+        <div class="res"><div class="rn">Prof Andrew Christensen</div><div class="rt">UCLA couples research</div><div class="rd">Demand and withdraw, studied across decades and cultures.</div></div>
+      </div>
+      <p class="sub">Four schools of research. One dance.</p>
+    </section>
+
+    <!-- 5 · Two circles -->
     <section class="slide">
       <div class="chip">Two people, two instincts</div>
-      <h2>When you feel disconnected,<br>you protect yourselves in opposite directions</h2>
+      <h2>When couples feel disconnected, each partner<br>protects themselves in opposite directions</h2>
       <div class="circles">
-        <div class="pcircle pursuer"><span class="nm">One of you</span><span class="mv">moves towards</span></div>
+        <div class="pcircle pursuer"><span class="nm">One partner</span><span class="mv">moves towards</span></div>
         <div class="between">
           <span class="arr toward">&#8594;</span>
           <span class="lbl">the dance happens here</span>
           <span class="arr away">&#8592;</span>
         </div>
-        <div class="pcircle avoider"><span class="nm">One of you</span><span class="mv">moves away</span></div>
+        <div class="pcircle avoider"><span class="nm">One partner</span><span class="mv">moves away</span></div>
       </div>
-      <p class="sub">Neither is wrong, and either of you can be either circle. The roles can even swap depending on the topic.</p>
+      <p class="sub">Neither is wrong. Either partner can be either circle, and the roles can swap depending on the topic.</p>
     </section>
 
-    <!-- 4 · Pursuer -->
-    <section class="slide">
-      <div class="role-wrap pursuer">
-        <div class="pcircle pursuer" style="flex-shrink:0;"><span class="nm">Pursuer</span><span class="mv">moves towards</span></div>
-        <div class="role-copy">
-          <h2>The Pursuer</h2>
-          <div class="tagline">cannot relax while something is unresolved</div>
-          <ul>
-            <li>Wants to talk about it now, fix it now</li>
-            <li>Asks questions, seeks reassurance, follows</li>
-            <li>Reaching out is their repair attempt, even when it comes out sharp</li>
-          </ul>
-          <span class="fear-pill">&ldquo;If I stop reaching, we will drift apart.&rdquo;</span>
+    <!-- 6 · The Pursuer (worksheet wording) -->
+    <section class="slide role-pu">
+      <div class="chip">See the dance</div>
+      <div class="role-grid">
+        <div class="role-side">
+          <div class="pcircle pursuer" style="width:clamp(110px,15vw,170px);height:clamp(110px,15vw,170px);"><span class="nm">The Pursuer</span><span class="mv">moves towards connection</span></div>
+        </div>
+        <div class="role-cols">
+          <div class="role-col">
+            <h4>What it looks like</h4>
+            <ul>
+              <li>Reaches out more when feeling disconnected</li>
+              <li>Wants to talk things through straight away</li>
+              <li>Asks questions, seeks reassurance</li>
+              <li>May follow their partner from room to room</li>
+              <li>Can become critical when needs are not met</li>
+            </ul>
+          </div>
+          <div class="role-col">
+            <h4>What is underneath</h4>
+            <ul>
+              <li>A deep need to feel important and valued</li>
+              <li>Fear that silence means something is wrong</li>
+              <li>Reaching out is their way of trying to repair</li>
+            </ul>
+          </div>
         </div>
       </div>
+      <div class="fear-strip pu">Core fear: &ldquo;If I stop reaching, we will drift apart.&rdquo;</div>
     </section>
 
-    <!-- 5 · Avoider -->
-    <section class="slide">
-      <div class="role-wrap avoider">
-        <div class="pcircle avoider" style="flex-shrink:0;"><span class="nm">Avoider</span><span class="mv">moves away</span></div>
-        <div class="role-copy">
-          <h2>The Avoider</h2>
-          <div class="tagline">feels flooded when things get intense</div>
-          <ul>
-            <li>Goes quiet, needs space, lets things settle</li>
-            <li>Looks calm outside, overwhelmed inside</li>
-            <li>Withdrawing is how they keep the peace and avoid making it worse</li>
-          </ul>
-          <span class="fear-pill">&ldquo;If I engage, I will get it wrong and make it worse.&rdquo;</span>
+    <!-- 7 · The Avoider (worksheet wording) -->
+    <section class="slide role-av">
+      <div class="chip">See the dance</div>
+      <div class="role-grid">
+        <div class="role-side">
+          <div class="pcircle avoider" style="width:clamp(110px,15vw,170px);height:clamp(110px,15vw,170px);"><span class="nm">The Avoider</span><span class="mv">moves away to self-protect</span></div>
+        </div>
+        <div class="role-cols">
+          <div class="role-col">
+            <h4>What it looks like</h4>
+            <ul>
+              <li>Needs space when things get intense</li>
+              <li>Goes quiet, shuts down, or leaves the room</li>
+              <li>Prefers to let things settle before talking</li>
+              <li>May seem calm outside but feels flooded inside</li>
+              <li>Can appear dismissive or uninterested</li>
+            </ul>
+          </div>
+          <div class="role-col">
+            <h4>What is underneath</h4>
+            <ul>
+              <li>A deep need to feel competent and not overwhelmed</li>
+              <li>Fear that engaging will make things worse</li>
+              <li>Withdrawing is their way of trying to keep the peace</li>
+            </ul>
+          </div>
         </div>
       </div>
+      <div class="fear-strip av">Core fear: &ldquo;If I engage, I will get it wrong or make it worse.&rdquo;</div>
     </section>
 
-    <!-- 6 · The loop -->
+    <!-- 8 · Hailstorm & turtle (before the trap) -->
+    <section class="slide">
+      <div class="chip">Imago &middot; Hendrix &amp; Hunt</div>
+      <h2>Two primal ways of staying safe</h2>
+      <div class="imago">
+        <div class="hail">
+          <svg class="icon" viewBox="0 0 64 64"><path d="M18 30a10 10 0 0 1 1-20 14 14 0 0 1 27 3 9 9 0 0 1-1 17H18z" fill="none" stroke="#0fa28d" stroke-width="4" stroke-linejoin="round"/><circle cx="20" cy="42" r="3" fill="#0fa28d"/><circle cx="32" cy="48" r="3" fill="#0fa28d"/><circle cx="44" cy="42" r="3" fill="#0fa28d"/><circle cx="26" cy="56" r="3" fill="#0fa28d"/><circle cx="40" cy="58" r="3" fill="#0fa28d"/></svg>
+          <div class="who">The maximiser</div>
+          <h3>The Hailstorm</h3>
+          <p>Turns the energy up and out. Gets louder and bigger when anxious.</p>
+          <div class="voice">&ldquo;If I express it strongly enough, I will get the attention and love I need.&rdquo;</div>
+        </div>
+        <div class="turt">
+          <svg class="icon" viewBox="0 0 64 64"><path d="M14 40a18 12 0 0 1 36 0z" fill="none" stroke="#134e4a" stroke-width="4" stroke-linejoin="round"/><path d="M22 34l6 6M32 30v10M42 34l-6 6" stroke="#134e4a" stroke-width="3" stroke-linecap="round"/><path d="M50 40c6 0 8-4 6-7-2 2-4 2-6 2" fill="none" stroke="#134e4a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 40h44M18 40l-3 8M46 40l3 8" fill="none" stroke="#134e4a" stroke-width="4" stroke-linecap="round"/></svg>
+          <div class="who">The minimiser</div>
+          <h3>The Turtle</h3>
+          <p>Pulls the energy down and in. Retreats deeper into the shell when anxious.</p>
+          <div class="voice">&ldquo;If I retreat far enough, my boundaries will finally be honoured.&rdquo;</div>
+        </div>
+      </div>
+      <p class="sub">Opposites attract, then the two safety styles set each other off.</p>
+    </section>
+
+    <!-- 9 · The trap: the circle with arrows running around it -->
     <section class="slide">
       <div class="chip">The trap</div>
       <div class="loop-wrap">
-        <div class="loop-ring"></div>
+        <svg class="loop-svg" viewBox="0 0 540 540">
+          <circle cx="270" cy="270" r="190" fill="none" stroke="#9fb4ca" stroke-width="5" stroke-dasharray="14 12"/>
+          <g fill="#0D9488">
+            <path d="M270 80 m 134 -56 l 22 14 -24 10 z" transform="rotate(45 270 270)" opacity="0"/>
+          </g>
+          <g fill="#0D9488">
+            <path d="M438 178 l -8 -26 26 9 z" transform="rotate(8 270 270)"/>
+            <path d="M438 178 l -8 -26 26 9 z" transform="rotate(98 270 270)"/>
+            <path d="M438 178 l -8 -26 26 9 z" transform="rotate(188 270 270)"/>
+            <path d="M438 178 l -8 -26 26 9 z" transform="rotate(278 270 270)"/>
+          </g>
+        </svg>
         <div class="loop-stop n">reaches, pushes, asks again</div>
         <div class="loop-stop e">feels like a storm coming</div>
         <div class="loop-stop s">goes quiet and pulls away</div>
         <div class="loop-stop w">feels like abandonment</div>
-        <span class="loop-arrow ne">&#10140;</span>
-        <span class="loop-arrow sw">&#10140;</span>
-        <div class="loop-core"><div>each move sets off the other</div></div>
+        <div class="loop-core"><div>round and round it goes</div></div>
       </div>
+      <p class="sub">Each partner's way of staying safe is exactly what sets off the other.</p>
     </section>
 
-    <!-- 7 · Hailstorm & turtle -->
+    <!-- 10 · The Dance of Anger (Lerner) -->
     <section class="slide">
-      <div class="chip">Same dance, different names</div>
-      <div class="imago">
-        <div class="hail">
-          <svg class="icon" viewBox="0 0 64 64"><path d="M18 30a10 10 0 0 1 1-20 14 14 0 0 1 27 3 9 9 0 0 1-1 17H18z" fill="none" stroke="#be185d" stroke-width="4" stroke-linejoin="round"/><circle cx="20" cy="42" r="3" fill="#be185d"/><circle cx="32" cy="48" r="3" fill="#be185d"/><circle cx="44" cy="42" r="3" fill="#be185d"/><circle cx="26" cy="56" r="3" fill="#be185d"/><circle cx="40" cy="58" r="3" fill="#be185d"/></svg>
-          <h3>The Hailstorm</h3>
-          <p>gets louder and bigger</p>
-        </div>
-        <div class="turt">
-          <svg class="icon" viewBox="0 0 64 64"><path d="M14 40a18 12 0 0 1 36 0z" fill="none" stroke="#6d28d9" stroke-width="4" stroke-linejoin="round"/><path d="M22 34l6 6M32 30v10M42 34l-6 6" stroke="#6d28d9" stroke-width="3" stroke-linecap="round"/><path d="M50 40c6 0 8-4 6-7-2 2-4 2-6 2" fill="none" stroke="#6d28d9" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 40h44M18 40l-3 8M46 40l3 8" fill="none" stroke="#6d28d9" stroke-width="4" stroke-linecap="round"/></svg>
-          <h3>The Turtle</h3>
-          <p>pulls deeper into the shell</p>
-        </div>
+      <div class="chip">Why we call it the dance</div>
+      <div class="quotebox">
+        <div class="q">These patterns are dances. The dance cannot continue in the same way if one partner changes their steps.</div>
+        <div class="qa">After Harriet Lerner, The Dance of Anger (1985), the classic work on pursuer and distancer cycles.</div>
       </div>
-      <p class="sub">Harville Hendrix (Imago) calls it the hailstorm and the turtle. Sue Johnson (EFT) calls it pursue and withdraw. Different researchers, same dance.</p>
+      <p class="sub">That is the hope in this. Nobody has to wait for their partner to go first.</p>
     </section>
 
-    <!-- 8 · Reframe -->
+    <!-- 11 · Reframe -->
     <section class="slide navy-slide">
       <div class="chip">The part to hold onto</div>
       <div class="big">It is not your characters. It is a <span class="mint">cycle</span>.</div>
-      <p class="note">You are not a nag, and your partner is not cold. Those are the roles the dance hands you. And a cycle can be changed.</p>
+      <p class="note">Not a nag. Not cold. Those are the roles the dance hands out. The dance itself is the problem, and a cycle can be changed.</p>
     </section>
 
-    <!-- 9 · Strengths shape the dance -->
-    <section class="slide">
-      <div class="chip">Your strengths in the dance</div>
-      <h2>Where your strengths live changes how you dance</h2>
-      <div class="domains">
-        <div class="dom" style="--dc:#7B2D8E;"><div class="dl">Executing</div><p>&ldquo;Fix it now&rdquo; energy can fuel the chase. Unresolved feels unbearable.</p></div>
-        <div class="dom" style="--dc:#E97200;"><div class="dl">Influencing</div><p>Needing to be heard can turn the volume up when it matters most.</p></div>
-        <div class="dom" style="--dc:#0070CD;"><div class="dl">Relationship Building</div><p>Feels the disconnection first. The radar that starts the reach.</p></div>
-        <div class="dom" style="--dc:#00945B;"><div class="dl">Strategic Thinking</div><p>Retreats to think it through. The pause that can read as hiding.</p></div>
-      </div>
-      <p class="sub">None of this is a flaw. It is your talent under pressure.</p>
-    </section>
-
-    <!-- 10 · Strengths walk you out -->
-    <section class="slide">
-      <div class="chip">Your strengths on the way out</div>
-      <h2>The same strengths walk you out</h2>
-      <div class="domains">
-        <div class="dom" style="--dc:#7B2D8E;"><div class="dl">Executing</div><p>Keep the return-time promise. Reliability rebuilds safety.</p></div>
-        <div class="dom" style="--dc:#E97200;"><div class="dl">Influencing</div><p>Be the one who names the dance out loud, warmly.</p></div>
-        <div class="dom" style="--dc:#0070CD;"><div class="dl">Relationship Building</div><p>Make the first repair bid. The text, the hand, the cup of tea.</p></div>
-        <div class="dom" style="--dc:#00945B;"><div class="dl">Strategic Thinking</div><p>Design the pause that suits you both. When, how long, how you come back.</p></div>
-      </div>
-      <p class="sub">Aimed at the cycle instead of each other, your strengths become the way out.</p>
-    </section>
-
-    <!-- 11 · Step 1 -->
+    <!-- 12 · Step 1 -->
     <section class="slide">
       <div class="chip">Stepping out &middot; 1 of 3</div>
       <div class="step-num">1</div>
       <h2>Name the dance,<br>not the partner</h2>
+      <p class="sub">The moment either partner spots the pattern, say so gently. It turns the couple against the cycle, instead of against each other.</p>
       <div class="says">&ldquo;I think we are in our dance right now. Can we slow down?&rdquo;</div>
     </section>
 
-    <!-- 10 · Step 2 -->
+    <!-- 13 · Step 2 -->
     <section class="slide">
       <div class="chip">Stepping out &middot; 2 of 3</div>
       <div class="step-num">2</div>
       <h2>The turtle says when</h2>
-      <p class="sub">A pause with a return time feels safe. A pause without one feels like abandonment.</p>
+      <p class="sub">Space is allowed. A pause with a return time feels safe. A pause without one feels like abandonment.</p>
       <div class="says">&ldquo;I need half an hour. I am not going anywhere, and I will come back at eight.&rdquo;</div>
     </section>
 
-    <!-- 11 · Step 3 -->
+    <!-- 14 · Step 3 -->
     <section class="slide">
       <div class="chip">Stepping out &middot; 3 of 3</div>
       <div class="step-num">3</div>
       <h2>The storm softens</h2>
-      <p class="sub">Easing off is not giving up on the conversation. It is what makes the conversation possible.</p>
+      <p class="sub">Letting the space happen, trusting the return. Easing off is not giving up on the conversation. It is what makes the conversation possible.</p>
       <div class="says">&ldquo;Okay. Eight works. Thank you for telling me.&rdquo;</div>
     </section>
 
-    <!-- 12 · Hope / close -->
+    <!-- 15 · One action -->
     <section class="slide navy-slide">
       <div class="chip">Your one action this week</div>
       <div class="big">Just <span class="mint">notice</span> the dance, and notice which step is yours.</div>
@@ -361,8 +412,8 @@
         dotsEl.appendChild(d);
       });
       const dots = Array.from(dotsEl.children);
-      // Which of the three parts each slide belongs to (0 = none, e.g. title/roadmap).
-      const PART_OF = [0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3];
+      // Which of the three parts each slide belongs to (0 = none: title/roadmap).
+      const PART_OF = [0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3];
       const stepperEl = document.getElementById('stepper');
       const stepSpans = stepperEl ? Array.from(stepperEl.children) : [];
       function go(i) {
