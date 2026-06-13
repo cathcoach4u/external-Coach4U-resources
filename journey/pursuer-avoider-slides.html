@@ -39,12 +39,12 @@
     .card { background: #fff; border-radius: 24px; border-top: 10px solid #0D9488; box-shadow: 0 16px 44px rgba(2,32,71,.14); padding: clamp(22px, 4vw, 44px); max-width: 880px; width: 100%; }
     .card p { font-size: clamp(1rem, 2.4vw, 1.45rem); line-height: 1.55; color: #444; }
     .card p + p { margin-top: 14px; }
-    .navy-slide { background: linear-gradient(150deg, #003366 0%, #0a5a96 70%, #0D9488 140%); }
+    .navy-slide { background: linear-gradient(150deg, #0d4a8a 0%, #0e6e9e 65%, #0D9488 130%); }
     .navy-slide h2, .navy-slide .big { color: #fff; }
     .navy-slide .chip { background: rgba(94,234,212,.18); color: #5eead4; }
     .big { font-size: clamp(1.7rem, 4.6vw, 3.4rem); font-weight: 800; line-height: 1.2; letter-spacing: -1px; max-width: 18ch; }
     .big .mint { color: #5eead4; }
-    .navy-slide .note { color: rgba(255,255,255,.8); font-size: clamp(1rem, 2.2vw, 1.4rem); margin-top: 22px; max-width: 36ch; line-height: 1.5; }
+    .navy-slide .note { color: #eaf3fb; font-size: clamp(1rem, 2.2vw, 1.4rem); margin-top: 22px; max-width: 36ch; line-height: 1.5; text-shadow: 0 1px 8px rgba(0,20,40,.35); }
     /* roadmap (big picture) */
     .roadmap { display: flex; flex-direction: column; gap: 16px; width: 100%; max-width: 760px; margin-top: 10px; }
     .rm-row { display: flex; align-items: center; gap: 20px; background: #fff; border-radius: 18px; border-left: 10px solid #0D9488; box-shadow: 0 10px 28px rgba(2,32,71,.1); padding: clamp(16px, 2.6vw, 26px) clamp(18px, 3vw, 30px); text-align: left; }
@@ -116,6 +116,22 @@
     .loop-stop.w { left: 0; top: 50%; transform: translate(-16%,-50%); background: #fff; border: 2px solid #d7dee8; color: #64748b; }
     .loop-core { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
     .loop-core div { max-width: 10ch; color: #003366; font-weight: 800; font-size: clamp(.85rem, 2vw, 1.2rem); line-height: 1.3; }
+    /* story scene: speech bubble vs thought cloud */
+    .scene-kicker { color: #475569; font-size: clamp(1rem, 2.3vw, 1.45rem); font-weight: 700; margin-bottom: 18px; }
+    .scene { display: flex; gap: clamp(20px, 5vw, 70px); align-items: flex-start; justify-content: center; max-width: 960px; width: 100%; }
+    .scene-col { flex: 1; max-width: 400px; display: flex; flex-direction: column; align-items: center; }
+    .bubble { position: relative; font-size: clamp(.95rem, 2.1vw, 1.3rem); font-weight: 600; line-height: 1.45; padding: clamp(16px, 2.6vw, 24px) clamp(18px, 2.8vw, 28px); margin-bottom: 26px; width: 100%; text-align: center; }
+    .bubble.speech { background: #e9faf6; border: 3px solid #0fa28d; color: #0F766E; border-radius: 22px; }
+    .bubble.speech::after { content: ''; position: absolute; bottom: -16px; left: 50%; transform: translateX(-50%); border: 9px solid transparent; border-top-color: #0fa28d; border-bottom: 0; }
+    .bubble.thought { background: #e7efee; border: 3px solid #134e4a; color: #134e4a; border-radius: 60px; font-style: italic; }
+    .bubble.thought .t1, .bubble.thought .t2 { position: absolute; border-radius: 50%; background: #e7efee; border: 3px solid #134e4a; }
+    .bubble.thought .t1 { width: 18px; height: 18px; bottom: -20px; left: 48%; }
+    .bubble.thought .t2 { width: 10px; height: 10px; bottom: -36px; left: 44%; }
+    .figure { width: clamp(70px, 10vw, 110px); height: auto; margin-top: 6px; }
+    .scene-label { font-size: clamp(.8rem, 1.8vw, 1.05rem); font-weight: 700; line-height: 1.45; margin-top: 10px; }
+    .scene-label.pu { color: #0F766E; }
+    .scene-label.av { color: #134e4a; }
+    @media (max-width: 700px) { .scene { flex-direction: column; align-items: center; } }
     /* lerner slide */
     .quotebox { background: #fff; border-radius: 20px; border-left: 12px solid #0D9488; box-shadow: 0 16px 40px rgba(2,32,71,.14); padding: clamp(22px, 3.6vw, 40px); max-width: 860px; width: 100%; text-align: left; }
     .quotebox .q { color: #003366; font-size: clamp(1.15rem, 2.9vw, 1.9rem); font-weight: 700; line-height: 1.4; }
@@ -170,7 +186,7 @@
     <section class="slide active">
       <div class="chip">Your Relationship Coach</div>
       <h1>The <span class="mint">Dance</span></h1>
-      <p class="sub">Why one partner reaches, and the other retreats. The most researched conflict pattern in couples.</p>
+      <p class="sub">Why you are stuck in the same argument, and how to step out of it.</p>
     </section>
 
     <!-- 2 · Big picture roadmap -->
@@ -184,14 +200,28 @@
       </div>
     </section>
 
-    <!-- 3 · Story -->
+    <!-- 3 · Story (visual scene: speech bubble vs thought cloud) -->
     <section class="slide">
       <div class="chip soft">Does this sound familiar?</div>
-      <div class="card">
-        <p>An argument starts. Halfway through, one partner walks out of the room, and does not come back. No &ldquo;I need a minute&rdquo;. No return time. Just gone, to the shed, the bedroom, the phone.</p>
-        <p>The other is left standing there with everything still unsaid. Hurt, churning, wanting one thing only, to feel connected again. So they follow, or text, or bring it up again at dinner.</p>
-        <p>And the more one reaches, the further the other goes.</p>
+      <p class="scene-kicker">An argument starts. Halfway through&hellip;</p>
+      <div class="scene">
+        <div class="scene-col">
+          <div class="bubble speech">
+            &ldquo;We are not finished. Please come back. Can we just sort this out?&rdquo;
+          </div>
+          <svg class="figure" viewBox="0 0 120 170"><circle cx="60" cy="28" r="19" fill="none" stroke="#0fa28d" stroke-width="8"/><path d="M60 47v58M60 62l34-14M60 62l-26 22M60 105l26 50M60 105l-22 52" fill="none" stroke="#0fa28d" stroke-width="8" stroke-linecap="round"/></svg>
+          <div class="scene-label pu">left standing there, hurt,<br>wanting to feel close again</div>
+        </div>
+        <div class="scene-col">
+          <div class="bubble thought">
+            If I stay, I will only make it worse.
+            <span class="t1"></span><span class="t2"></span>
+          </div>
+          <svg class="figure" viewBox="0 0 120 170" style="transform:scaleX(-1);"><circle cx="60" cy="28" r="19" fill="none" stroke="#134e4a" stroke-width="8"/><path d="M60 47v58M60 62l30 18M60 62l-24 20M60 105l30 48M60 105l-18 54" fill="none" stroke="#134e4a" stroke-width="8" stroke-linecap="round"/><path d="M100 130h14M107 123l9 7-9 7" fill="none" stroke="#134e4a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div class="scene-label av">walks out, and does not come back.<br>No &ldquo;I need a minute&rdquo;. No return time.</div>
+        </div>
       </div>
+      <p class="sub">And the more one reaches, the further the other goes.</p>
     </section>
 
     <!-- 4 · What research shows (authority) -->
@@ -297,18 +327,18 @@
           <svg class="icon" viewBox="0 0 64 64"><path d="M18 30a10 10 0 0 1 1-20 14 14 0 0 1 27 3 9 9 0 0 1-1 17H18z" fill="none" stroke="#0fa28d" stroke-width="4" stroke-linejoin="round"/><circle cx="20" cy="42" r="3" fill="#0fa28d"/><circle cx="32" cy="48" r="3" fill="#0fa28d"/><circle cx="44" cy="42" r="3" fill="#0fa28d"/><circle cx="26" cy="56" r="3" fill="#0fa28d"/><circle cx="40" cy="58" r="3" fill="#0fa28d"/></svg>
           <div class="who">The maximiser</div>
           <h3>The Hailstorm</h3>
-          <p>Turns the energy up and out. Gets louder and bigger when anxious.</p>
-          <div class="voice">&ldquo;If I express it strongly enough, I will get the attention and love I need.&rdquo;</div>
+          <p>Maximises the conflict. Expresses feelings loudly and passionately, needing to be heard.</p>
+          <div class="voice">For a hailstorm, silence feels like abandonment.</div>
         </div>
         <div class="turt">
           <svg class="icon" viewBox="0 0 64 64"><path d="M14 40a18 12 0 0 1 36 0z" fill="none" stroke="#134e4a" stroke-width="4" stroke-linejoin="round"/><path d="M22 34l6 6M32 30v10M42 34l-6 6" stroke="#134e4a" stroke-width="3" stroke-linecap="round"/><path d="M50 40c6 0 8-4 6-7-2 2-4 2-6 2" fill="none" stroke="#134e4a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 40h44M18 40l-3 8M46 40l3 8" fill="none" stroke="#134e4a" stroke-width="4" stroke-linecap="round"/></svg>
           <div class="who">The minimiser</div>
           <h3>The Turtle</h3>
-          <p>Pulls the energy down and in. Retreats deeper into the shell when anxious.</p>
-          <div class="voice">&ldquo;If I retreat far enough, my boundaries will finally be honoured.&rdquo;</div>
+          <p>Minimises the conflict. Retreats into the shell, holds feelings in, avoids confrontation.</p>
+          <div class="voice">For a turtle, an intense conversation feels like an attack.</div>
         </div>
       </div>
-      <p class="sub">Opposites attract, then the two safety styles set each other off.</p>
+      <p class="sub">The louder the hailstorm hails, the deeper the turtle retreats. Not personality flaws, adaptations learned in childhood.</p>
     </section>
 
     <!-- 9 · The trap: the circle with arrows running around it -->
@@ -346,11 +376,11 @@
       <p class="sub">That is the hope in this. Nobody has to wait for their partner to go first.</p>
     </section>
 
-    <!-- 11 · Reframe -->
-    <section class="slide navy-slide">
+    <!-- 11 · Reframe (light, high contrast) -->
+    <section class="slide">
       <div class="chip">The part to hold onto</div>
-      <div class="big">It is not your characters. It is a <span class="mint">cycle</span>.</div>
-      <p class="note">Not a nag. Not cold. Those are the roles the dance hands out. The dance itself is the problem, and a cycle can be changed.</p>
+      <div class="big" style="color:#003366;">It is not your characters.<br>It is a <span style="color:#0D9488;">cycle</span>.</div>
+      <p class="sub" style="max-width:38ch;">Not a nag. Not cold. Those are the roles the dance hands out. The dance itself is the problem, and a cycle can be changed.</p>
     </section>
 
     <!-- 12 · Step 1 -->
