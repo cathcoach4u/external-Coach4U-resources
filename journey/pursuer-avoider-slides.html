@@ -140,6 +140,9 @@
     .scene-label.pu { color: #0F766E; }
     .scene-label.av { color: #134e4a; }
     @media (max-width: 700px) { .scene { flex-direction: column; align-items: center; } }
+    /* closing: the two figures together */
+    .together { display: flex; gap: 6px; align-items: flex-end; margin-bottom: 10px; }
+    .together .person { width: clamp(90px, 12vw, 140px); }
     /* stop-the-cycle slide */
     .stop-wrap { width: min(44vw, 340px); }
     .stop-svg { width: 100%; height: auto; }
@@ -197,7 +200,7 @@
     <section class="slide active">
       <div class="chip">Your Relationship Coach</div>
       <h1>The <span class="mint">Dance</span></h1>
-      <p class="sub">Why you are stuck in the same argument.</p>
+      <p class="sub">Why you are stuck in the same argument, and the way back to each other.</p>
     </section>
 
     <!-- 2 · Big picture roadmap -->
@@ -449,7 +452,18 @@
     <section class="slide navy-slide">
       <div class="chip">Your one action this week</div>
       <div class="big">Just <span class="mint">notice</span> the dance, and notice which step is yours.</div>
-      <p class="note">That is the whole homework.</p>
+      <p class="note">That is the whole homework. Not to win the argument, to come back to each other.</p>
+    </section>
+
+    <!-- 17 · Close — back to each other -->
+    <section class="slide">
+      <div class="chip">What all of this is for</div>
+      <div class="together">
+        <svg class="person" viewBox="0 0 120 170"><circle cx="60" cy="28" r="19" fill="none" stroke="#0fa28d" stroke-width="8"/><path d="M60 47v58M60 62l36-10M60 62l-26 22M60 105l26 50M60 105l-22 52" fill="none" stroke="#0fa28d" stroke-width="8" stroke-linecap="round"/></svg>
+        <svg class="person" viewBox="0 0 120 170" style="transform:scaleX(-1);"><circle cx="60" cy="28" r="19" fill="none" stroke="#134e4a" stroke-width="8"/><path d="M60 47v58M60 62l36-10M60 62l-26 22M60 105l26 50M60 105l-22 52" fill="none" stroke="#134e4a" stroke-width="8" stroke-linecap="round"/></svg>
+      </div>
+      <div class="big" style="color:#003366;">Back to <span style="color:#0D9488;">each other</span>.</div>
+      <p class="sub">Connected, and present with one another.</p>
     </section>
 
   </div>
@@ -478,7 +492,7 @@
       });
       const dots = Array.from(dotsEl.children);
       // Which of the three parts each slide belongs to (0 = none: title/roadmap).
-      const PART_OF = [0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3];
+      const PART_OF = [0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3];
       const stepperEl = document.getElementById('stepper');
       const stepSpans = stepperEl ? Array.from(stepperEl.children) : [];
       function go(i) {
