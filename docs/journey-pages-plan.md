@@ -23,6 +23,14 @@ Keep building in **yourrelationshipcoach**. Reasons:
 - The internal hub keeps the practitioner side (transcripts, file notes, patterns); this repo
   stays the client-facing product. Clean split, same Supabase pattern.
 
+## Series tagline (locked 2026-06-13)
+
+> **Back to each other.**
+> Truly connected, fully present.
+
+The standing sign-off for the whole couples series. Every concept deck, explainer page and
+video closes on the two figures together and these two lines.
+
 ## What a Journey Page is
 
 Adapted from the ThriveHQ Journey Card formula (internal hub `CLAUDE.md`), reshaped for
